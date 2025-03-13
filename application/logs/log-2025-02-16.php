@@ -1,0 +1,64 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2025-02-16 02:35:58 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:58 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:58 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:58 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:58 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:58 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:35:59 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:00 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:01 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:02 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:02 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:02 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:02 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:02 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:02 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:02 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 02:36:02 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 09:54:38 --> 404 Page Not Found: /index
+ERROR - 2025-02-16 22:12:46 --> Could not find the language line "purchase_widget"
+ERROR - 2025-02-16 22:13:04 --> Could not find the language line "Purchase request"
+ERROR - 2025-02-16 22:15:36 --> Could not find the language line "Purchase request"
