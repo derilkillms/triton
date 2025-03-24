@@ -871,6 +871,10 @@ class purchase extends AdminController
         $data['estimateid']            = $id;
         $data['pur_request'] = $this->purchase_model->get_purchase_request();
         $data['vendors'] = $this->purchase_model->get_vendor();
+
+        $data['project'] = $this->purchase_model->get_projects();
+        // $data['client'] = $this->purchase_model->get_vendor();
+        
         $data['title']                 = _l('estimates');
         $data['bodyclass']             = 'estimates-total-manual';
 
@@ -979,8 +983,8 @@ class purchase extends AdminController
         $data['items_groups'] = $this->invoice_items_model->get_groups();
 
         $data['staff']             = $this->staff_model->get('', ['active' => 1]);
-        $data['vendors'] = $this->purchase_model->get_vendor();
-        $data['pur_request'] = $this->purchase_model->get_pur_request_by_status(2);
+        // $data['vendors'] = $this->purchase_model->get_vendor();
+        // $data['pur_request'] = $this->purchase_model->get_pur_request_by_status(2);
         $data['units'] = $this->purchase_model->get_units();
 
         $data['title']             = $title;
@@ -1070,12 +1074,12 @@ class purchase extends AdminController
         $data['estimate_detail'] = $this->purchase_model->get_pur_estimate_detail($id);
         $data['estimate']          = $estimate;
         $data['members']           = $this->staff_model->get('', ['active' => 1]);
-        $data['vendor_contacts'] = $this->purchase_model->get_contacts($estimate->vendor->userid);
-        $send_mail_approve = $this->session->userdata("send_mail_approve");
-        if ((isset($send_mail_approve)) && $send_mail_approve != '') {
-            $data['send_mail_approve'] = $send_mail_approve;
-            $this->session->unset_userdata("send_mail_approve");
-        }
+        // $data['vendor_contacts'] = $this->purchase_model->get_contacts($estimate->vendor->userid);
+        // $send_mail_approve = $this->session->userdata("send_mail_approve");
+        // if ((isset($send_mail_approve)) && $send_mail_approve != '') {
+        //     $data['send_mail_approve'] = $send_mail_approve;
+        //     $this->session->unset_userdata("send_mail_approve");
+        // }
         $data['check_appr'] = $this->purchase_model->get_approve_setting('pur_quotation');
         $data['get_staff_sign'] = $this->purchase_model->get_staff_sign($id, 'pur_quotation');
         $data['check_approve_status'] = $this->purchase_model->check_approval_details($id, 'pur_quotation');
@@ -1244,7 +1248,8 @@ class purchase extends AdminController
             }
         }
 
-        $list_item = $this->purchase_model->create_purchase_order_row_template();
+        // $list_item = $this->purchase_model->create_purchase_order_row_template();
+        $list_item = '';
 
         $currency_rate = 1;
         $to_currency = $base_currency->id;
@@ -1275,6 +1280,76 @@ class purchase extends AdminController
 
         echo json_encode([
             'result' => $pur_request_detail,
+            'subtotal' => app_format_money(round($subtotal, 2), ''),
+            'total' => app_format_money(round($total, 2), ''),
+            'tax_html' => $tax_html,
+            'taxes' => $taxes,
+            'list_item' => $list_item,
+            'currency' => $to_currency,
+            'currency_rate' => $currency_rate,
+            'estimate_html' => $estimate_html,
+        ]);
+    }
+
+    public function coppy_project_for_po($project, $vendor = '')
+    {
+
+        $this->load->model('currencies_model');
+
+        $project_detail = $this->purchase_model->get_project_detail_in_po($project);
+        $projects = $this->purchase_model->get_projects($project);
+
+        $base_currency = $this->currencies_model->get_base_currency();
+        $taxes = [];
+        $tax_val = [];
+        $tax_name = [];
+        $subtotal = 0;
+        $total = 0;
+        $data_rs = [];
+        $tax_html = '';
+        $estimate_html = '';
+
+        $estimate_html .= $this->purchase_model->get_estimate_html_by_pr_vendor($project, $vendor);
+
+        if (count($project_detail) > 0) {
+            foreach ($project_detail as $key => $item) {
+                $subtotal += $item['into_money'];
+                $total += $item['total'];
+            }
+        }
+
+        // $list_item = $this->purchase_model->create_purchase_order_row_template();
+        $list_item = '';
+
+        $currency_rate = 1;
+        $to_currency = $base_currency->id;
+        if ($projects->currency != 0 && $projects->currency_rate != null) {
+            $currency_rate = $projects->currency_rate;
+            $to_currency = $projects->currency;
+        }
+
+
+        if (count($project_detail) > 0) {
+            $index_quote = 0;
+            foreach ($project_detail as $key => $item) {
+                $index_quote++;
+                $unit_name = pur_get_unit_name($item['unit_id']);
+                $taxname = $item['tax_name'];
+                $item_name = $item['item_text'];
+
+                if (strlen($item_name) == 0) {
+                    $item_name = pur_get_item_variatiom($item['item_code']);
+                }
+
+                $list_item .= $this->purchase_model->create_purchase_order_row_template('newitems[' . $index_quote . ']',  $item_name, '', $item['quantity'], $unit_name, $item['unit_price'], $taxname, $item['item_code'], $item['unit_id'], $item['tax_rate'],  $item['total'], '', '', $item['total'], $item['into_money'], $item['tax'], $item['tax_value'], $index_quote, true, $currency_rate, $to_currency);
+            }
+        }
+
+        $taxes_data = $this->purchase_model->get_html_tax_project($project);
+        $tax_html = $taxes_data['html'];
+
+        echo json_encode([
+            'result' => $project_detail,
             'subtotal' => app_format_money(round($subtotal, 2), ''),
             'total' => app_format_money(round($total, 2), ''),
             'tax_html' => $tax_html,
@@ -6462,7 +6537,8 @@ class purchase extends AdminController
         $inv = $this->invoices_model->get($invoice);
         $base_currency = $this->currencies_model->get_base_currency();
 
-        $list_item = $this->purchase_model->create_purchase_order_row_template();
+        // $list_item = $this->purchase_model->create_purchase_order_row_template();
+        $list_item = '';
 
         $currency_rate = 1;
         $to_currency = $base_currency->id;

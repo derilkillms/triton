@@ -63,12 +63,32 @@
                             <hr class="hr-panel-separator" />
 
                             <?php hooks()->do_action('before_expense_form_name', $expense ?? null); ?>
-
+                            
+                                <label for="department"><?php echo _l('department'); ?></label>
+                                <select name="department" id="department" class="selectpicker" onchange="department_change(this); return false;" data-live-search="true" data-width="100%" data-none-selected-text="<?php echo _l('ticket_settings_none_assigned'); ?>">
+                                    <option value=""></option>
+                                    <?php foreach ($departments as $s) { ?>
+                                        <option value="<?php echo pur_html_entity_decode($s['departmentid']); ?>" <?php if (isset($expense) && $s['departmentid'] == $expense->department) {
+                                                                                                                        echo 'selected';
+                                                                                                                    } ?>><?php echo pur_html_entity_decode($s['name']); ?></option>
+                                    <?php } ?>
+                                </select>
+                                <br><br>
+                           
                             <i class="fa-regular fa-circle-question pull-left tw-mt-0.5 ltr:tw-mr-1 rtl:tw-ml-1"
                                 data-toggle="tooltip"
                                 data-title="<?= _l('expense_name_help'); ?> - <?= e(_l('expense_field_billable_help', _l('expense_name'))); ?>"></i>
                             <?php $value = (isset($expense) ? $expense->expense_name : ''); ?>
                             <?= render_input('expense_name', 'expense_name', $value); ?>
+
+                            
+                            <?php $value = (isset($expense) ? $expense->position : ''); ?>
+                            <?= render_input('position', 'position', $value); ?>
+
+                           
+                            <?php $value = (isset($expense) ? $expense->supervisor : ''); ?>
+                            <?= render_input('supervisor', 'Supervisor', $value); ?>
+
                             <i class="fa-regular fa-circle-question pull-left tw-mt-0.5 ltr:tw-mr-1 rtl:tw-ml-1"
                                 data-toggle="tooltip"
                                 data-title="<?= e(_l('expense_field_billable_help', _l('expense_add_edit_note'))); ?>"></i>
@@ -99,10 +119,10 @@
                                 <input type="checkbox" id="billable" <?php if (isset($expense) && $expense->invoiceid !== null) {
                                                                             echo 'disabled';
                                                                         } ?> name="billable" <?php if (isset($expense)) {
-                                                            if ($expense->billable == 1) {
-                                                                echo 'checked';
-                                                            }
-                                                        } ?>>
+                                                                                                    if ($expense->billable == 1) {
+                                                                                                        echo 'checked';
+                                                                                                    }
+                                                                                                } ?>>
                                 <label for="billable"
                                     <?php if (isset($expense) && $expense->invoiceid !== null) {
                                         echo 'data-toggle="tooltip" title="' . _l('expense_already_invoiced') . '"';
@@ -267,6 +287,12 @@
                                     <?= render_input('reference_no', 'expense_add_edit_reference_no', $value); ?>
                                 </div>
                             </div>
+                            <?php $value = (isset($expense) ? $expense->bank_name : ''); ?>
+                            <?= render_input('bank_name', 'Bank Name', $value); ?>
+
+                            <?php $value = (isset($expense) ? $expense->account_number : ''); ?>
+                            <?= render_input('account_number', 'Account Number', $value,'number'); ?>
+
                             <div class="form-group select-placeholder" <?php if (isset($expense) && ! empty($expense->recurring_from)) { ?>
                                 data-toggle="tooltip"
                                 data-title="<?= _l('create_recurring_from_child_error_message', [_l('expense_lowercase'), _l('expense_lowercase'), _l('expense_lowercase')]); ?>"
@@ -406,7 +432,7 @@
                                     for="send_invoice_to_customer"><?= _l('expense_recurring_send_custom_on_renew'); ?></label>
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">

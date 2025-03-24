@@ -186,7 +186,7 @@ foreach ($rResult as $aRow) {
 
                 $_data .= '<a href="#" onclick="send_request_quotation('.$aRow['id'].'); return false;" class="btn btn-success" ><i class="fa fa-envelope" data-toggle="tooltip" title="'. _l('request_quotation') .'"></i></a>';
 
-                $_data .= '<a href="#" onclick="share_request('.$aRow['id'].'); return false;" class="btn btn-primary mleft5" ><i class="fa fa-share-alt" data-toggle="tooltip" title="'. _l('share_request') .'"></i></a>';
+                // $_data .= '<a href="#" onclick="share_request('.$aRow['id'].'); return false;" class="btn btn-primary mleft5" ><i class="fa fa-share-alt" data-toggle="tooltip" title="'. _l('share_request') .'"></i></a>';
             }else{
                 $_data = '';
             }

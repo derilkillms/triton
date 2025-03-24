@@ -120,9 +120,9 @@ class Projects_model extends App_Model
     public function pin_action($id)
     {
         if (total_rows(db_prefix() . 'pinned_projects', [
-                'staff_id' => get_staff_user_id(),
-                'project_id' => $id,
-            ]) == 0) {
+            'staff_id' => get_staff_user_id(),
+            'project_id' => $id,
+        ]) == 0) {
             $this->db->insert(db_prefix() . 'pinned_projects', [
                 'staff_id' => get_staff_user_id(),
                 'project_id' => $id,
@@ -682,6 +682,41 @@ class Projects_model extends App_Model
 
     public function add($data)
     {
+        $detail_data = [];
+        if (isset($data['newitems'])) {
+            $detail_data = $data['newitems'];
+            unset($data['newitems']);
+        }
+        unset($data['item_text']);
+        unset($data['unit_price']);
+        unset($data['quantity']);
+        unset($data['into_money']);
+        unset($data['tax_select']);
+        unset($data['tax_value']);
+        unset($data['total']);
+        unset($data['item_select']);
+        unset($data['item_code']);
+        unset($data['unit_name']);
+        unset($data['request_detail']);
+        unset($data['unit_id']);
+
+        if (isset($data['send_to_vendors']) && count($data['send_to_vendors']) > 0) {
+            $data['send_to_vendors'] = implode(',', $data['send_to_vendors']);
+        }
+
+        $data['subtotal'] = reformat_currency_pur($data['subtotal'], $data['currency']);
+
+        if (isset($data['total_mn'])) {
+            $data['total'] = reformat_currency_pur($data['total_mn'], $data['currency']);
+            unset($data['total_mn']);
+        }
+
+        $data['total_tax'] = $data['total'] - $data['subtotal'];
+
+
+        // $dpm_name = department_pur_request_name($data['department']);
+        $prefix = get_purchase_option('project_prefix');
+
         if (isset($data['notify_project_members_status_change'])) {
             unset($data['notify_project_members_status_change']);
         }
@@ -852,10 +887,623 @@ class Projects_model extends App_Model
 
             log_activity('New Project Created [ID: ' . $insert_id . ']');
 
+            // detail project
+
+            // Update next purchase order number in settings
+            $next_number = $data['number'] + 1;
+            $this->db->where('option_name', 'next_prj_number');
+            $this->db->update(db_prefix() . 'purchase_option', ['option_val' =>  $next_number,]);
+
+            if (count($detail_data) > 0) {
+                foreach ($detail_data as $key => $rqd) {
+                    $dt_data = [];
+                    $dt_data['project_id'] = $insert_id;
+                    $dt_data['item_code'] = $rqd['item_code'];
+                    $dt_data['unit_id'] = isset($rqd['unit_id']) ? $rqd['unit_id'] : null;
+                    $dt_data['unit_price'] = $rqd['unit_price'];
+                    $dt_data['into_money'] = $rqd['into_money'];
+                    $dt_data['total'] = $rqd['total'];
+                    $dt_data['tax_value'] = $rqd['tax_value'];
+                    $dt_data['item_text'] = nl2br($rqd['item_text']);
+
+                    $tax_money = 0;
+                    $tax_rate_value = 0;
+                    $tax_rate = null;
+                    $tax_id = null;
+                    $tax_name = null;
+
+                    if (isset($rqd['tax_select'])) {
+                        $tax_rate_data = $this->pur_get_tax_rate($rqd['tax_select']);
+                        $tax_rate_value = $tax_rate_data['tax_rate'];
+                        $tax_rate = $tax_rate_data['tax_rate_str'];
+                        $tax_id = $tax_rate_data['tax_id_str'];
+                        $tax_name = $tax_rate_data['tax_name_str'];
+                    }
+
+                    $dt_data['tax'] = $tax_id;
+                    $dt_data['tax_rate'] = $tax_rate;
+                    $dt_data['tax_name'] = $tax_name;
+
+                    $dt_data['quantity'] = ($rqd['quantity'] != '' && $rqd['quantity'] != null) ? $rqd['quantity'] : 0;
+
+                    if ($data['status'] == 2 && ($rqd['item_code'] == '' || $rqd['item_code'] == null)) {
+                        $item_data['description'] = $rqd['item_text'];
+                        $item_data['purchase_price'] = $rqd['unit_price'];
+                        $item_data['unit_id'] = $rqd['unit_id'];
+                        $item_data['rate'] = '';
+                        $item_data['sku_code'] = '';
+                        $item_data['commodity_barcode'] = $this->generate_commodity_barcode();
+                        $item_data['commodity_code'] = $this->generate_commodity_barcode();
+                        $item_id = $this->add_commodity_one_item($item_data);
+                        if ($item_id) {
+                            $dt_data['item_code'] = $item_id;
+                        }
+                    }
+
+                    $this->db->insert(db_prefix() . 'project_detail', $dt_data);
+                }
+            }
+
             return $insert_id;
         }
 
         return false;
+    }
+
+    public function get_project_detail($project)
+    {
+        $this->db->where('project_id', $project);
+        $project_lst = $this->db->get(db_prefix() . 'project_detail')->result_array();
+
+        foreach ($project_lst as $key => $detail) {
+            $project_lst[$key]['into_money'] = (float) $detail['into_money'];
+            $project_lst[$key]['total'] = (float) $detail['total'];
+            $project_lst[$key]['unit_price'] = (float) $detail['unit_price'];
+            $project_lst[$key]['tax_value'] = (float) $detail['tax_value'];
+        }
+
+        return $project_lst;
+    }
+
+    public function create_project_row_template($name = '', $item_code = '', $item_text = '', $unit_price = '', $quantity = '', $unit_name = '', $unit_id = '', $into_money = '', $item_key = '', $tax_value = '', $total = '', $tax_name = '', $tax_rate = '', $tax_id = '', $is_edit = false, $currency_rate = 1, $to_currency = '')
+    {
+        $this->load->model('invoice_items_model');
+        $row = '';
+
+        $name_item_code = 'item_code';
+        $name_item_text = 'item_text';
+        $name_unit_id = 'unit_id';
+        $name_unit_name = 'unit_name';
+        $name_unit_price = 'unit_price';
+        $name_quantity = 'quantity';
+        $name_into_money = 'into_money';
+        $name_tax = 'tax';
+        $name_tax_value = 'tax_value';
+        $name_tax_name = 'tax_name';
+        $name_tax_rate = 'tax_rate';
+        $name_tax_id_select = 'tax_select';
+        $name_total = 'total';
+
+        $array_rate_attr = ['min' => '0.0', 'step' => 'any'];
+        $array_qty_attr = ['min' => '0.0', 'step' => 'any'];
+        $array_subtotal_attr = ['readonly' => true];
+
+        $text_right_class = 'text-right';
+
+        if ($name == '') {
+            $row .= '<tr class="main">
+                  <td></td>';
+            $vehicles = [];
+            $array_attr = ['placeholder' => _l('unit_price')];
+
+            $manual             = true;
+            $invoice_item_taxes = '';
+            $total = '';
+            $into_money = 0;
+        } else {
+            $manual             = false;
+            $row .= '<tr class="sortable item">
+                    <td class="dragger"><input type="hidden" class="order" name="' . $name . '[order]"><input type="hidden" class="ids" name="' . $name . '[id]" value="' . $item_key . '"></td>';
+            $name_item_code = $name . '[item_code]';
+            $name_item_text = $name . '[item_text]';
+            $name_unit_id = $name . '[unit_id]';
+            $name_unit_name = $name . '[unit_name]';
+            $name_unit_price = $name . '[unit_price]';
+            $name_quantity = $name . '[quantity]';
+            $name_into_money = $name . '[into_money]';
+            $name_tax = $name . '[tax]';
+            $name_tax_value = $name . '[tax_value]';
+            $name_tax_name = $name . '[tax_name]';
+            $name_tax_rate = $name . '[tax_rate]';
+            $name_tax_id_select = $name . '[tax_select][]';
+            $name_total = $name . '[total]';
+
+            $array_rate_attr = ['onblur' => 'pur_calculate_total();', 'onchange' => 'pur_calculate_total();', 'min' => '0.0', 'step' => 'any', 'data-amount' => 'invoice', 'placeholder' => _l('unit_price')];
+
+            $array_qty_attr = ['onblur' => 'pur_calculate_total();', 'onchange' => 'pur_calculate_total();', 'min' => '0.0', 'step' => 'any',  'data-quantity' => (float)$quantity];
+
+            $tax_money = 0;
+            $tax_rate_value = 0;
+
+            if ($is_edit) {
+                $invoice_item_taxes = pur_convert_item_taxes($tax_id, $tax_rate, $tax_name);
+                $arr_tax_rate = explode('|', $tax_rate ?? '');
+                foreach ($arr_tax_rate as $key => $value) {
+                    $tax_rate_value += (float)$value;
+                }
+            } else {
+                $invoice_item_taxes = $tax_name;
+                $tax_rate_data = $this->pur_get_tax_rate($tax_name);
+                $tax_rate_value = $tax_rate_data['tax_rate'];
+            }
+
+            if ((float)$tax_rate_value != 0) {
+                $tax_money = (float)$unit_price * (float)$quantity * (float)$tax_rate_value / 100;
+
+                $amount = (float)$unit_price * (float)$quantity + (float)$tax_money;
+            } else {
+
+                $amount = (float)$unit_price * (float)$quantity;
+            }
+
+            $into_money = (float)$unit_price * (float)$quantity;
+            $total = $amount;
+        }
+
+
+        $row .= '<td class="">' . render_textarea($name_item_text, '', $item_text, ['rows' => 2, 'placeholder' => _l('pur_item_name')]) . '</td>';
+        $row .= '<td class="rate">' . render_input($name_unit_price, '', $unit_price, 'number', $array_rate_attr, [], 'no-margin', $text_right_class);
+        if ($unit_price != '') {
+            $original_price = round(($unit_price / $currency_rate), 2);
+            $base_currency = get_base_currency();
+            if ($to_currency != 0 && $to_currency != $base_currency->id) {
+                $row .= render_input('original_price', '', app_format_money($original_price, $base_currency), 'text', ['data-toggle' => 'tooltip', 'data-placement' => 'top', 'title' => _l('original_price'), 'disabled' => true], [], 'no-margin', 'input-transparent text-right pur_input_none');
+            }
+
+            $row .= '<input class="hide" name="og_price" disabled="true" value="' . $original_price . '">';
+        }
+
+        $row .=  '</td>';
+
+        $row .= '<td class="quantities">' .
+            render_input($name_quantity, '', $quantity, 'number', $array_qty_attr, [], 'no-margin', $text_right_class) .
+            render_input($name_unit_name, '', $unit_name, 'text', ['placeholder' => _l('unit'), 'readonly' => true], [], 'no-margin', 'input-transparent text-right pur_input_none') .
+            '</td>';
+
+        $row .= '<td class="into_money">' . render_input($name_into_money, '', $into_money, 'number', $array_subtotal_attr, [], '', $text_right_class) . '</td>';
+        $row .= '<td class="taxrate">' . $this->get_taxes_dropdown_template($name_tax_id_select, $invoice_item_taxes, 'invoice', $item_key, true, $manual) . '</td>';
+        $row .= '<td class="tax_value">' . render_input($name_tax_value, '', $tax_value, 'number', $array_subtotal_attr, [], '', $text_right_class) . '</td>';
+        $row .= '<td class="hide item_code">' . render_input($name_item_code, '', $item_code, 'text', ['placeholder' => _l('item_code')]) . '</td>';
+        $row .= '<td class="hide unit_id">' . render_input($name_unit_id, '', $unit_id, 'text', ['placeholder' => _l('unit_id')]) . '</td>';
+        $row .= '<td class="_total">' . render_input($name_total, '', $total, 'number', $array_subtotal_attr, [], '', $text_right_class) . '</td>';
+
+        if ($name == '') {
+            $row .= '<td><button type="button" onclick="pur_add_item_to_table(\'undefined\',\'undefined\'); return false;" class="btn pull-right btn-info"><i class="fa fa-check"></i></button></td>';
+        } else {
+            $row .= '<td><a href="#" class="btn btn-danger pull-right" onclick="pur_delete_item(this,' . $item_key . ',\'.invoice-item\'); return false;"><i class="fa fa-trash"></i></a></td>';
+        }
+        $row .= '</tr>';
+        return $row;
+    }
+
+    public function get_taxes_dropdown_template($name, $taxname, $type = '', $item_key = '', $is_edit = false, $manual = false)
+    {
+        // if passed manually - like in proposal convert items or project
+        if ($taxname != '' && !is_array($taxname)) {
+            $taxname = explode(',', $taxname);
+        }
+
+        if ($manual == true) {
+            // + is no longer used and is here for backward compatibilities
+            if (is_array($taxname) || strpos($taxname, '+') !== false) {
+                if (!is_array($taxname)) {
+                    $__tax = explode('+', $taxname);
+                } else {
+                    $__tax = $taxname;
+                }
+                // Multiple taxes found // possible option from default settings when invoicing project
+                $taxname = [];
+                foreach ($__tax as $t) {
+                    $tax_array = explode('|', $t);
+                    if (isset($tax_array[0]) && isset($tax_array[1])) {
+                        array_push($taxname, $tax_array[0] . '|' . $tax_array[1]);
+                    }
+                }
+            } else {
+                $tax_array = explode('|', $taxname);
+                // isset tax rate
+                if (isset($tax_array[0]) && isset($tax_array[1])) {
+                    $tax = get_tax_by_name($tax_array[0]);
+                    if ($tax) {
+                        $taxname = $tax->name . '|' . $tax->taxrate;
+                    }
+                }
+            }
+        }
+        // First get all system taxes
+        $this->load->model('taxes_model');
+        $taxes = $this->taxes_model->get();
+        $i     = 0;
+        foreach ($taxes as $tax) {
+            unset($taxes[$i]['id']);
+            $taxes[$i]['name'] = $tax['name'] . '|' . $tax['taxrate'];
+            $i++;
+        }
+        if ($is_edit == true) {
+
+            // Lets check the items taxes in case of changes.
+            // Separate functions exists to get item taxes for Invoice, Estimate, Proposal, Credit Note
+            $func_taxes = 'get_' . $type . '_item_taxes';
+            if (function_exists($func_taxes)) {
+                $item_taxes = call_user_func($func_taxes, $item_key);
+            }
+
+            foreach ($item_taxes as $item_tax) {
+                $new_tax            = [];
+                $new_tax['name']    = $item_tax['taxname'];
+                $new_tax['taxrate'] = $item_tax['taxrate'];
+                $taxes[]            = $new_tax;
+            }
+        }
+
+        // In case tax is changed and the old tax is still linked to estimate/proposal when converting
+        // This will allow the tax that don't exists to be shown on the dropdowns too.
+        if (is_array($taxname)) {
+            foreach ($taxname as $tax) {
+                // Check if tax empty
+                if ((!is_array($tax) && $tax == '') || is_array($tax) && $tax['taxname'] == '') {
+                    continue;
+                };
+                // Check if really the taxname NAME|RATE don't exists in all taxes
+                if (!value_exists_in_array_by_key($taxes, 'name', $tax)) {
+                    if (!is_array($tax)) {
+                        $tmp_taxname = $tax;
+                        $tax_array   = explode('|', $tax);
+                    } else {
+                        $tax_array   = explode('|', $tax['taxname']);
+                        $tmp_taxname = $tax['taxname'];
+                        if ($tmp_taxname == '') {
+                            continue;
+                        }
+                    }
+                    $taxes[] = ['name' => $tmp_taxname, 'taxrate' => $tax_array[1]];
+                }
+            }
+        }
+
+        // Clear the duplicates
+        $taxes = $this->pur_uniqueByKey($taxes, 'name');
+
+        $select = '<select class="selectpicker display-block taxes" data-width="100%" name="' . $name . '" multiple data-none-selected-text="' . _l('no_tax') . '">';
+
+        foreach ($taxes as $tax) {
+            $selected = '';
+            if (is_array($taxname)) {
+                foreach ($taxname as $_tax) {
+                    if (is_array($_tax)) {
+                        if ($_tax['taxname'] == $tax['name']) {
+                            $selected = 'selected';
+                        }
+                    } else {
+                        if ($_tax == $tax['name']) {
+                            $selected = 'selected';
+                        }
+                    }
+                }
+            } else {
+                if ($taxname == $tax['name']) {
+                    $selected = 'selected';
+                }
+            }
+
+            $select .= '<option value="' . $tax['name'] . '" ' . $selected . ' data-taxrate="' . $tax['taxrate'] . '" data-taxname="' . $tax['name'] . '" data-subtext="' . $tax['name'] . '">' . $tax['taxrate'] . '%</option>';
+        }
+        $select .= '</select>';
+
+        return $select;
+    }
+    public function pur_uniqueByKey($array, $key)
+    {
+        $temp_array = [];
+        $i          = 0;
+        $key_array  = [];
+
+        foreach ($array as $val) {
+            if (!in_array($val[$key], $key_array)) {
+                $key_array[$i]  = $val[$key];
+                $temp_array[$i] = $val;
+            }
+            $i++;
+        }
+
+        return $temp_array;
+    }
+
+    public function get_projects($id = '')
+    {
+        if ($id == '') {
+            if (!has_permission('purchase_request', '', 'view') && is_staff_logged_in()) {
+
+                $or_where = '';
+                $list_vendor = get_vendor_admin_list(get_staff_user_id());
+                foreach ($list_vendor as $vendor_id) {
+                    $or_where .= ' OR find_in_set(' . $vendor_id . ', ' . db_prefix() . 'projects.send_to_vendors)';
+                }
+                $this->db->where('(' . db_prefix() . 'projects.requester = ' . get_staff_user_id() .  $or_where . ')');
+            }
+
+            return $this->db->get(db_prefix() . 'projects')->result_array();
+        } else {
+            $this->db->where('id', $id);
+            return $this->db->get(db_prefix() . 'projects')->row();
+        }
+    }
+    public function tax_rate_by_id($tax_id)
+    {
+        $this->db->where('id', $tax_id);
+        $tax = $this->db->get(db_prefix() . 'taxes')->row();
+        if ($tax) {
+            return $tax->taxrate;
+        }
+        return 0;
+    }
+    public function get_tax_name($tax)
+    {
+        $this->db->where('id', $tax);
+        $tax_if = $this->db->get(db_prefix() . 'taxes')->row();
+        if ($tax_if) {
+            return $tax_if->name;
+        }
+        return '';
+    }
+
+    public function get_sum_pur_orders($id)
+    {
+
+        $this->db->select('SUM(pj.project_cost) as totalcost');
+        $this->db->from(db_prefix() . 'pur_orders po');
+        $this->db->join(db_prefix() . 'projects pj', 'po.project = pj.id');
+        $this->db->where('pj.id', $id);
+        $query = $this->db->get();
+        return $query->row_array(); // Mengembalikan satu baris hasil
+    }
+
+    public function get_sum_pur_request($id)
+    {
+
+        $this->db->select('SUM(pj.project_cost) as totalcost');
+        $this->db->from(db_prefix() . 'pur_request po');
+        $this->db->join(db_prefix() . 'projects pj', 'po.project = pj.id');
+        $this->db->where('pj.id', $id);
+        $query = $this->db->get();
+        return $query->row_array(); // Mengembalikan satu baris hasil
+    }
+
+    public function get_html_tax_project($id)
+    {
+        $html = '';
+        $preview_html = '';
+        $pdf_html = '';
+        $taxes = [];
+        $t_rate = [];
+        $tax_val = [];
+        $tax_val_rs = [];
+        $tax_name = [];
+        $rs = [];
+
+        $request = $this->get_projects($id);
+
+        $this->load->model('currencies_model');
+        $base_currency = $this->currencies_model->get_base_currency();
+        if ($request->currency != 0 && $request->currency != null) {
+            $base_currency = pur_get_currency_by_id($request->currency);
+        }
+
+        $this->db->where('project_id', $id);
+        $details = $this->db->get(db_prefix() . 'project_detail')->result_array();
+        foreach ($details as $row) {
+            if ($row['tax'] != '') {
+                $tax_arr = explode('|', $row['tax']);
+
+                $tax_rate_arr = [];
+                if ($row['tax_rate'] != '') {
+                    $tax_rate_arr = explode('|', $row['tax_rate']);
+                }
+
+                foreach ($tax_arr as $k => $tax_it) {
+                    if (!isset($tax_rate_arr[$k])) {
+                        $tax_rate_arr[$k] = $this->tax_rate_by_id($tax_it);
+                    }
+
+                    if (!in_array($tax_it, $taxes)) {
+                        $taxes[$tax_it] = $tax_it;
+                        $t_rate[$tax_it] = $tax_rate_arr[$k];
+                        $tax_name[$tax_it] = $this->get_tax_name($tax_it) . ' (' . $tax_rate_arr[$k] . '%)';
+                    }
+                }
+            }
+        }
+
+        if (count($tax_name) > 0) {
+            foreach ($tax_name as $key => $tn) {
+                $tax_val[$key] = 0;
+                foreach ($details as $row_dt) {
+                    if (!(strpos($row_dt['tax'] ?? '', $taxes[$key]) === false)) {
+                        $tax_val[$key] += ($row_dt['into_money'] * $t_rate[$key] / 100);
+                    }
+                }
+                $pdf_html .= '<tr id="subtotal"><td width="33%"></td><td>' . $tn . '</td><td>' . app_format_money($tax_val[$key], $base_currency->symbol) . '</td></tr>';
+                $preview_html .= '<tr id="subtotal"><td>' . $tn . '</td><td>' . app_format_money($tax_val[$key], $base_currency->symbol) . '</td><tr>';
+                $html .= '<tr class="tax-area_pr"><td>' . $tn . '</td><td width="65%">' . app_format_money($tax_val[$key], '') . ' ' . ($base_currency->symbol) . '</td></tr>';
+                $tax_val_rs[] = $tax_val[$key];
+            }
+        }
+
+        $rs['pdf_html'] = $pdf_html;
+        $rs['preview_html'] = $preview_html;
+        $rs['html'] = $html;
+        $rs['taxes'] = $taxes;
+        $rs['taxes_val'] = $tax_val_rs;
+        return $rs;
+    }
+
+    public function pur_get_tax_rate($taxname)
+    {
+        $tax_rate = 0;
+        $tax_rate_str = '';
+        $tax_id_str = '';
+        $tax_name_str = '';
+        //var_dump($taxname); die;
+        if (is_array($taxname)) {
+            foreach ($taxname as $key => $value) {
+                $_tax = explode("|", $value);
+                if (isset($_tax[1])) {
+                    $tax_rate += (float)$_tax[1];
+                    if (strlen($tax_rate_str) > 0) {
+                        $tax_rate_str .= '|' . $_tax[1];
+                    } else {
+                        $tax_rate_str .= $_tax[1];
+                    }
+
+                    $this->db->where('name', $_tax[0]);
+                    $taxes = $this->db->get(db_prefix() . 'taxes')->row();
+                    if ($taxes) {
+                        if (strlen($tax_id_str) > 0) {
+                            $tax_id_str .= '|' . $taxes->id;
+                        } else {
+                            $tax_id_str .= $taxes->id;
+                        }
+                    }
+
+                    if (strlen($tax_name_str) > 0) {
+                        $tax_name_str .= '|' . $_tax[0];
+                    } else {
+                        $tax_name_str .= $_tax[0];
+                    }
+                }
+            }
+        }
+        return ['tax_rate' => $tax_rate, 'tax_rate_str' => $tax_rate_str, 'tax_id_str' => $tax_id_str, 'tax_name_str' => $tax_name_str];
+    }
+
+    public function add_commodity_one_item($data)
+    {
+        /*add data tblitem*/
+        $data['rate'] = $data['rate'];
+        $data['purchase_price'] = $data['purchase_price'];
+        $data['can_be_purchased'] = 'can_be_purchased';
+        $data['can_be_sold'] = null;
+        $data['can_be_manufacturing'] = null;
+        $data['can_be_inventory'] = null;
+
+        /*create sku code*/
+        if ($data['sku_code'] != '') {
+            $data['sku_code'] = $data['sku_code'];
+        } else {
+            $data['sku_code'] = $this->create_sku_code('', '');
+        }
+
+        //update column unit name use sales/items
+        $unit_type = get_unit_type_item($data['unit_id']);
+        if ($unit_type && !is_array($unit_type)) {
+            $data['unit'] = $unit_type->unit_name;
+        }
+
+        if (isset($data['custom_fields'])) {
+            $custom_fields = $data['custom_fields'];
+            unset($data['custom_fields']);
+        }
+
+        $this->db->insert(db_prefix() . 'items', $data);
+        $insert_id = $this->db->insert_id();
+
+        if ($insert_id) {
+            if (isset($custom_fields)) {
+                handle_custom_fields_post($insert_id, $custom_fields, true);
+            }
+
+            return $insert_id;
+        }
+
+        /*add data tblinventory*/
+        return false;
+    }
+
+    public function  create_sku_code($commodity_group, $sub_group)
+    {
+        // input  commodity group, sub group
+        //get commodity group from id
+        $group_character = '';
+        if (isset($commodity_group)) {
+
+            $sql_group_where = 'SELECT * FROM ' . db_prefix() . 'items_groups where id = "' . $commodity_group . '"';
+            $group_value = $this->db->query($sql_group_where)->row();
+            if ($group_value) {
+
+                if ($group_value->commodity_group_code != '') {
+                    $group_character = mb_substr($group_value->commodity_group_code, 0, 1, "UTF-8") . '-';
+                }
+            }
+        }
+
+        //get sku code from sku id
+        $sub_code = '';
+
+
+
+
+        $sql_where = 'SELECT * FROM ' . db_prefix() . 'items order by id desc limit 1';
+        $last_commodity_id = $this->db->query($sql_where)->row();
+        if ($last_commodity_id) {
+            $next_commodity_id = (int)$last_commodity_id->id + 1;
+        } else {
+            $next_commodity_id = 1;
+        }
+        $commodity_id_length = strlen((string)$next_commodity_id);
+
+        $commodity_str_betwen = '';
+
+        $create_candidate_code = '';
+
+        switch ($commodity_id_length) {
+            case 1:
+                $commodity_str_betwen = '000';
+                break;
+            case 2:
+                $commodity_str_betwen = '00';
+                break;
+            case 3:
+                $commodity_str_betwen = '0';
+                break;
+
+            default:
+                $commodity_str_betwen = '0';
+                break;
+        }
+
+
+        return  $group_character . $sub_code . $commodity_str_betwen . $next_commodity_id; // X_X_000.id auto increment
+
+
+    }
+
+    public function generate_commodity_barcode()
+    {
+        $item = false;
+        do {
+            $length = 11;
+            $chars = '0123456789';
+            $count = mb_strlen($chars);
+            $password = '';
+            for ($i = 0; $i < $length; $i++) {
+                $index = rand(0, $count - 1);
+                $password .= mb_substr($chars, $index, 1);
+            }
+            $this->db->where('commodity_barcode', $password);
+            $item = $this->db->get(db_prefix() . 'items')->row();
+        } while ($item);
+
+        return $password;
     }
 
     public function update($data, $id)

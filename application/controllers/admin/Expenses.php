@@ -112,6 +112,8 @@ class Expenses extends AdminController
         $this->load->model('taxes_model');
         $this->load->model('payment_modes_model');
         $this->load->model('currencies_model');
+        $data['departments'] = $this->departments_model->get();
+
 
         $data['taxes']         = $this->taxes_model->get();
         $data['categories']    = $this->expenses_model->get_category();

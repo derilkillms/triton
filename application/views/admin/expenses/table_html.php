@@ -7,7 +7,17 @@ if ($withBulkActions === true && $hasPermission) { ?>
   <?= _l('bulk_actions'); ?>
 </a>
 <?php } ?>
+
+
 <?php
+
+// elseif($aColumns[$i] == 'approve_status'){
+
+//     //get_status
+//     $_data = get_status_approve($aRow['approve_status']);
+
+
+// }
 $table_data = [
     [
         'name'     => '<span class="hide"> - </span><div class="checkbox mass_select_all_wrap"><input type="checkbox" id="mass_select_all" data-to-table="expenses"><label></label></div>',
@@ -19,6 +29,7 @@ $table_data = [
     _l('expense_name'),
     _l('receipt'),
     _l('expense_dt_table_heading_date'),
+    _l('approval_status'),
 ];
 
 if (! isset($project)) {

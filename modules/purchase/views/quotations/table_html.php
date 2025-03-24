@@ -9,10 +9,10 @@ $table_data = array(
       'th_attrs'=>array('class'=>'not_visible')
    ),
    array(
-      'name'=>_l('vendor'),
+      'name'=>_l('clients'),
       'th_attrs'=>array('class'=> (isset($client) ? 'not_visible' : ''))
    ),
-   _l('pur_request'),
+   _l('projects'),
    _l('estimate_dt_table_heading_date'),
    _l('estimate_dt_table_heading_expirydate'),
    _l('approval_status'));

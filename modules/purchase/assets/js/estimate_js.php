@@ -15,7 +15,7 @@
     selector = typeof(selector) == 'undefined' ? '#estimate-form' : selector;
 
     appValidateForm($(selector), {
-        vendor: 'required',
+      clientid: 'required',
         date: 'required',
         currency: 'required',
         number: {

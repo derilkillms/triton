@@ -21,6 +21,7 @@ return App_table::find('expenses')
             'invoiceid',
             'reference_no',
             'paymentmode',
+            'approve_status',
         ];
 
         $join = [
@@ -152,10 +153,17 @@ return App_table::find('expenses')
             $row[] = $outputReceipt;
 
             $row[] = e(_d($aRow['date']));
+            $row[] = get_status_approve($aRow['approve_status']);
 
             $row[] = '<a href="' . admin_url('projects/view/' . $aRow['project_id']) . '">' . e($aRow['project_name']) . '</a>';
 
             $row[] = '<a href="' . admin_url('clients/client/' . $aRow['clientid']) . '">' . e($aRow['company']) . '</a>';
+
+            
+           
+    
+    
+            
 
             if ($aRow['invoiceid']) {
                 $row[] = '<a href="' . admin_url('invoices/list_invoices/' . $aRow['invoiceid']) . '">' . e(format_invoice_number($aRow['invoiceid'])) . '</a>';

@@ -52,6 +52,14 @@ function app_init_project_tabs()
         'linked_to_customer_option' => ['view_tasks'],
     ]);
 
+    $CI->app_tabs->add_project_tab('project_items', [
+        'name'                      => _l('items'),
+        'icon'                      => 'fa-solid fa-file-invoice',
+        'view'                      => 'admin/projects/project_items',
+        'position'                  => 10,
+        'linked_to_customer_option' => ['view_tasks'],
+    ]);
+
     $CI->app_tabs->add_project_tab('project_timesheets', [
         'name'                      => _l('project_timesheets'),
         'icon'                      => 'fa-regular fa-clock',

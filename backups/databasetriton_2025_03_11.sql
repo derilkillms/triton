@@ -15,6 +15,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 -- membuang struktur untuk table triton.tblactivity_log
+DROP TABLE IF EXISTS `tblactivity_log`;
 CREATE TABLE IF NOT EXISTS `tblactivity_log` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -22,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `tblactivity_log` (
   `staffid` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `staffid` (`staffid`)
-) ENGINE=InnoDB AUTO_INCREMENT=312 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=329 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel triton.tblactivity_log: ~275 rows (lebih kurang)
 INSERT INTO `tblactivity_log` (`id`, `description`, `date`, `staffid`) VALUES
@@ -336,9 +337,27 @@ INSERT INTO `tblactivity_log` (`id`, `description`, `date`, `staffid`) VALUES
 	(308, 'Failed to send email template - SMTP connect() failed. https://github.com/PHPMailer/PHPMailer/wiki/Troubleshooting<br /><pre>\n\n</pre>', '2025-03-10 17:49:28', 'Andhy Reeza'),
 	(309, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-11 12:29:56', 'Andhy Reeza'),
 	(310, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-12 13:06:52', 'Andhy Reeza'),
-	(311, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-13 14:19:28', 'Andhy Reeza');
+	(311, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-13 14:19:28', 'Andhy Reeza'),
+	(312, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-14 13:38:44', 'Andhy Reeza'),
+	(313, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-15 14:29:40', 'Andhy Reeza'),
+	(314, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-16 13:08:40', 'Andhy Reeza'),
+	(315, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-17 09:54:04', 'Andhy Reeza'),
+	(316, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-18 10:16:37', 'Andhy Reeza'),
+	(317, 'New Project Created [ID: 3]', '2025-03-18 11:18:32', 'Andhy Reeza'),
+	(318, 'Project Deleted [ID: 3, Name: test aja]', '2025-03-18 11:19:14', 'Andhy Reeza'),
+	(319, 'New Project Created [ID: 4]', '2025-03-18 11:38:28', 'Andhy Reeza'),
+	(320, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-19 11:12:39', 'Andhy Reeza'),
+	(321, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-20 12:35:33', 'Andhy Reeza'),
+	(322, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-21 10:36:36', 'Andhy Reeza'),
+	(323, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-22 13:13:24', 'Andhy Reeza'),
+	(324, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-23 10:04:53', 'Andhy Reeza'),
+	(325, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-24 06:33:38', 'Andhy Reeza'),
+	(326, 'User Successfully Logged In [User Id: 1, Is Staff Member: Yes, IP: 127.0.0.1]', '2025-03-24 06:33:42', 'Andhy Reeza'),
+	(327, 'Expense Updated [1]', '2025-03-24 15:51:18', 'Andhy Reeza'),
+	(328, 'Expense Updated [1]', '2025-03-24 15:51:35', 'Andhy Reeza');
 
 -- membuang struktur untuk table triton.tblannouncements
+DROP TABLE IF EXISTS `tblannouncements`;
 CREATE TABLE IF NOT EXISTS `tblannouncements` (
   `announcementid` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -356,6 +375,7 @@ INSERT INTO `tblannouncements` (`announcementid`, `name`, `message`, `showtouser
 	(2, 'testt', '<p><img src="http://triton.test/media/moodle.jpg" width="150" height="100" alt=""></p>\r\n<p></p>\r\n<p>testt</p>', 0, 1, 0, '2025-03-06 10:31:47', 'Andhy Reeza');
 
 -- membuang struktur untuk table triton.tblapprovify_approval_categories
+DROP TABLE IF EXISTS `tblapprovify_approval_categories`;
 CREATE TABLE IF NOT EXISTS `tblapprovify_approval_categories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) DEFAULT NULL,
@@ -373,6 +393,7 @@ INSERT INTO `tblapprovify_approval_categories` (`id`, `category_name`, `category
 	(1, 'Quotation', '', '', '["2"]', 0, NULL, '2024-12-04 02:13:31');
 
 -- membuang struktur untuk table triton.tblapprovify_requests
+DROP TABLE IF EXISTS `tblapprovify_requests`;
 CREATE TABLE IF NOT EXISTS `tblapprovify_requests` (
   `id` int NOT NULL AUTO_INCREMENT,
   `requester_id` int DEFAULT NULL,
@@ -389,6 +410,7 @@ INSERT INTO `tblapprovify_requests` (`id`, `requester_id`, `category_id`, `reque
 	(1, 1, 1, 'Testing Quotation', '<p>testing</p>\n', '3', '2024-12-04 02:14:15');
 
 -- membuang struktur untuk table triton.tblapprovify_request_activity
+DROP TABLE IF EXISTS `tblapprovify_request_activity`;
 CREATE TABLE IF NOT EXISTS `tblapprovify_request_activity` (
   `id` int NOT NULL AUTO_INCREMENT,
   `request_id` int DEFAULT NULL,
@@ -403,6 +425,7 @@ INSERT INTO `tblapprovify_request_activity` (`id`, `request_id`, `staff_id`, `de
 	(1, 1, 1, 'Has changed request status to Canceled', '2024-12-04 02:17:32');
 
 -- membuang struktur untuk table triton.tblapprovify_request_approvals
+DROP TABLE IF EXISTS `tblapprovify_request_approvals`;
 CREATE TABLE IF NOT EXISTS `tblapprovify_request_approvals` (
   `id` int NOT NULL AUTO_INCREMENT,
   `request_id` int DEFAULT NULL,
@@ -416,6 +439,7 @@ CREATE TABLE IF NOT EXISTS `tblapprovify_request_approvals` (
 -- Membuang data untuk tabel triton.tblapprovify_request_approvals: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblapprovify_request_files
+DROP TABLE IF EXISTS `tblapprovify_request_files`;
 CREATE TABLE IF NOT EXISTS `tblapprovify_request_files` (
   `id` int NOT NULL AUTO_INCREMENT,
   `request_id` int DEFAULT NULL,
@@ -428,6 +452,7 @@ CREATE TABLE IF NOT EXISTS `tblapprovify_request_files` (
 -- Membuang data untuk tabel triton.tblapprovify_request_files: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblclients
+DROP TABLE IF EXISTS `tblclients`;
 CREATE TABLE IF NOT EXISTS `tblclients` (
   `userid` int NOT NULL AUTO_INCREMENT,
   `company` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -474,6 +499,7 @@ INSERT INTO `tblclients` (`userid`, `company`, `vat`, `phonenumber`, `country`, 
 	(3, 'PT Indosat', '112345', '08977239', 103, 'Ciamis', '46211', 'Jawa Barat', 'Indonesia', 'https://google.com', '2025-03-05 13:19:34', 1, NULL, 'Indonesia', 'Ciamis', 'Jawa Barat', '46211', 103, NULL, NULL, NULL, NULL, 0, NULL, NULL, 'english', 0, 0, NULL, 1, 0);
 
 -- membuang struktur untuk table triton.tblconsents
+DROP TABLE IF EXISTS `tblconsents`;
 CREATE TABLE IF NOT EXISTS `tblconsents` (
   `id` int NOT NULL AUTO_INCREMENT,
   `action` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -494,6 +520,7 @@ CREATE TABLE IF NOT EXISTS `tblconsents` (
 -- Membuang data untuk tabel triton.tblconsents: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblconsent_purposes
+DROP TABLE IF EXISTS `tblconsent_purposes`;
 CREATE TABLE IF NOT EXISTS `tblconsent_purposes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -506,6 +533,7 @@ CREATE TABLE IF NOT EXISTS `tblconsent_purposes` (
 -- Membuang data untuk tabel triton.tblconsent_purposes: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblcontacts
+DROP TABLE IF EXISTS `tblcontacts`;
 CREATE TABLE IF NOT EXISTS `tblcontacts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `userid` int NOT NULL,
@@ -548,6 +576,7 @@ INSERT INTO `tblcontacts` (`id`, `userid`, `is_primary`, `firstname`, `lastname`
 	(1, 3, 1, 'Muhammad', 'Deril', 'derilkillms@gmail.com', '+620988122343', 'Developer', '2025-03-05 13:19:34', '$2a$08$DXCOXPvaFXAM12VV3Ai6wulbGo6nzIIrJgRIHHwAjlLHX4ZHxAeR6', NULL, NULL, '2025-03-05 13:24:02', 'ba37e1b2a7afa5130b9daad6dbdf6bf0', '2025-03-05 13:23:49', '127.0.0.1', '2025-03-05 13:19:35', NULL, 1, NULL, NULL, 0, 1, 0, 1, 0, 0, 0);
 
 -- membuang struktur untuk table triton.tblcontact_permissions
+DROP TABLE IF EXISTS `tblcontact_permissions`;
 CREATE TABLE IF NOT EXISTS `tblcontact_permissions` (
   `id` int NOT NULL AUTO_INCREMENT,
   `permission_id` int NOT NULL,
@@ -565,6 +594,7 @@ INSERT INTO `tblcontact_permissions` (`id`, `permission_id`, `userid`) VALUES
 	(6, 4, 3);
 
 -- membuang struktur untuk table triton.tblcontracts
+DROP TABLE IF EXISTS `tblcontracts`;
 CREATE TABLE IF NOT EXISTS `tblcontracts` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -604,6 +634,7 @@ INSERT INTO `tblcontracts` (`id`, `content`, `description`, `subject`, `client`,
 	(1, NULL, 'Kontrak Maintenance pengolahan air limbah', 'KONTRAK 001-TISKSA', 1, '2024-12-04', '2025-12-31', 1, 1, 1, '2024-12-04 02:23:30', 0, 1000000000.00, 0, 0, '0a78eb77858db9d70fd3c37053e154ae', 0, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- membuang struktur untuk table triton.tblcontracts_types
+DROP TABLE IF EXISTS `tblcontracts_types`;
 CREATE TABLE IF NOT EXISTS `tblcontracts_types` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -617,6 +648,7 @@ INSERT INTO `tblcontracts_types` (`id`, `name`) VALUES
 	(3, 'Other Contract');
 
 -- membuang struktur untuk table triton.tblcontract_comments
+DROP TABLE IF EXISTS `tblcontract_comments`;
 CREATE TABLE IF NOT EXISTS `tblcontract_comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -629,6 +661,7 @@ CREATE TABLE IF NOT EXISTS `tblcontract_comments` (
 -- Membuang data untuk tabel triton.tblcontract_comments: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblcontract_renewals
+DROP TABLE IF EXISTS `tblcontract_renewals`;
 CREATE TABLE IF NOT EXISTS `tblcontract_renewals` (
   `id` int NOT NULL AUTO_INCREMENT,
   `contractid` int NOT NULL,
@@ -648,6 +681,7 @@ CREATE TABLE IF NOT EXISTS `tblcontract_renewals` (
 -- Membuang data untuk tabel triton.tblcontract_renewals: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblcountries
+DROP TABLE IF EXISTS `tblcountries`;
 CREATE TABLE IF NOT EXISTS `tblcountries` (
   `country_id` int NOT NULL AUTO_INCREMENT,
   `iso2` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -915,6 +949,7 @@ INSERT INTO `tblcountries` (`country_id`, `iso2`, `short_name`, `long_name`, `is
 	(250, 'ZW', 'Zimbabwe', 'Republic of Zimbabwe', 'ZWE', '716', 'yes', '263', '.zw');
 
 -- membuang struktur untuk table triton.tblcreditnotes
+DROP TABLE IF EXISTS `tblcreditnotes`;
 CREATE TABLE IF NOT EXISTS `tblcreditnotes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `clientid` int NOT NULL,
@@ -963,6 +998,7 @@ CREATE TABLE IF NOT EXISTS `tblcreditnotes` (
 -- Membuang data untuk tabel triton.tblcreditnotes: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblcreditnote_refunds
+DROP TABLE IF EXISTS `tblcreditnote_refunds`;
 CREATE TABLE IF NOT EXISTS `tblcreditnote_refunds` (
   `id` int NOT NULL AUTO_INCREMENT,
   `credit_note_id` int NOT NULL,
@@ -978,6 +1014,7 @@ CREATE TABLE IF NOT EXISTS `tblcreditnote_refunds` (
 -- Membuang data untuk tabel triton.tblcreditnote_refunds: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblcredits
+DROP TABLE IF EXISTS `tblcredits`;
 CREATE TABLE IF NOT EXISTS `tblcredits` (
   `id` int NOT NULL AUTO_INCREMENT,
   `invoice_id` int NOT NULL,
@@ -992,6 +1029,7 @@ CREATE TABLE IF NOT EXISTS `tblcredits` (
 -- Membuang data untuk tabel triton.tblcredits: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblcurrencies
+DROP TABLE IF EXISTS `tblcurrencies`;
 CREATE TABLE IF NOT EXISTS `tblcurrencies` (
   `id` int NOT NULL AUTO_INCREMENT,
   `symbol` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1009,6 +1047,7 @@ INSERT INTO `tblcurrencies` (`id`, `symbol`, `name`, `decimal_separator`, `thous
 	(2, '$', 'USD', '.', ',', 'before', 0);
 
 -- membuang struktur untuk table triton.tblcurrency_rates
+DROP TABLE IF EXISTS `tblcurrency_rates`;
 CREATE TABLE IF NOT EXISTS `tblcurrency_rates` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `from_currency_id` int DEFAULT NULL,
@@ -1027,6 +1066,7 @@ INSERT INTO `tblcurrency_rates` (`id`, `from_currency_id`, `from_currency_name`,
 	(2, 2, 'USD', 1.000000, 1, 'IDR', 15.000000, '2024-12-04 16:59:19');
 
 -- membuang struktur untuk table triton.tblcurrency_rate_logs
+DROP TABLE IF EXISTS `tblcurrency_rate_logs`;
 CREATE TABLE IF NOT EXISTS `tblcurrency_rate_logs` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `from_currency_id` int DEFAULT NULL,
@@ -1141,6 +1181,7 @@ INSERT INTO `tblcurrency_rate_logs` (`id`, `from_currency_id`, `from_currency_na
 	(98, 2, 'USD', 0.000000, 1, 'IDR', 15.000000, '2024-12-04');
 
 -- membuang struktur untuk table triton.tblcustomers_groups
+DROP TABLE IF EXISTS `tblcustomers_groups`;
 CREATE TABLE IF NOT EXISTS `tblcustomers_groups` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1157,6 +1198,7 @@ INSERT INTO `tblcustomers_groups` (`id`, `name`) VALUES
 	(1, 'Water Treatment');
 
 -- membuang struktur untuk table triton.tblcustomer_admins
+DROP TABLE IF EXISTS `tblcustomer_admins`;
 CREATE TABLE IF NOT EXISTS `tblcustomer_admins` (
   `staff_id` int NOT NULL,
   `customer_id` int NOT NULL,
@@ -1168,6 +1210,7 @@ CREATE TABLE IF NOT EXISTS `tblcustomer_admins` (
 -- Membuang data untuk tabel triton.tblcustomer_admins: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblcustomer_groups
+DROP TABLE IF EXISTS `tblcustomer_groups`;
 CREATE TABLE IF NOT EXISTS `tblcustomer_groups` (
   `id` int NOT NULL AUTO_INCREMENT,
   `groupid` int NOT NULL,
@@ -1183,6 +1226,7 @@ INSERT INTO `tblcustomer_groups` (`id`, `groupid`, `customer_id`) VALUES
 	(2, 5, 2);
 
 -- membuang struktur untuk table triton.tblcustomfields
+DROP TABLE IF EXISTS `tblcustomfields`;
 CREATE TABLE IF NOT EXISTS `tblcustomfields` (
   `id` int NOT NULL AUTO_INCREMENT,
   `fieldto` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1208,6 +1252,7 @@ CREATE TABLE IF NOT EXISTS `tblcustomfields` (
 -- Membuang data untuk tabel triton.tblcustomfields: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblcustomfieldsvalues
+DROP TABLE IF EXISTS `tblcustomfieldsvalues`;
 CREATE TABLE IF NOT EXISTS `tblcustomfieldsvalues` (
   `id` int NOT NULL AUTO_INCREMENT,
   `relid` int NOT NULL,
@@ -1223,6 +1268,7 @@ CREATE TABLE IF NOT EXISTS `tblcustomfieldsvalues` (
 -- Membuang data untuk tabel triton.tblcustomfieldsvalues: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbldepartments
+DROP TABLE IF EXISTS `tbldepartments`;
 CREATE TABLE IF NOT EXISTS `tbldepartments` (
   `departmentid` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -1251,6 +1297,7 @@ INSERT INTO `tbldepartments` (`departmentid`, `name`, `imap_username`, `email`, 
 	(8, 'Sales & Marketing', '', NULL, 0, '', '', '', 'INBOX', 0, 'a97ceae2685c37258b2fb5212b4b1110128b692ebffa151a5fcefcd3211d8be3@group.calendar.google.com', 0);
 
 -- membuang struktur untuk table triton.tbldismissed_announcements
+DROP TABLE IF EXISTS `tbldismissed_announcements`;
 CREATE TABLE IF NOT EXISTS `tbldismissed_announcements` (
   `dismissedannouncementid` int NOT NULL AUTO_INCREMENT,
   `announcementid` int NOT NULL,
@@ -1265,6 +1312,7 @@ CREATE TABLE IF NOT EXISTS `tbldismissed_announcements` (
 -- Membuang data untuk tabel triton.tbldismissed_announcements: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblemailtemplates
+DROP TABLE IF EXISTS `tblemailtemplates`;
 CREATE TABLE IF NOT EXISTS `tblemailtemplates` (
   `emailtemplateid` int NOT NULL AUTO_INCREMENT,
   `type` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3796,6 +3844,7 @@ INSERT INTO `tblemailtemplates` (`emailtemplateid`, `type`, `slug`, `language`, 
 	(2511, 'purchase_order', 'purchase-send-rejected', 'norwegian', 'Email send rejected [norwegian]', 'Email send rejected', '', '{companyname} | CRM', NULL, 0, 1, 0);
 
 -- membuang struktur untuk table triton.tblestimates
+DROP TABLE IF EXISTS `tblestimates`;
 CREATE TABLE IF NOT EXISTS `tblestimates` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sent` tinyint(1) NOT NULL DEFAULT '0',
@@ -3857,13 +3906,16 @@ CREATE TABLE IF NOT EXISTS `tblestimates` (
   KEY `sale_agent` (`sale_agent`),
   KEY `status` (`status`),
   KEY `formatted_number` (`formatted_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel triton.tblestimates: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel triton.tblestimates: ~3 rows (lebih kurang)
 INSERT INTO `tblestimates` (`id`, `sent`, `datesend`, `clientid`, `deleted_customer_name`, `project_id`, `number`, `prefix`, `number_format`, `formatted_number`, `hash`, `datecreated`, `date`, `expirydate`, `currency`, `subtotal`, `total_tax`, `total`, `adjustment`, `addedfrom`, `status`, `clientnote`, `adminnote`, `discount_percent`, `discount_total`, `discount_type`, `invoiceid`, `invoiced_date`, `terms`, `reference_no`, `sale_agent`, `billing_street`, `billing_city`, `billing_state`, `billing_zip`, `billing_country`, `shipping_street`, `shipping_city`, `shipping_state`, `shipping_zip`, `shipping_country`, `include_shipping`, `show_shipping_on_estimate`, `show_quantity_as`, `pipeline_order`, `is_expiry_notified`, `acceptance_firstname`, `acceptance_lastname`, `acceptance_email`, `acceptance_date`, `acceptance_ip`, `signature`, `short_link`) VALUES
-	(2, 0, NULL, 1, NULL, 1, 1, 'EST-', 1, 'EST-000001', '1ac8262721e4f5c6fd4393925bdff6d2', '2024-12-04 03:00:36', '2024-12-04', '2024-12-11', 1, 1000000.00, 110000.00, 1110000.00, 0.00, 1, 3, '', '', 0.00, 0.00, '', NULL, NULL, '', '', 1, '', '', '', '', 0, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+	(2, 0, NULL, 1, NULL, 1, 1, 'EST-', 1, 'EST-000001', '1ac8262721e4f5c6fd4393925bdff6d2', '2024-12-04 03:00:36', '2024-12-04', '2024-12-11', 1, 1000000.00, 110000.00, 1110000.00, 0.00, 1, 3, '', '', 0.00, 0.00, '', NULL, NULL, '', '', 1, '', '', '', '', 0, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(3, 0, NULL, 3, NULL, 0, 2, 'EST-', 1, 'EST-000002', '9a5dbb6bceba7b7dd0f174eab0c18d41', '2025-03-20 13:19:01', '2025-03-20', '2025-03-27', 1, 10000.00, 0.00, 10000.00, 0.00, 1, 1, '', 'test', 0.00, 0.00, '', NULL, NULL, '', 'test', 1, 'Indonesia', 'Ciamis', 'Jawa Barat', '46211', 103, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(4, 0, NULL, 1, NULL, 4, 3, 'EST-', 1, 'EST-000003', '76f70a0d803cc6cf1f628ce8270d5643', '2025-03-20 15:41:30', '2025-03-20', '2025-03-27', 1, 10000.00, 0.00, 10000.00, 0.00, 1, 1, '', 'test', 0.00, 0.00, '', NULL, NULL, '', 'test', 1, 'Dsn Limus, RT/RW 04/06 , Desa Sukajadi, Kecamatan Sadananya', 'CIAMIS, KAB.CIAMIS', 'Jawa Barat', '46211', 103, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- membuang struktur untuk table triton.tblestimate_requests
+DROP TABLE IF EXISTS `tblestimate_requests`;
 CREATE TABLE IF NOT EXISTS `tblestimate_requests` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3881,6 +3933,7 @@ CREATE TABLE IF NOT EXISTS `tblestimate_requests` (
 -- Membuang data untuk tabel triton.tblestimate_requests: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblestimate_request_forms
+DROP TABLE IF EXISTS `tblestimate_request_forms`;
 CREATE TABLE IF NOT EXISTS `tblestimate_request_forms` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `form_key` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3909,6 +3962,7 @@ INSERT INTO `tblestimate_request_forms` (`id`, `form_key`, `type`, `name`, `form
 	(1, 'c21179ea0a90376de07630a54c055602', '', 'Estimasi Harga', '[{"type":"text","label":"Nama Lengkap","className":"form-control","name":"text-1733213215469","subtype":"text"},{"type":"text","required":true,"label":"Perusahaan","className":"form-control","name":"text-1733213304158","subtype":"text"},{"type":"text","subtype":"email","required":true,"label":"Email","className":"form-control","name":"email"},{"type":"text","required":true,"label":"No. Telp","className":"form-control","name":"text-1733213264359","subtype":"text"},{"type":"textarea","label":"Text Area","className":"form-control","name":"textarea-1733213218116","subtype":"textarea"},{"type":"file","required":true,"label":"File Upload","className":"form-control","name":"file-input","subtype":"file","multiple":true}]', 1, 2, 'Submit', '#5a29c5', '#ffffff', 'Terima kasih, secepatnya kami akan membalas permintaan harga Anda', 0, '', 'indonesia', '2024-12-03 15:06:49', 'specific_staff', 'a:0:{}', 1, 1);
 
 -- membuang struktur untuk table triton.tblestimate_request_status
+DROP TABLE IF EXISTS `tblestimate_request_status`;
 CREATE TABLE IF NOT EXISTS `tblestimate_request_status` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3925,6 +3979,7 @@ INSERT INTO `tblestimate_request_status` (`id`, `name`, `statusorder`, `color`, 
 	(3, 'Completed', 3, '#28a745', 'completed');
 
 -- membuang struktur untuk table triton.tblevents
+DROP TABLE IF EXISTS `tblevents`;
 CREATE TABLE IF NOT EXISTS `tblevents` (
   `eventid` int NOT NULL AUTO_INCREMENT,
   `title` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3945,6 +4000,7 @@ INSERT INTO `tblevents` (`eventid`, `title`, `description`, `userid`, `start`, `
 	(2, 'Test input agenda', 'Test input agenda meeting', 1, '2024-12-04 10:00:00', '2024-12-04 14:19:00', 1, '#28B8DA', 1, 30, 'minutes');
 
 -- membuang struktur untuk table triton.tblexpenses
+DROP TABLE IF EXISTS `tblexpenses`;
 CREATE TABLE IF NOT EXISTS `tblexpenses` (
   `id` int NOT NULL AUTO_INCREMENT,
   `category` int NOT NULL,
@@ -3974,6 +4030,13 @@ CREATE TABLE IF NOT EXISTS `tblexpenses` (
   `dateadded` datetime NOT NULL,
   `addedfrom` int NOT NULL,
   `vendor` int DEFAULT NULL,
+  `department` int DEFAULT NULL,
+  `position` text COLLATE utf8mb4_unicode_ci,
+  `supervisor` text COLLATE utf8mb4_unicode_ci,
+  `bank_name` text COLLATE utf8mb4_unicode_ci,
+  `account_number` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `status` int DEFAULT NULL,
+  `approve_status` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `clientid` (`clientid`),
   KEY `project_id` (`project_id`),
@@ -3981,11 +4044,12 @@ CREATE TABLE IF NOT EXISTS `tblexpenses` (
   KEY `currency` (`currency`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel triton.tblexpenses: ~0 rows (lebih kurang)
-INSERT INTO `tblexpenses` (`id`, `category`, `currency`, `amount`, `tax`, `tax2`, `reference_no`, `note`, `expense_name`, `clientid`, `project_id`, `billable`, `invoiceid`, `paymentmode`, `date`, `recurring_type`, `repeat_every`, `recurring`, `cycles`, `total_cycles`, `custom_recurring`, `last_recurring_date`, `create_invoice_billable`, `send_invoice_to_customer`, `recurring_from`, `dateadded`, `addedfrom`, `vendor`) VALUES
-	(1, 1, 1, 1000922.00, 0, 0, '', 'ngetest aja', 'Test aja ini mah', 2, 0, 1, 1, '', '2025-03-10', NULL, 0, 0, 0, 0, 0, NULL, 0, 0, NULL, '2025-03-10 10:50:51', 1, 1);
+-- Membuang data untuk tabel triton.tblexpenses: ~1 rows (lebih kurang)
+INSERT INTO `tblexpenses` (`id`, `category`, `currency`, `amount`, `tax`, `tax2`, `reference_no`, `note`, `expense_name`, `clientid`, `project_id`, `billable`, `invoiceid`, `paymentmode`, `date`, `recurring_type`, `repeat_every`, `recurring`, `cycles`, `total_cycles`, `custom_recurring`, `last_recurring_date`, `create_invoice_billable`, `send_invoice_to_customer`, `recurring_from`, `dateadded`, `addedfrom`, `vendor`, `department`, `position`, `supervisor`, `bank_name`, `account_number`, `status`, `approve_status`) VALUES
+	(1, 1, 1, 1000922.00, 0, 0, '', 'ngetest aja', 'Test aja ini mah', 2, 0, 1, 1, '', '2025-03-10', NULL, 0, 0, 0, 0, 0, NULL, 0, 0, NULL, '2025-03-10 10:50:51', 1, 1, 7, 'IT', 'TEST', 'Bank BCA', '11992093021', 1, 1);
 
 -- membuang struktur untuk table triton.tblexpenses_categories
+DROP TABLE IF EXISTS `tblexpenses_categories`;
 CREATE TABLE IF NOT EXISTS `tblexpenses_categories` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -3998,6 +4062,7 @@ INSERT INTO `tblexpenses_categories` (`id`, `name`, `description`) VALUES
 	(1, 'Internet', 'Biaya pengeluaran internet');
 
 -- membuang struktur untuk table triton.tblfiles
+DROP TABLE IF EXISTS `tblfiles`;
 CREATE TABLE IF NOT EXISTS `tblfiles` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -4027,6 +4092,7 @@ INSERT INTO `tblfiles` (`id`, `rel_id`, `rel_type`, `file_name`, `filetype`, `vi
 	(6, 1, 'expense', 'Konsep Perkawinan.pdf', 'application/pdf', 0, '571dbadea8ff711702fb7586a738a361', NULL, NULL, NULL, 1, 0, 0, '2025-03-10 10:50:52');
 
 -- membuang struktur untuk table triton.tblfilters
+DROP TABLE IF EXISTS `tblfilters`;
 CREATE TABLE IF NOT EXISTS `tblfilters` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4040,6 +4106,7 @@ CREATE TABLE IF NOT EXISTS `tblfilters` (
 -- Membuang data untuk tabel triton.tblfilters: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblfilter_defaults
+DROP TABLE IF EXISTS `tblfilter_defaults`;
 CREATE TABLE IF NOT EXISTS `tblfilter_defaults` (
   `filter_id` int unsigned NOT NULL,
   `staff_id` int NOT NULL,
@@ -4054,6 +4121,7 @@ CREATE TABLE IF NOT EXISTS `tblfilter_defaults` (
 -- Membuang data untuk tabel triton.tblfilter_defaults: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblform_questions
+DROP TABLE IF EXISTS `tblform_questions`;
 CREATE TABLE IF NOT EXISTS `tblform_questions` (
   `questionid` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -4067,6 +4135,7 @@ CREATE TABLE IF NOT EXISTS `tblform_questions` (
 -- Membuang data untuk tabel triton.tblform_questions: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblform_question_box
+DROP TABLE IF EXISTS `tblform_question_box`;
 CREATE TABLE IF NOT EXISTS `tblform_question_box` (
   `boxid` int NOT NULL AUTO_INCREMENT,
   `boxtype` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4077,6 +4146,7 @@ CREATE TABLE IF NOT EXISTS `tblform_question_box` (
 -- Membuang data untuk tabel triton.tblform_question_box: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblform_question_box_description
+DROP TABLE IF EXISTS `tblform_question_box_description`;
 CREATE TABLE IF NOT EXISTS `tblform_question_box_description` (
   `questionboxdescriptionid` int NOT NULL AUTO_INCREMENT,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4088,6 +4158,7 @@ CREATE TABLE IF NOT EXISTS `tblform_question_box_description` (
 -- Membuang data untuk tabel triton.tblform_question_box_description: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblform_results
+DROP TABLE IF EXISTS `tblform_results`;
 CREATE TABLE IF NOT EXISTS `tblform_results` (
   `resultid` int NOT NULL AUTO_INCREMENT,
   `boxid` int NOT NULL,
@@ -4103,6 +4174,7 @@ CREATE TABLE IF NOT EXISTS `tblform_results` (
 -- Membuang data untuk tabel triton.tblform_results: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblgdpr_requests
+DROP TABLE IF EXISTS `tblgdpr_requests`;
 CREATE TABLE IF NOT EXISTS `tblgdpr_requests` (
   `id` int NOT NULL AUTO_INCREMENT,
   `clientid` int NOT NULL DEFAULT '0',
@@ -4119,6 +4191,7 @@ CREATE TABLE IF NOT EXISTS `tblgdpr_requests` (
 -- Membuang data untuk tabel triton.tblgdpr_requests: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblinvoicepaymentrecords
+DROP TABLE IF EXISTS `tblinvoicepaymentrecords`;
 CREATE TABLE IF NOT EXISTS `tblinvoicepaymentrecords` (
   `id` int NOT NULL AUTO_INCREMENT,
   `invoiceid` int NOT NULL,
@@ -4139,6 +4212,7 @@ INSERT INTO `tblinvoicepaymentrecords` (`id`, `invoiceid`, `amount`, `paymentmod
 	(1, 1, 1000922.00, '1', NULL, '2025-03-10', '2025-03-10 10:55:30', 'test', '01928333123');
 
 -- membuang struktur untuk table triton.tblinvoices
+DROP TABLE IF EXISTS `tblinvoices`;
 CREATE TABLE IF NOT EXISTS `tblinvoices` (
   `id` int NOT NULL AUTO_INCREMENT,
   `sent` tinyint(1) NOT NULL DEFAULT '0',
@@ -4210,6 +4284,7 @@ INSERT INTO `tblinvoices` (`id`, `sent`, `datesend`, `clientid`, `deleted_custom
 	(1, 0, NULL, 1, NULL, 1, 'INV-', 1, 'INV-000001', '2025-03-10 10:52:53', '2025-03-10', '2025-04-09', 1, 1000922.00, 0.00, 1000922.00, 0.00, 1, 'e4c7721a6a5daa505906c9abc4782cc1', 2, '', 'test', NULL, NULL, 0, 'a:1:{i:0;s:1:"1";}', NULL, 0.00, 0.00, '', 1, NULL, 0, 0, 0, NULL, NULL, '', 4, '', '', '', '', 103, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 1, 0, NULL);
 
 -- membuang struktur untuk table triton.tblitemable
+DROP TABLE IF EXISTS `tblitemable`;
 CREATE TABLE IF NOT EXISTS `tblitemable` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -4225,15 +4300,18 @@ CREATE TABLE IF NOT EXISTS `tblitemable` (
   KEY `rel_type` (`rel_type`),
   KEY `qty` (`qty`),
   KEY `rate` (`rate`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel triton.tblitemable: ~2 rows (lebih kurang)
 INSERT INTO `tblitemable` (`id`, `rel_id`, `rel_type`, `description`, `long_description`, `qty`, `rate`, `unit`, `item_order`) VALUES
 	(3, 2, 'proposal', 'Mesin RO Besar', 'Mesin RO besar merek PUMP', 1.00, 1000000.00, 'Unit', 1),
 	(4, 2, 'estimate', 'Mesin RO Besar', 'Mesin RO besar merek PUMP', 1.00, 1000000.00, 'Unit', 1),
-	(5, 1, 'invoice', '[Expense] Internet', 'Biaya pengeluaran internet<br />\r\nngetest aja', 1.00, 1000922.00, '', 1);
+	(5, 1, 'invoice', '[Expense] Internet', 'Biaya pengeluaran internet<br />\r\nngetest aja', 1.00, 1000922.00, '', 1),
+	(6, 3, 'estimate', 'Filter RO Mesin 1234', 'Part consumable untuk ganti filter RO', 1.00, 10000.00, 'Pieces', 1),
+	(7, 4, 'estimate', 'Filter RO Mesin 1234', 'Part consumable untuk ganti filter RO', 1.00, 10000.00, 'Pieces', 1);
 
 -- membuang struktur untuk table triton.tblitems
+DROP TABLE IF EXISTS `tblitems`;
 CREATE TABLE IF NOT EXISTS `tblitems` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4282,6 +4360,7 @@ INSERT INTO `tblitems` (`id`, `description`, `long_description`, `rate`, `tax`, 
 	(2, 'Filter RO Mesin 1234', 'Part consumable untuk ganti filter RO', 10000.00, 0, NULL, 'Pieces', 1, 'MC001', '', 1, '', '', 1000000.00, '1', 1, NULL, NULL, NULL, 'can_be_sold', 'can_be_purchased', 'can_be_manufacturing', 'can_be_inventory', NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- membuang struktur untuk table triton.tblitems_groups
+DROP TABLE IF EXISTS `tblitems_groups`;
 CREATE TABLE IF NOT EXISTS `tblitems_groups` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4299,6 +4378,7 @@ INSERT INTO `tblitems_groups` (`id`, `name`, `commodity_group_code`, `order`, `d
 	(3, 'Project', 'PRJ', 3, 1, '0');
 
 -- membuang struktur untuk table triton.tblitems_of_vendor
+DROP TABLE IF EXISTS `tblitems_of_vendor`;
 CREATE TABLE IF NOT EXISTS `tblitems_of_vendor` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `vendor_id` int NOT NULL,
@@ -4331,6 +4411,7 @@ CREATE TABLE IF NOT EXISTS `tblitems_of_vendor` (
 -- Membuang data untuk tabel triton.tblitems_of_vendor: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblitem_tax
+DROP TABLE IF EXISTS `tblitem_tax`;
 CREATE TABLE IF NOT EXISTS `tblitem_tax` (
   `id` int NOT NULL AUTO_INCREMENT,
   `itemid` int NOT NULL,
@@ -4349,6 +4430,7 @@ INSERT INTO `tblitem_tax` (`id`, `itemid`, `rel_id`, `rel_type`, `taxrate`, `tax
 	(4, 4, 2, 'estimate', 11.00, 'PPN');
 
 -- membuang struktur untuk table triton.tblknowedge_base_article_feedback
+DROP TABLE IF EXISTS `tblknowedge_base_article_feedback`;
 CREATE TABLE IF NOT EXISTS `tblknowedge_base_article_feedback` (
   `articleanswerid` int NOT NULL AUTO_INCREMENT,
   `articleid` int NOT NULL,
@@ -4361,6 +4443,7 @@ CREATE TABLE IF NOT EXISTS `tblknowedge_base_article_feedback` (
 -- Membuang data untuk tabel triton.tblknowedge_base_article_feedback: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblknowledge_base
+DROP TABLE IF EXISTS `tblknowledge_base`;
 CREATE TABLE IF NOT EXISTS `tblknowledge_base` (
   `articleid` int NOT NULL AUTO_INCREMENT,
   `articlegroup` int NOT NULL,
@@ -4377,6 +4460,7 @@ CREATE TABLE IF NOT EXISTS `tblknowledge_base` (
 -- Membuang data untuk tabel triton.tblknowledge_base: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblknowledge_base_groups
+DROP TABLE IF EXISTS `tblknowledge_base_groups`;
 CREATE TABLE IF NOT EXISTS `tblknowledge_base_groups` (
   `groupid` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4391,6 +4475,7 @@ CREATE TABLE IF NOT EXISTS `tblknowledge_base_groups` (
 -- Membuang data untuk tabel triton.tblknowledge_base_groups: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblleads
+DROP TABLE IF EXISTS `tblleads`;
 CREATE TABLE IF NOT EXISTS `tblleads` (
   `id` int NOT NULL AUTO_INCREMENT,
   `hash` varchar(65) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4444,6 +4529,7 @@ INSERT INTO `tblleads` (`id`, `hash`, `name`, `title`, `company`, `description`,
 	(1, '9545b6988ed4f27aa350ace88d7c5c25-ddc07a4080dba74affdeccff663a09b5', 'Dina', 'CEO', 'Dina Company', 'Ada kebutuhan terkait water pump, coba di follow up', 103, '15324', 'Tangerang', 'Banten', 'BSD', 1, '2024-12-03 15:23:44', 0, 4, 3, '2024-12-03 15:23:44', NULL, NULL, 1, 'dolink.id@gmail.com', 'www.wampp.com', 1, '12345678', NULL, 0, 0, 0, 0, NULL, 0, NULL, 0, 1000000.00);
 
 -- membuang struktur untuk table triton.tblleads_email_integration
+DROP TABLE IF EXISTS `tblleads_email_integration`;
 CREATE TABLE IF NOT EXISTS `tblleads_email_integration` (
   `id` int NOT NULL AUTO_INCREMENT COMMENT 'the ID always must be 1',
   `active` int NOT NULL,
@@ -4473,6 +4559,7 @@ INSERT INTO `tblleads_email_integration` (`id`, `active`, `email`, `imap_server`
 	(1, 0, '', '', '', 10, 0, 0, 0, 'tls', 'INBOX', '', 1, 1, 'assigned', '', 0, 1, 0, 1);
 
 -- membuang struktur untuk table triton.tblleads_sources
+DROP TABLE IF EXISTS `tblleads_sources`;
 CREATE TABLE IF NOT EXISTS `tblleads_sources` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4488,6 +4575,7 @@ INSERT INTO `tblleads_sources` (`id`, `name`) VALUES
 	(3, 'Website');
 
 -- membuang struktur untuk table triton.tblleads_status
+DROP TABLE IF EXISTS `tblleads_status`;
 CREATE TABLE IF NOT EXISTS `tblleads_status` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4505,6 +4593,7 @@ INSERT INTO `tblleads_status` (`id`, `name`, `statusorder`, `color`, `isdefault`
 	(4, 'Data Baru', 2, '#985dff', 0);
 
 -- membuang struktur untuk table triton.tbllead_activity_log
+DROP TABLE IF EXISTS `tbllead_activity_log`;
 CREATE TABLE IF NOT EXISTS `tbllead_activity_log` (
   `id` int NOT NULL AUTO_INCREMENT,
   `leadid` int NOT NULL,
@@ -4524,6 +4613,7 @@ INSERT INTO `tbllead_activity_log` (`id`, `leadid`, `description`, `additional_d
 	(3, 1, 'not_lead_activity_created_proposal', 'a:1:{i:0;s:113:"<a href="https://erp.tritonkencanatirta.co.id/admin/proposals/list_proposals/2" target="_blank">Test Proposal</a>";}', '2024-12-04 02:51:10', 1, 'Andhy Reeza', 0);
 
 -- membuang struktur untuk table triton.tbllead_integration_emails
+DROP TABLE IF EXISTS `tbllead_integration_emails`;
 CREATE TABLE IF NOT EXISTS `tbllead_integration_emails` (
   `id` int NOT NULL AUTO_INCREMENT,
   `subject` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -4537,6 +4627,7 @@ CREATE TABLE IF NOT EXISTS `tbllead_integration_emails` (
 -- Membuang data untuk tabel triton.tbllead_integration_emails: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblmail_queue
+DROP TABLE IF EXISTS `tblmail_queue`;
 CREATE TABLE IF NOT EXISTS `tblmail_queue` (
   `id` int NOT NULL AUTO_INCREMENT,
   `engine` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -4555,6 +4646,7 @@ CREATE TABLE IF NOT EXISTS `tblmail_queue` (
 -- Membuang data untuk tabel triton.tblmail_queue: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblmigrations
+DROP TABLE IF EXISTS `tblmigrations`;
 CREATE TABLE IF NOT EXISTS `tblmigrations` (
   `version` bigint NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -4564,6 +4656,7 @@ INSERT INTO `tblmigrations` (`version`) VALUES
 	(321);
 
 -- membuang struktur untuk table triton.tblmilestones
+DROP TABLE IF EXISTS `tblmilestones`;
 CREATE TABLE IF NOT EXISTS `tblmilestones` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4584,6 +4677,7 @@ INSERT INTO `tblmilestones` (`id`, `name`, `description`, `description_visible_t
 	(1, 'Test Milestone', 'Testing milestone', 0, '2024-12-04', '2025-01-10', 1, NULL, 1, '2024-12-04', 0);
 
 -- membuang struktur untuk table triton.tblmodules
+DROP TABLE IF EXISTS `tblmodules`;
 CREATE TABLE IF NOT EXISTS `tblmodules` (
   `id` int NOT NULL AUTO_INCREMENT,
   `module_name` varchar(55) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4601,6 +4695,7 @@ INSERT INTO `tblmodules` (`id`, `module_name`, `installed_version`, `active`) VA
 	(6, 'backup', '2.3.0', 1);
 
 -- membuang struktur untuk table triton.tblnewsfeed_comment_likes
+DROP TABLE IF EXISTS `tblnewsfeed_comment_likes`;
 CREATE TABLE IF NOT EXISTS `tblnewsfeed_comment_likes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `postid` int NOT NULL,
@@ -4613,6 +4708,7 @@ CREATE TABLE IF NOT EXISTS `tblnewsfeed_comment_likes` (
 -- Membuang data untuk tabel triton.tblnewsfeed_comment_likes: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblnewsfeed_posts
+DROP TABLE IF EXISTS `tblnewsfeed_posts`;
 CREATE TABLE IF NOT EXISTS `tblnewsfeed_posts` (
   `postid` int NOT NULL AUTO_INCREMENT,
   `creator` int NOT NULL,
@@ -4629,6 +4725,7 @@ INSERT INTO `tblnewsfeed_posts` (`postid`, `creator`, `datecreated`, `visibility
 	(2, 1, '2024-12-03 14:31:16', 'all', 'Contractor Forum Summit', 0, NULL);
 
 -- membuang struktur untuk table triton.tblnewsfeed_post_comments
+DROP TABLE IF EXISTS `tblnewsfeed_post_comments`;
 CREATE TABLE IF NOT EXISTS `tblnewsfeed_post_comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -4644,6 +4741,7 @@ INSERT INTO `tblnewsfeed_post_comments` (`id`, `content`, `userid`, `postid`, `d
 	(3, 'test', 1, 2, '2024-12-03 14:33:04');
 
 -- membuang struktur untuk table triton.tblnewsfeed_post_likes
+DROP TABLE IF EXISTS `tblnewsfeed_post_likes`;
 CREATE TABLE IF NOT EXISTS `tblnewsfeed_post_likes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `postid` int NOT NULL,
@@ -4655,6 +4753,7 @@ CREATE TABLE IF NOT EXISTS `tblnewsfeed_post_likes` (
 -- Membuang data untuk tabel triton.tblnewsfeed_post_likes: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblnotes
+DROP TABLE IF EXISTS `tblnotes`;
 CREATE TABLE IF NOT EXISTS `tblnotes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -4673,6 +4772,7 @@ INSERT INTO `tblnotes` (`id`, `rel_id`, `rel_type`, `description`, `date_contact
 	(1, 2, 'purchase_order', 'test', NULL, 1, '2025-03-07 21:23:53');
 
 -- membuang struktur untuk table triton.tblnotifications
+DROP TABLE IF EXISTS `tblnotifications`;
 CREATE TABLE IF NOT EXISTS `tblnotifications` (
   `id` int NOT NULL AUTO_INCREMENT,
   `isread` int NOT NULL DEFAULT '0',
@@ -4687,7 +4787,7 @@ CREATE TABLE IF NOT EXISTS `tblnotifications` (
   `link` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `additional_data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=70 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel triton.tblnotifications: ~64 rows (lebih kurang)
 INSERT INTO `tblnotifications` (`id`, `isread`, `isread_inline`, `date`, `description`, `fromuserid`, `fromclientid`, `from_fullname`, `touserid`, `fromcompany`, `link`, `additional_data`) VALUES
@@ -4759,9 +4859,11 @@ INSERT INTO `tblnotifications` (`id`, `isread`, `isread_inline`, `date`, `descri
 	(66, 0, 0, '2025-03-10 10:56:06', 'not_task_marked_as_complete', 1, 0, 'Andhy Reeza', 4, NULL, '#taskid=3', 'a:1:{i:0;s:8:"test aja";}'),
 	(67, 1, 1, '2025-03-10 17:46:16', 'notify_send_approve_pur_request', 1, 0, 'Andhy Reeza', 1, NULL, 'purchase/view_pur_request/7', 'a:1:{i:0;s:16:"Test aja ini mah";}'),
 	(68, 1, 0, '2025-03-10 17:49:16', 'notify_send_approve_pur_request', 1, 0, 'Andhy Reeza', 1, NULL, 'purchase/view_pur_request/8', 'a:1:{i:0;s:15:"Ngetest lagi ya";}'),
-	(69, 1, 0, '2025-03-10 17:49:26', 'notify_send_approve_pur_request', 1, 0, 'Andhy Reeza', 1, NULL, 'purchase/view_pur_request/8', 'a:1:{i:0;s:15:"Ngetest lagi ya";}');
+	(69, 1, 0, '2025-03-10 17:49:26', 'notify_send_approve_pur_request', 1, 0, 'Andhy Reeza', 1, NULL, 'purchase/view_pur_request/8', 'a:1:{i:0;s:15:"Ngetest lagi ya";}'),
+	(70, 1, 0, '2025-03-20 13:17:15', 'Purchase Quotation Added EST-000003', 1, 0, 'Andhy Reeza', 1, NULL, 'purchase/quotations/3', 'a:1:{i:0;s:10:"EST-000003";}');
 
 -- membuang struktur untuk table triton.tbloptions
+DROP TABLE IF EXISTS `tbloptions`;
 CREATE TABLE IF NOT EXISTS `tbloptions` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -4821,7 +4923,7 @@ INSERT INTO `tbloptions` (`id`, `name`, `value`, `autoload`) VALUES
 	(46, 'rtl_support_client', '0', 1),
 	(47, 'limit_top_search_bar_results_to', '10', 1),
 	(48, 'estimate_prefix', 'EST-', 1),
-	(49, 'next_estimate_number', '2', 0),
+	(49, 'next_estimate_number', '4', 0),
 	(50, 'estimate_number_decrement_on_delete', '1', 1),
 	(51, 'estimate_number_format', '1', 1),
 	(52, 'estimate_auto_convert_to_invoice_on_client_accept', '0', 1),
@@ -5277,6 +5379,7 @@ INSERT INTO `tbloptions` (`id`, `name`, `value`, `autoload`) VALUES
 	(502, 'auto_backup_hour', '6', 1);
 
 -- membuang struktur untuk table triton.tblpayment_attempts
+DROP TABLE IF EXISTS `tblpayment_attempts`;
 CREATE TABLE IF NOT EXISTS `tblpayment_attempts` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `reference` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5291,6 +5394,7 @@ CREATE TABLE IF NOT EXISTS `tblpayment_attempts` (
 -- Membuang data untuk tabel triton.tblpayment_attempts: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpayment_modes
+DROP TABLE IF EXISTS `tblpayment_modes`;
 CREATE TABLE IF NOT EXISTS `tblpayment_modes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5309,6 +5413,7 @@ INSERT INTO `tblpayment_modes` (`id`, `name`, `description`, `show_on_pdf`, `inv
 	(2, 'Cek/Giro', '', 0, 0, 0, 0, 1);
 
 -- membuang struktur untuk table triton.tblperfex_dashboard_list
+DROP TABLE IF EXISTS `tblperfex_dashboard_list`;
 CREATE TABLE IF NOT EXISTS `tblperfex_dashboard_list` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(191) DEFAULT NULL,
@@ -5327,6 +5432,7 @@ INSERT INTO `tblperfex_dashboard_list` (`id`, `name`, `dashboard_widgets`, `note
 	(4, 'Projects Dashboard', 'a:7:{s:16:"top-left-first-4";a:1:{i:0;s:2:"24";}s:15:"top-left-last-4";a:1:{i:0;s:2:"25";}s:17:"top-right-first-4";a:1:{i:0;s:2:"26";}s:16:"top-right-last-4";a:1:{i:0;s:2:"27";}s:13:"middle-left-6";a:2:{i:0;s:2:"28";i:1;s:2:"30";}s:14:"middle-right-6";a:2:{i:0;s:2:"29";i:1;s:2:"31";}s:6:"left-8";a:2:{i:0;s:2:"12";i:1;s:2:"13";}}', 'Projects Dashboard', '2021-10-05 03:33:28', '2021-10-05 03:33:28');
 
 -- membuang struktur untuk table triton.tblperfex_dashboard_users
+DROP TABLE IF EXISTS `tblperfex_dashboard_users`;
 CREATE TABLE IF NOT EXISTS `tblperfex_dashboard_users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `user_id` bigint NOT NULL,
@@ -5339,6 +5445,7 @@ CREATE TABLE IF NOT EXISTS `tblperfex_dashboard_users` (
 -- Membuang data untuk tabel triton.tblperfex_dashboard_users: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblperfex_dashboard_widgets
+DROP TABLE IF EXISTS `tblperfex_dashboard_widgets`;
 CREATE TABLE IF NOT EXISTS `tblperfex_dashboard_widgets` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) DEFAULT NULL,
@@ -5394,6 +5501,7 @@ INSERT INTO `tblperfex_dashboard_widgets` (`id`, `name`, `category`, `widget_nam
 	(39, 'Monthly income and expense', 2, 'widget-techfago_finance_monthly_income_and_expense', 'top-12', 'Monthly income and expense', '2024-12-03 18:36:23', '2024-12-03 18:36:23');
 
 -- membuang struktur untuk table triton.tblperfex_dashboard_widget_categories
+DROP TABLE IF EXISTS `tblperfex_dashboard_widget_categories`;
 CREATE TABLE IF NOT EXISTS `tblperfex_dashboard_widget_categories` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `name` varchar(191) DEFAULT NULL,
@@ -5414,6 +5522,7 @@ INSERT INTO `tblperfex_dashboard_widget_categories` (`id`, `name`, `note`, `upda
 	(7, 'Support', 'Stuff relate to support', '2024-12-03 18:36:22', '2024-12-03 18:36:22');
 
 -- membuang struktur untuk table triton.tblpinned_projects
+DROP TABLE IF EXISTS `tblpinned_projects`;
 CREATE TABLE IF NOT EXISTS `tblpinned_projects` (
   `id` int NOT NULL AUTO_INCREMENT,
   `project_id` int NOT NULL,
@@ -5425,6 +5534,7 @@ CREATE TABLE IF NOT EXISTS `tblpinned_projects` (
 -- Membuang data untuk tabel triton.tblpinned_projects: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblprojectdiscussioncomments
+DROP TABLE IF EXISTS `tblprojectdiscussioncomments`;
 CREATE TABLE IF NOT EXISTS `tblprojectdiscussioncomments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `discussion_id` int NOT NULL,
@@ -5444,6 +5554,7 @@ CREATE TABLE IF NOT EXISTS `tblprojectdiscussioncomments` (
 -- Membuang data untuk tabel triton.tblprojectdiscussioncomments: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblprojectdiscussions
+DROP TABLE IF EXISTS `tblprojectdiscussions`;
 CREATE TABLE IF NOT EXISTS `tblprojectdiscussions` (
   `id` int NOT NULL AUTO_INCREMENT,
   `project_id` int NOT NULL,
@@ -5460,6 +5571,7 @@ CREATE TABLE IF NOT EXISTS `tblprojectdiscussions` (
 -- Membuang data untuk tabel triton.tblprojectdiscussions: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblprojects
+DROP TABLE IF EXISTS `tblprojects`;
 CREATE TABLE IF NOT EXISTS `tblprojects` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5479,17 +5591,34 @@ CREATE TABLE IF NOT EXISTS `tblprojects` (
   `addedfrom` int NOT NULL,
   `contact_notification` int DEFAULT '1',
   `notify_contacts` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `project_number` text COLLATE utf8mb4_unicode_ci,
+  `number` int DEFAULT NULL,
+  `type` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `from_items` int DEFAULT NULL,
+  `subtotal` decimal(15,2) DEFAULT NULL,
+  `total_tax` decimal(15,2) DEFAULT NULL,
+  `total` decimal(15,2) DEFAULT NULL,
+  `sale_invoice` int DEFAULT NULL,
+  `compare_note` text COLLATE utf8mb4_unicode_ci,
+  `send_to_vendors` text COLLATE utf8mb4_unicode_ci,
+  `currency` int DEFAULT NULL,
+  `currency_rate` decimal(15,2) DEFAULT NULL,
+  `from_currency` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `to_currency` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `sale_estimate` int DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `clientid` (`clientid`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel triton.tblprojects: ~2 rows (lebih kurang)
-INSERT INTO `tblprojects` (`id`, `name`, `description`, `status`, `clientid`, `billing_type`, `start_date`, `deadline`, `project_created`, `date_finished`, `progress`, `progress_from_tasks`, `project_cost`, `project_rate_per_hour`, `estimated_hours`, `addedfrom`, `contact_notification`, `notify_contacts`) VALUES
-	(1, 'SITE KALIMATAN', '<p>Maintenance water treatment dan pengolahan air limbah produksi di site Pertamina</p>', 2, 1, 1, '2024-12-03', '2025-12-31', '2024-12-03', NULL, 0, 1, 1000000000.00, 0.00, 365.00, 1, 1, 'a:0:{}'),
-	(2, 'SITE MAKASAR', '', 2, 1, 1, '2024-12-04', NULL, '2024-12-04', NULL, 100, 1, NULL, 0.00, NULL, 1, 1, 'a:0:{}');
+-- Membuang data untuk tabel triton.tblprojects: ~3 rows (lebih kurang)
+INSERT INTO `tblprojects` (`id`, `name`, `description`, `status`, `clientid`, `billing_type`, `start_date`, `deadline`, `project_created`, `date_finished`, `progress`, `progress_from_tasks`, `project_cost`, `project_rate_per_hour`, `estimated_hours`, `addedfrom`, `contact_notification`, `notify_contacts`, `project_number`, `number`, `type`, `from_items`, `subtotal`, `total_tax`, `total`, `sale_invoice`, `compare_note`, `send_to_vendors`, `currency`, `currency_rate`, `from_currency`, `to_currency`, `sale_estimate`) VALUES
+	(1, 'SITE KALIMATAN', '<p>Maintenance water treatment dan pengolahan air limbah produksi di site Pertamina</p>', 2, 1, 1, '2024-12-03', '2025-12-31', '2024-12-03', NULL, 0, 1, 1000000000.00, 0.00, 365.00, 1, 1, 'a:0:{}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(2, 'SITE MAKASAR', '', 2, 1, 1, '2024-12-04', NULL, '2024-12-04', NULL, 100, 1, 2000.00, 0.00, NULL, 1, 1, 'a:0:{}', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	(4, 'test aja', '<p>test</p>', 2, 1, 1, '2025-03-18', '2025-03-30', '2025-03-18', NULL, 0, 1, 1000000.00, 0.00, 3.00, 1, 1, 'a:0:{}', 'TKT-PRJ-00001-2025', 1, 'opex', NULL, 1.00, 0.00, 1.00, NULL, NULL, NULL, 1, 1.00, '1', NULL, NULL);
 
 -- membuang struktur untuk table triton.tblproject_activity
+DROP TABLE IF EXISTS `tblproject_activity`;
 CREATE TABLE IF NOT EXISTS `tblproject_activity` (
   `id` int NOT NULL AUTO_INCREMENT,
   `project_id` int NOT NULL,
@@ -5501,7 +5630,7 @@ CREATE TABLE IF NOT EXISTS `tblproject_activity` (
   `additional_data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `dateadded` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel triton.tblproject_activity: ~9 rows (lebih kurang)
 INSERT INTO `tblproject_activity` (`id`, `project_id`, `staff_id`, `contact_id`, `fullname`, `visible_to_customer`, `description_key`, `additional_data`, `dateadded`) VALUES
@@ -5513,9 +5642,36 @@ INSERT INTO `tblproject_activity` (`id`, `project_id`, `staff_id`, `contact_id`,
 	(6, 2, 1, 0, 'Andhy Reeza', 1, 'project_activity_updated', '', '2024-12-04 02:03:39'),
 	(7, 1, 1, 0, 'Andhy Reeza', 1, 'project_activity_created_milestone', 'Test Milestone', '2024-12-04 02:25:03'),
 	(8, 1, 1, 0, 'Andhy Reeza', 1, 'project_activity_updated', '', '2024-12-04 02:27:32'),
-	(9, 2, 1, 0, 'Andhy Reeza', 1, 'project_activity_updated', '', '2024-12-04 02:27:45');
+	(9, 2, 1, 0, 'Andhy Reeza', 1, 'project_activity_updated', '', '2024-12-04 02:27:45'),
+	(12, 4, 1, 0, 'Andhy Reeza', 1, 'project_activity_added_team_member', 'Andhy Reeza', '2025-03-18 11:38:28'),
+	(13, 4, 1, 0, 'Andhy Reeza', 1, 'project_activity_created', '', '2025-03-18 11:38:28');
+
+-- membuang struktur untuk table triton.tblproject_detail
+DROP TABLE IF EXISTS `tblproject_detail`;
+CREATE TABLE IF NOT EXISTS `tblproject_detail` (
+  `prd_id` int NOT NULL AUTO_INCREMENT,
+  `project_id` int NOT NULL,
+  `item_code` varchar(100) NOT NULL,
+  `unit_id` int DEFAULT NULL,
+  `unit_price` decimal(15,2) DEFAULT NULL,
+  `quantity` decimal(15,2) NOT NULL,
+  `into_money` decimal(15,2) DEFAULT NULL,
+  `inventory_quantity` int DEFAULT '0',
+  `item_text` text,
+  `tax` text,
+  `tax_rate` text,
+  `tax_value` decimal(15,2) DEFAULT NULL,
+  `total` decimal(15,2) DEFAULT NULL,
+  `tax_name` text,
+  PRIMARY KEY (`prd_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
+
+-- Membuang data untuk tabel triton.tblproject_detail: ~0 rows (lebih kurang)
+INSERT INTO `tblproject_detail` (`prd_id`, `project_id`, `item_code`, `unit_id`, `unit_price`, `quantity`, `into_money`, `inventory_quantity`, `item_text`, `tax`, `tax_rate`, `tax_value`, `total`, `tax_name`) VALUES
+	(9, 4, '2', 1, 1000000.00, 1.00, 1000000.00, 0, 'MC001_Filter RO Mesin 1234', NULL, NULL, 0.00, 1000000.00, NULL);
 
 -- membuang struktur untuk table triton.tblproject_files
+DROP TABLE IF EXISTS `tblproject_files`;
 CREATE TABLE IF NOT EXISTS `tblproject_files` (
   `id` int NOT NULL AUTO_INCREMENT,
   `file_name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -5538,6 +5694,7 @@ CREATE TABLE IF NOT EXISTS `tblproject_files` (
 -- Membuang data untuk tabel triton.tblproject_files: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblproject_members
+DROP TABLE IF EXISTS `tblproject_members`;
 CREATE TABLE IF NOT EXISTS `tblproject_members` (
   `id` int NOT NULL AUTO_INCREMENT,
   `project_id` int NOT NULL,
@@ -5545,14 +5702,16 @@ CREATE TABLE IF NOT EXISTS `tblproject_members` (
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`),
   KEY `staff_id` (`staff_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel triton.tblproject_members: ~2 rows (lebih kurang)
 INSERT INTO `tblproject_members` (`id`, `project_id`, `staff_id`) VALUES
 	(1, 1, 1),
-	(2, 2, 1);
+	(2, 2, 1),
+	(4, 4, 1);
 
 -- membuang struktur untuk table triton.tblproject_notes
+DROP TABLE IF EXISTS `tblproject_notes`;
 CREATE TABLE IF NOT EXISTS `tblproject_notes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `project_id` int NOT NULL,
@@ -5564,6 +5723,7 @@ CREATE TABLE IF NOT EXISTS `tblproject_notes` (
 -- Membuang data untuk tabel triton.tblproject_notes: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblproject_settings
+DROP TABLE IF EXISTS `tblproject_settings`;
 CREATE TABLE IF NOT EXISTS `tblproject_settings` (
   `id` int NOT NULL AUTO_INCREMENT,
   `project_id` int NOT NULL,
@@ -5571,9 +5731,9 @@ CREATE TABLE IF NOT EXISTS `tblproject_settings` (
   `value` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   PRIMARY KEY (`id`),
   KEY `project_id` (`project_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel triton.tblproject_settings: ~38 rows (lebih kurang)
+-- Membuang data untuk tabel triton.tblproject_settings: ~57 rows (lebih kurang)
 INSERT INTO `tblproject_settings` (`id`, `project_id`, `name`, `value`) VALUES
 	(1, 1, 'available_features', 'a:20:{s:16:"project_overview";i:1;s:13:"project_tasks";i:1;s:18:"project_milestones";i:1;s:13:"project_files";i:1;s:19:"project_discussions";i:1;s:13:"project_gantt";i:1;s:17:"project_contracts";i:1;s:17:"project_proposals";i:1;s:17:"project_estimates";i:1;s:16:"purchase_request";i:1;s:14:"purchase_order";i:1;s:17:"purchase_contract";i:1;s:13:"project_notes";i:1;s:16:"project_activity";i:1;s:18:"project_timesheets";i:0;s:15:"project_tickets";i:0;s:16:"project_invoices";i:0;s:21:"project_subscriptions";i:0;s:16:"project_expenses";i:0;s:20:"project_credit_notes";i:0;}'),
 	(2, 1, 'view_tasks', '1'),
@@ -5612,9 +5772,29 @@ INSERT INTO `tblproject_settings` (`id`, `project_id`, `name`, `value`) VALUES
 	(35, 2, 'view_timesheets', '0'),
 	(36, 2, 'view_activity_log', '1'),
 	(37, 2, 'view_team_members', '1'),
-	(38, 2, 'hide_tasks_on_main_tasks_table', '0');
+	(38, 2, 'hide_tasks_on_main_tasks_table', '0'),
+	(58, 4, 'available_features', 'a:20:{s:16:"project_overview";i:1;s:13:"project_tasks";i:1;s:18:"project_milestones";i:1;s:13:"project_files";i:1;s:19:"project_discussions";i:1;s:13:"project_gantt";i:1;s:17:"project_contracts";i:1;s:17:"project_proposals";i:1;s:17:"project_estimates";i:1;s:16:"purchase_request";i:1;s:14:"purchase_order";i:1;s:17:"purchase_contract";i:1;s:13:"project_notes";i:1;s:16:"project_activity";i:1;s:18:"project_timesheets";i:0;s:15:"project_tickets";i:0;s:16:"project_invoices";i:0;s:21:"project_subscriptions";i:0;s:16:"project_expenses";i:0;s:20:"project_credit_notes";i:0;}'),
+	(59, 4, 'view_tasks', '1'),
+	(60, 4, 'create_tasks', '1'),
+	(61, 4, 'edit_tasks', '1'),
+	(62, 4, 'comment_on_tasks', '1'),
+	(63, 4, 'view_task_comments', '1'),
+	(64, 4, 'view_task_attachments', '1'),
+	(65, 4, 'view_task_checklist_items', '1'),
+	(66, 4, 'upload_on_tasks', '1'),
+	(67, 4, 'view_task_total_logged_time', '1'),
+	(68, 4, 'view_finance_overview', '1'),
+	(69, 4, 'upload_files', '1'),
+	(70, 4, 'open_discussions', '1'),
+	(71, 4, 'view_milestones', '1'),
+	(72, 4, 'view_gantt', '1'),
+	(73, 4, 'view_timesheets', '0'),
+	(74, 4, 'view_activity_log', '1'),
+	(75, 4, 'view_team_members', '1'),
+	(76, 4, 'hide_tasks_on_main_tasks_table', '0');
 
 -- membuang struktur untuk table triton.tblproposals
+DROP TABLE IF EXISTS `tblproposals`;
 CREATE TABLE IF NOT EXISTS `tblproposals` (
   `id` int NOT NULL AUTO_INCREMENT,
   `subject` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -5668,6 +5848,7 @@ INSERT INTO `tblproposals` (`id`, `subject`, `content`, `addedfrom`, `datecreate
 	(2, 'Test Proposal', '{proposal_items}', 1, '2024-12-04 02:51:10', 1110000.00, 1000000.00, 110000.00, 0.00, 0.00, 0.00, '', 1, 1, '2024-12-11', '2024-12-04', 1, 'customer', 1, '5f4b60fae118a8565717bced61ff448f', 'PERTAMINA', 1, 103, '15419', 'DKI Jakarta', 'Jakarta Selatan', 'Menteng', 'support@doit.co.id', '12345678', 1, 3, 2, NULL, NULL, 1, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- membuang struktur untuk table triton.tblproposal_comments
+DROP TABLE IF EXISTS `tblproposal_comments`;
 CREATE TABLE IF NOT EXISTS `tblproposal_comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -5680,13 +5861,14 @@ CREATE TABLE IF NOT EXISTS `tblproposal_comments` (
 -- Membuang data untuk tabel triton.tblproposal_comments: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpurchase_option
+DROP TABLE IF EXISTS `tblpurchase_option`;
 CREATE TABLE IF NOT EXISTS `tblpurchase_option` (
   `option_id` int unsigned NOT NULL AUTO_INCREMENT,
   `option_name` varchar(200) NOT NULL,
   `option_val` longtext,
   `auto` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`option_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Membuang data untuk tabel triton.tblpurchase_option: ~13 rows (lebih kurang)
 INSERT INTO `tblpurchase_option` (`option_id`, `option_name`, `option_val`, `auto`) VALUES
@@ -5695,16 +5877,19 @@ INSERT INTO `tblpurchase_option` (`option_id`, `option_name`, `option_val`, `aut
 	(3, 'next_po_number', '4', 1),
 	(4, 'date_reset_number', '', 1),
 	(5, 'pur_request_prefix', 'TKT-PR', 1),
-	(6, 'next_pr_number', '9', 1),
+	(6, 'next_pr_number', '10', 1),
 	(7, 'date_reset_pr_number', '', 1),
 	(8, 'pur_inv_prefix', 'TKT-INV', 1),
 	(9, 'next_inv_number', '2', 1),
 	(10, 'create_invoice_by', NULL, 1),
 	(11, 'item_by_vendor', '1', 1),
 	(12, 'terms_and_conditions', '<p>Syarat dan ketentuan:</p>\r\n<ol>\r\n<li>Lorem insum</li>\r\n<li>Lorem insum</li>\r\n</ol>', 1),
-	(13, 'vendor_note', '', 1);
+	(13, 'vendor_note', '', 1),
+	(14, 'project_prefix', 'TKT-PRJ', 1),
+	(15, 'next_prj_number', '2', 1);
 
 -- membuang struktur untuk table triton.tblpur_activity_log
+DROP TABLE IF EXISTS `tblpur_activity_log`;
 CREATE TABLE IF NOT EXISTS `tblpur_activity_log` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -5718,6 +5903,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_activity_log` (
 -- Membuang data untuk tabel triton.tblpur_activity_log: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_approval_details
+DROP TABLE IF EXISTS `tblpur_approval_details`;
 CREATE TABLE IF NOT EXISTS `tblpur_approval_details` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -5772,6 +5958,7 @@ INSERT INTO `tblpur_approval_details` (`id`, `rel_id`, `rel_type`, `staffid`, `a
 	(31, 8, 'pur_request', '1', '2', NULL, '2025-03-10 17:49:25', NULL, NULL, NULL, NULL, 1, 'sign', 1, '2025-03-10 17:49:07');
 
 -- membuang struktur untuk table triton.tblpur_approval_setting
+DROP TABLE IF EXISTS `tblpur_approval_setting`;
 CREATE TABLE IF NOT EXISTS `tblpur_approval_setting` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -5782,11 +5969,12 @@ CREATE TABLE IF NOT EXISTS `tblpur_approval_setting` (
 
 -- Membuang data untuk tabel triton.tblpur_approval_setting: ~3 rows (lebih kurang)
 INSERT INTO `tblpur_approval_setting` (`id`, `name`, `related`, `setting`) VALUES
-	(1, 'Purchase Request Approval', 'pur_request', '[{"approver":"staff","staff":"1","action":"approve","department":"4"},{"approver":"staff","staff":"1","action":"sign","department":null}]'),
+	(1, 'Purchase Request Approval', 'pur_request', '[{"approver":"staff","staff":"1","action":"approve","department":"7"},{"approver":"staff","staff":"1","action":"sign","department":null}]'),
 	(2, 'Purchase Order Approval', 'pur_order', '[{"approver":"staff","staff":"1","action":"approve","department":"7"}]'),
 	(4, 'Staff expenses', 'expenses', '[{"approver":"staff","staff":"1","action":"approve","department":"7"}]');
 
 -- membuang struktur untuk table triton.tblpur_comments
+DROP TABLE IF EXISTS `tblpur_comments`;
 CREATE TABLE IF NOT EXISTS `tblpur_comments` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `content` mediumtext,
@@ -5816,6 +6004,7 @@ INSERT INTO `tblpur_comments` (`id`, `content`, `rel_type`, `rel_id`, `staffid`,
 	(25, 'testz', 'pur_order', 2, 1, '2025-03-09 11:01:57');
 
 -- membuang struktur untuk table triton.tblpur_contacts
+DROP TABLE IF EXISTS `tblpur_contacts`;
 CREATE TABLE IF NOT EXISTS `tblpur_contacts` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `userid` int NOT NULL,
@@ -5853,6 +6042,7 @@ INSERT INTO `tblpur_contacts` (`id`, `userid`, `is_primary`, `firstname`, `lastn
 	(1, 1, 0, 'Andhy', 'Reeza', 'paketsolusicom@gmail.com', '12345678', 'Business Development', '2024-12-03 16:23:27', '$2a$08$X5b3kamgo2qW.8qArsGomORnIPci0DZkd940zYIH5evJFRt4nfO4i', NULL, NULL, '2024-12-03 16:23:27', NULL, NULL, '172.70.147.15', '2024-12-04 11:56:52', '2024-12-04 11:55:15', 1, NULL, 'ltr', 1, 1, 1, 1, 1, 1, 1);
 
 -- membuang struktur untuk table triton.tblpur_contracts
+DROP TABLE IF EXISTS `tblpur_contracts`;
 CREATE TABLE IF NOT EXISTS `tblpur_contracts` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `contract_number` varchar(200) NOT NULL,
@@ -5890,6 +6080,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_contracts` (
 -- Membuang data untuk tabel triton.tblpur_contracts: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_debits
+DROP TABLE IF EXISTS `tblpur_debits`;
 CREATE TABLE IF NOT EXISTS `tblpur_debits` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `invoice_id` int DEFAULT NULL,
@@ -5904,6 +6095,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_debits` (
 -- Membuang data untuk tabel triton.tblpur_debits: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_debits_refunds
+DROP TABLE IF EXISTS `tblpur_debits_refunds`;
 CREATE TABLE IF NOT EXISTS `tblpur_debits_refunds` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `debit_note_id` int DEFAULT NULL,
@@ -5919,6 +6111,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_debits_refunds` (
 -- Membuang data untuk tabel triton.tblpur_debits_refunds: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_debit_notes
+DROP TABLE IF EXISTS `tblpur_debit_notes`;
 CREATE TABLE IF NOT EXISTS `tblpur_debit_notes` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `vendorid` int DEFAULT NULL,
@@ -5961,13 +6154,14 @@ CREATE TABLE IF NOT EXISTS `tblpur_debit_notes` (
 -- Membuang data untuk tabel triton.tblpur_debit_notes: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_estimates
+DROP TABLE IF EXISTS `tblpur_estimates`;
 CREATE TABLE IF NOT EXISTS `tblpur_estimates` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `sent` tinyint(1) NOT NULL DEFAULT '0',
   `datesend` datetime DEFAULT NULL,
-  `vendor` int NOT NULL,
-  `deleted_vendor_name` varchar(100) DEFAULT NULL,
-  `pur_request` int DEFAULT NULL,
+  `clientid` int NOT NULL,
+  `deleted_customer_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `project_id` int DEFAULT NULL,
   `number` int NOT NULL,
   `prefix` varchar(50) DEFAULT NULL,
   `number_format` int NOT NULL DEFAULT '0',
@@ -5982,7 +6176,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_estimates` (
   `adjustment` decimal(15,2) DEFAULT NULL,
   `addedfrom` int NOT NULL,
   `status` int NOT NULL DEFAULT '1',
-  `vendornote` text,
+  `clientnote` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
   `adminnote` text,
   `discount_percent` decimal(15,2) DEFAULT '0.00',
   `discount_total` decimal(15,2) DEFAULT '0.00',
@@ -5991,7 +6185,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_estimates` (
   `invoiced_date` datetime DEFAULT NULL,
   `terms` text,
   `reference_no` varchar(100) DEFAULT NULL,
-  `buyer` int NOT NULL DEFAULT '0',
+  `sale_agent` int NOT NULL DEFAULT '0',
   `billing_street` varchar(200) DEFAULT NULL,
   `billing_city` varchar(100) DEFAULT NULL,
   `billing_state` varchar(100) DEFAULT NULL,
@@ -6019,14 +6213,16 @@ CREATE TABLE IF NOT EXISTS `tblpur_estimates` (
   `to_currency` varchar(20) DEFAULT NULL,
   `shipping_fee` decimal(15,2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Membuang data untuk tabel triton.tblpur_estimates: ~2 rows (lebih kurang)
-INSERT INTO `tblpur_estimates` (`id`, `sent`, `datesend`, `vendor`, `deleted_vendor_name`, `pur_request`, `number`, `prefix`, `number_format`, `hash`, `datecreated`, `date`, `expirydate`, `currency`, `subtotal`, `total_tax`, `total`, `adjustment`, `addedfrom`, `status`, `vendornote`, `adminnote`, `discount_percent`, `discount_total`, `discount_type`, `invoiceid`, `invoiced_date`, `terms`, `reference_no`, `buyer`, `billing_street`, `billing_city`, `billing_state`, `billing_zip`, `billing_country`, `shipping_street`, `shipping_city`, `shipping_state`, `shipping_zip`, `shipping_country`, `include_shipping`, `show_shipping_on_estimate`, `show_quantity_as`, `pipeline_order`, `is_expiry_notified`, `acceptance_firstname`, `acceptance_lastname`, `acceptance_email`, `acceptance_date`, `acceptance_ip`, `signature`, `make_a_contract`, `currency_rate`, `from_currency`, `to_currency`, `shipping_fee`) VALUES
+-- Membuang data untuk tabel triton.tblpur_estimates: ~3 rows (lebih kurang)
+INSERT INTO `tblpur_estimates` (`id`, `sent`, `datesend`, `clientid`, `deleted_customer_name`, `project_id`, `number`, `prefix`, `number_format`, `hash`, `datecreated`, `date`, `expirydate`, `currency`, `subtotal`, `total_tax`, `total`, `adjustment`, `addedfrom`, `status`, `clientnote`, `adminnote`, `discount_percent`, `discount_total`, `discount_type`, `invoiceid`, `invoiced_date`, `terms`, `reference_no`, `sale_agent`, `billing_street`, `billing_city`, `billing_state`, `billing_zip`, `billing_country`, `shipping_street`, `shipping_city`, `shipping_state`, `shipping_zip`, `shipping_country`, `include_shipping`, `show_shipping_on_estimate`, `show_quantity_as`, `pipeline_order`, `is_expiry_notified`, `acceptance_firstname`, `acceptance_lastname`, `acceptance_email`, `acceptance_date`, `acceptance_ip`, `signature`, `make_a_contract`, `currency_rate`, `from_currency`, `to_currency`, `shipping_fee`) VALUES
 	(1, 0, NULL, 1, NULL, 2, 1, 'EST-', 1, 'af671ca48b5a5c3931d650eae7d2c25e', '2024-12-03 19:45:29', '2024-12-03', '2024-12-10', 1, 1000000.00, 110000.00, 1110000.00, NULL, 1, 3, '', NULL, 0.00, 0.00, 'after_tax', NULL, NULL, '<p>Syarat dan ketentuan:</p>\r\n<ol>\r\n<li>Lorem insum</li>\r\n<li>Lorem insum</li>\r\n</ol>', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '', 1.000000, '1', '1', 0.00),
-	(2, 0, NULL, 1, NULL, 0, 2, 'EST-', 1, '615fe0e90b1649a3ed07d4bae7a638fd', '2024-12-04 00:03:49', '2024-12-04', '2024-12-11', 1, 1000000.00, 110000.00, 1110000.00, NULL, 1, 1, '', NULL, 0.00, 0.00, 'after_tax', NULL, NULL, '<p>Syarat dan ketentuan:</p>\r\n<ol>\r\n<li>Lorem insum</li>\r\n<li>Lorem insum</li>\r\n</ol>', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.000000, '1', '1', 0.00);
+	(2, 0, NULL, 1, NULL, 0, 2, 'EST-', 1, '615fe0e90b1649a3ed07d4bae7a638fd', '2024-12-04 00:03:49', '2024-12-04', '2024-12-11', 1, 1000000.00, 110000.00, 1110000.00, NULL, 1, 1, '', NULL, 0.00, 0.00, 'after_tax', NULL, NULL, '<p>Syarat dan ketentuan:</p>\r\n<ol>\r\n<li>Lorem insum</li>\r\n<li>Lorem insum</li>\r\n</ol>', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.000000, '1', '1', 0.00),
+	(3, 0, NULL, 1, NULL, 2, 3, 'EST-', 1, '9ad6eb4799245bba41c5807b140dbea5', '2025-03-20 13:17:15', '2025-03-20', '2025-03-27', 1, 1000000.00, 110000.00, 1110000.00, NULL, 1, 2, '', NULL, 0.00, 0.00, 'after_tax', NULL, NULL, '<p>Syarat dan ketentuan:</p>\r\n<ol>\r\n<li>Lorem insum</li>\r\n<li>Lorem insum</li>\r\n</ol>', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, 1, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1.000000, '1', '1', 0.00);
 
 -- membuang struktur untuk table triton.tblpur_estimate_detail
+DROP TABLE IF EXISTS `tblpur_estimate_detail`;
 CREATE TABLE IF NOT EXISTS `tblpur_estimate_detail` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pur_estimate` int NOT NULL,
@@ -6045,14 +6241,16 @@ CREATE TABLE IF NOT EXISTS `tblpur_estimate_detail` (
   `tax_name` text,
   `item_name` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 
 -- Membuang data untuk tabel triton.tblpur_estimate_detail: ~2 rows (lebih kurang)
 INSERT INTO `tblpur_estimate_detail` (`id`, `pur_estimate`, `item_code`, `unit_id`, `unit_price`, `quantity`, `into_money`, `tax`, `total`, `total_money`, `discount_money`, `discount_%`, `tax_value`, `tax_rate`, `tax_name`, `item_name`) VALUES
 	(1, 1, '1', 3, 1000000.00, 1.00, 1000000.00, '1', 1110000.00, 1110000.00, 0.00, 0.00, 110000.00, '11.00', 'PPN', 'MC001_Mesin RO Besar'),
-	(2, 2, '1', 3, 1000000.00, 1.00, 1000000.00, '1', 1110000.00, 1110000.00, 0.00, 0.00, 110000.00, '11.00', 'PPN', 'MC001_Mesin RO Besar');
+	(2, 2, '1', 3, 1000000.00, 1.00, 1000000.00, '1', 1110000.00, 1110000.00, 0.00, 0.00, 110000.00, '11.00', 'PPN', 'MC001_Mesin RO Besar'),
+	(3, 3, '1', 3, 1000000.00, 1.00, 1000000.00, '1', 1110000.00, 1110000.00, 0.00, 0.00, 110000.00, '11.00', 'PPN', 'MC001_Mesin RO Besar');
 
 -- membuang struktur untuk table triton.tblpur_invoices
+DROP TABLE IF EXISTS `tblpur_invoices`;
 CREATE TABLE IF NOT EXISTS `tblpur_invoices` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `number` int NOT NULL,
@@ -6097,6 +6295,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_invoices` (
 -- Membuang data untuk tabel triton.tblpur_invoices: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_invoice_details
+DROP TABLE IF EXISTS `tblpur_invoice_details`;
 CREATE TABLE IF NOT EXISTS `tblpur_invoice_details` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pur_invoice` int NOT NULL,
@@ -6121,6 +6320,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_invoice_details` (
 -- Membuang data untuk tabel triton.tblpur_invoice_details: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_invoice_payment
+DROP TABLE IF EXISTS `tblpur_invoice_payment`;
 CREATE TABLE IF NOT EXISTS `tblpur_invoice_payment` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `pur_invoice` int NOT NULL,
@@ -6138,6 +6338,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_invoice_payment` (
 -- Membuang data untuk tabel triton.tblpur_invoice_payment: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_orders
+DROP TABLE IF EXISTS `tblpur_orders`;
 CREATE TABLE IF NOT EXISTS `tblpur_orders` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `pur_order_name` varchar(100) NOT NULL,
@@ -6196,6 +6397,7 @@ INSERT INTO `tblpur_orders` (`id`, `pur_order_name`, `vendor`, `estimate`, `pur_
 	(3, 'Order contoh', 1, 0, 'TKT-PR-00003-Mar-2025-IT001', '2025-03-09', 1, 1, '2025-03-09 17:00:10', 0, '2025-03-09', 1000000.00, 110000.00, 1110000.00, 1, 'test aja', '<p>Syarat dan ketentuan:</p>\r\n<ol>\r\n<li>Lorem insum</li>\r\n<li>Lorem insum</li>\r\n</ol>', 0.00, 0.00, 'after_tax', 1, 0, 3, 0, '6fa4aa0cc1b23148884ab60e30cf8cc3', '2', 1, 'capex', 2, 2, 7, NULL, NULL, 0, 1, 'delivered', NULL, 1.000000, '1', '1', 0.00, 'Prominence Blok 38G No.19 Jalan Jalur Sutera, Alam Sutera\r\nKota Tangerang Selatan Banten,', '15143', 'Banten', '15143', 103, '62');
 
 -- membuang struktur untuk table triton.tblpur_order_detail
+DROP TABLE IF EXISTS `tblpur_order_detail`;
 CREATE TABLE IF NOT EXISTS `tblpur_order_detail` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pur_order` int NOT NULL,
@@ -6225,6 +6427,7 @@ INSERT INTO `tblpur_order_detail` (`id`, `pur_order`, `item_code`, `description`
 	(3, 3, '1', '', 3, 1000000.00, 1.00, 1000000.00, '1', 1110000.00, 0.00, 0.00, 1110000.00, 110000.00, '11.00', 'PPN', 'MC001_Mesin RO Besar', NULL);
 
 -- membuang struktur untuk table triton.tblpur_order_payment
+DROP TABLE IF EXISTS `tblpur_order_payment`;
 CREATE TABLE IF NOT EXISTS `tblpur_order_payment` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `pur_order` int NOT NULL,
@@ -6240,6 +6443,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_order_payment` (
 -- Membuang data untuk tabel triton.tblpur_order_payment: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_request
+DROP TABLE IF EXISTS `tblpur_request`;
 CREATE TABLE IF NOT EXISTS `tblpur_request` (
   `id` int NOT NULL AUTO_INCREMENT,
   `pur_rq_code` varchar(45) NOT NULL,
@@ -6267,7 +6471,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_request` (
   `to_currency` varchar(20) DEFAULT NULL,
   `sale_estimate` int DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 
 -- Membuang data untuk tabel triton.tblpur_request: ~7 rows (lebih kurang)
 INSERT INTO `tblpur_request` (`id`, `pur_rq_code`, `pur_rq_name`, `rq_description`, `requester`, `department`, `request_date`, `status`, `status_goods`, `hash`, `type`, `project`, `number`, `from_items`, `subtotal`, `total_tax`, `total`, `sale_invoice`, `compare_note`, `send_to_vendors`, `currency`, `currency_rate`, `from_currency`, `to_currency`, `sale_estimate`) VALUES
@@ -6277,9 +6481,11 @@ INSERT INTO `tblpur_request` (`id`, `pur_rq_code`, `pur_rq_name`, `rq_descriptio
 	(5, 'TKT-PR-00005-2024-TENDER', 'PR-1238475', 'Beli mesin RO besar lagi terbaik', 1, 4, '2024-12-04 16:31:48', 2, 0, '198672711f4db697a1098cb64def36fd', 'capex', 2, 5, 1, 1000000.00, 110000.00, 1110000.00, NULL, NULL, NULL, 1, 1.000000, '1', '1', NULL),
 	(6, 'TKT-PR-00006-2024-MAINTENANCE', 'PR-004', 'Test lagi beli mesin terbesar', 1, 6, '2024-12-04 16:39:33', 2, 0, '9d9ce72060af7b739b047caed0829dc4', 'opex', 2, 6, 1, 5000000.00, 550000.00, 5550000.00, NULL, NULL, NULL, 1, 1.000000, '1', '1', NULL),
 	(7, 'TKT-PR-00007-2025-PRODUCTION', 'Test aja ini mah', 'test aja ini mah', 1, 7, '2025-03-05 14:28:49', 2, 0, '82620b764043e12201f9268e955e713b', 'capex', 2, 7, 1, 1000000.00, 110000.00, 1110000.00, 0, NULL, '1', 1, 1.000000, '1', '1', 0),
-	(8, 'TKT-PR-00008-2025-TENDER', 'Ngetest lagi ya', '', 1, 4, '2025-03-06 09:48:48', 2, 0, 'aaa8db50f674e5e3a6063d8593263fc4', 'capex', 1, 8, 1, 1000000.00, 0.00, 1000000.00, 0, NULL, '1', 1, 1.000000, '1', '1', 0);
+	(8, 'TKT-PR-00008-2025-TENDER', 'Ngetest lagi ya', '', 1, 4, '2025-03-06 09:48:48', 2, 0, 'aaa8db50f674e5e3a6063d8593263fc4', 'capex', 1, 8, 1, 1000000.00, 0.00, 1000000.00, 0, NULL, '1', 1, 1.000000, '1', '1', 0),
+	(9, 'TKT-PR-00009-2025-PRODUCTION', 'test kedua', 'test', 1, 7, '2025-03-23 10:07:24', 1, 0, '71f2c70784a2a98b13e96c778e96c74b', 'capex', 4, 9, 1, 2000922.00, 110000.00, 2110922.00, 1, NULL, '1', 1, 1.000000, '1', '1', 4);
 
 -- membuang struktur untuk table triton.tblpur_request_detail
+DROP TABLE IF EXISTS `tblpur_request_detail`;
 CREATE TABLE IF NOT EXISTS `tblpur_request_detail` (
   `prd_id` int NOT NULL AUTO_INCREMENT,
   `pur_request` int NOT NULL,
@@ -6296,9 +6502,9 @@ CREATE TABLE IF NOT EXISTS `tblpur_request_detail` (
   `total` decimal(15,2) DEFAULT NULL,
   `tax_name` text,
   PRIMARY KEY (`prd_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 
--- Membuang data untuk tabel triton.tblpur_request_detail: ~5 rows (lebih kurang)
+-- Membuang data untuk tabel triton.tblpur_request_detail: ~9 rows (lebih kurang)
 INSERT INTO `tblpur_request_detail` (`prd_id`, `pur_request`, `item_code`, `unit_id`, `unit_price`, `quantity`, `into_money`, `inventory_quantity`, `item_text`, `tax`, `tax_rate`, `tax_value`, `total`, `tax_name`) VALUES
 	(2, 2, '1', 3, 1000000.00, 1.00, 1000000.00, 0, 'MC001_Mesin RO Besar', '1', '11.00', 110000.00, 1110000.00, 'PPN'),
 	(3, 3, '1', 3, 1000000.00, 1.00, 1000000.00, 0, 'MC001_Mesin RO Besar', '1', '11.00', 110000.00, 1110000.00, 'PPN'),
@@ -6306,9 +6512,12 @@ INSERT INTO `tblpur_request_detail` (`prd_id`, `pur_request`, `item_code`, `unit
 	(5, 5, '1', 3, 1000000.00, 1.00, 1000000.00, 0, 'MC001_Mesin RO Besar', '1', '11.00', 110000.00, 1110000.00, 'PPN'),
 	(6, 6, '1', 3, 1000000.00, 5.00, 5000000.00, 0, 'MC001_Mesin RO Besar', '1', '11.00', 550000.00, 5550000.00, 'PPN'),
 	(7, 7, '2', 1, 1000000.00, 1.00, 1000000.00, 0, 'MC001_Filter RO Mesin 1234', '1', '11.00', 110000.00, 1110000.00, 'PPN'),
-	(8, 8, '2', 1, 1000000.00, 1.00, 1000000.00, 0, 'MC001_Filter RO Mesin 1234', NULL, NULL, 0.00, 1000000.00, NULL);
+	(8, 8, '2', 1, 1000000.00, 1.00, 1000000.00, 0, 'MC001_Filter RO Mesin 1234', NULL, NULL, 0.00, 1000000.00, NULL),
+	(9, 9, '', 0, 1000922.00, 1.00, 1000922.00, 0, '[Expense] Internet', NULL, NULL, 0.00, 1000922.00, NULL),
+	(10, 9, '2', 1, 1000000.00, 1.00, 1000000.00, 0, 'MC001_Filter RO Mesin 1234', '1', '11.00', 110000.00, 1110000.00, 'PPN');
 
 -- membuang struktur untuk table triton.tblpur_unit
+DROP TABLE IF EXISTS `tblpur_unit`;
 CREATE TABLE IF NOT EXISTS `tblpur_unit` (
   `unit_id` int NOT NULL AUTO_INCREMENT,
   `unit_name` varchar(100) NOT NULL,
@@ -6318,6 +6527,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_unit` (
 -- Membuang data untuk tabel triton.tblpur_unit: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_vendor
+DROP TABLE IF EXISTS `tblpur_vendor`;
 CREATE TABLE IF NOT EXISTS `tblpur_vendor` (
   `userid` int unsigned NOT NULL AUTO_INCREMENT,
   `company` varchar(200) DEFAULT NULL,
@@ -6368,6 +6578,7 @@ INSERT INTO `tblpur_vendor` (`userid`, `company`, `vat`, `phonenumber`, `country
 	(2, 'PT DERIL', '0089', '0977127234', 103, 'CIAMIS, KAB.CIAMIS', '46211', 'Jawa Barat', 'Dsn Limus, RT/RW 04/06 , Desa Sukajadi, Kecamatan Sadananya', 'http://github.com/derilkillms', '2025-03-10 15:34:03', 1, NULL, '', '', '', '', 0, '', '', '', '', 0, NULL, NULL, NULL, 1, 0, NULL, 1, 1, '3', 'test', 'test', '69696989', 1, 0.00, '', '52dabd862ff181f67b382bfd10c47662.jpg', 'b9fb6ca718c551e8f186e146b6c905b5.jpg');
 
 -- membuang struktur untuk table triton.tblpur_vendor_admin
+DROP TABLE IF EXISTS `tblpur_vendor_admin`;
 CREATE TABLE IF NOT EXISTS `tblpur_vendor_admin` (
   `staff_id` int NOT NULL,
   `vendor_id` int NOT NULL,
@@ -6377,6 +6588,7 @@ CREATE TABLE IF NOT EXISTS `tblpur_vendor_admin` (
 -- Membuang data untuk tabel triton.tblpur_vendor_admin: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblpur_vendor_cate
+DROP TABLE IF EXISTS `tblpur_vendor_cate`;
 CREATE TABLE IF NOT EXISTS `tblpur_vendor_cate` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `category_name` varchar(255) DEFAULT NULL,
@@ -6392,6 +6604,7 @@ INSERT INTO `tblpur_vendor_cate` (`id`, `category_name`, `description`) VALUES
 	(4, 'Lainnya', 'Vendor lainnya');
 
 -- membuang struktur untuk table triton.tblpur_vendor_items
+DROP TABLE IF EXISTS `tblpur_vendor_items`;
 CREATE TABLE IF NOT EXISTS `tblpur_vendor_items` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `vendor` int NOT NULL,
@@ -6407,6 +6620,7 @@ INSERT INTO `tblpur_vendor_items` (`id`, `vendor`, `group_items`, `items`, `add_
 	(1, 1, 1, 1, 1, '2024-12-03');
 
 -- membuang struktur untuk table triton.tblrelated_items
+DROP TABLE IF EXISTS `tblrelated_items`;
 CREATE TABLE IF NOT EXISTS `tblrelated_items` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -6420,6 +6634,7 @@ INSERT INTO `tblrelated_items` (`id`, `rel_id`, `rel_type`, `item_id`) VALUES
 	(1, 1, 'expense', 5);
 
 -- membuang struktur untuk table triton.tblreminders
+DROP TABLE IF EXISTS `tblreminders`;
 CREATE TABLE IF NOT EXISTS `tblreminders` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -6439,6 +6654,7 @@ CREATE TABLE IF NOT EXISTS `tblreminders` (
 -- Membuang data untuk tabel triton.tblreminders: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblroles
+DROP TABLE IF EXISTS `tblroles`;
 CREATE TABLE IF NOT EXISTS `tblroles` (
   `roleid` int NOT NULL AUTO_INCREMENT,
   `name` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6459,6 +6675,7 @@ INSERT INTO `tblroles` (`roleid`, `name`, `permissions`) VALUES
 	(9, 'Finance Director', 'a:24:{s:9:"contracts";a:1:{i:0;s:4:"view";}s:9:"customers";a:1:{i:0;s:4:"view";}s:9:"estimates";a:1:{i:0;s:4:"view";}s:5:"items";a:1:{i:0;s:4:"view";}s:8:"payments";a:1:{i:0;s:4:"view";}s:8:"projects";a:1:{i:0;s:4:"view";}s:9:"proposals";a:5:{i:0;s:4:"view";i:1;s:6:"create";i:2;s:4:"edit";i:3;s:6:"delete";i:4;s:18:"view_all_templates";}s:7:"reports";a:1:{i:0;s:4:"view";}s:16:"estimate_request";a:1:{i:0;s:4:"view";}s:5:"leads";a:1:{i:0;s:4:"view";}s:14:"purchase_items";a:1:{i:0;s:4:"view";}s:16:"purchase_vendors";a:1:{i:0;s:4:"view";}s:21:"purchase_vendor_items";a:1:{i:0;s:4:"view";}s:16:"purchase_request";a:1:{i:0;s:4:"view";}s:19:"purchase_quotations";a:1:{i:0;s:4:"view";}s:15:"purchase_orders";a:1:{i:0;s:4:"view";}s:21:"purchase_order_return";a:1:{i:0;s:4:"view";}s:18:"purchase_contracts";a:1:{i:0;s:4:"view";}s:17:"purchase_invoices";a:1:{i:0;s:4:"view";}s:20:"purchase_debit_notes";a:1:{i:0;s:4:"view";}s:16:"purchase_reports";a:1:{i:0;s:4:"view";}s:36:"purchase_order_change_approve_status";a:1:{i:0;s:4:"edit";}s:39:"purchase_estimate_change_approve_status";a:1:{i:0;s:4:"edit";}s:38:"purchase_request_change_approve_status";a:1:{i:0;s:4:"edit";}}');
 
 -- membuang struktur untuk table triton.tblsales_activity
+DROP TABLE IF EXISTS `tblsales_activity`;
 CREATE TABLE IF NOT EXISTS `tblsales_activity` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -6469,7 +6686,7 @@ CREATE TABLE IF NOT EXISTS `tblsales_activity` (
   `full_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel triton.tblsales_activity: ~5 rows (lebih kurang)
 INSERT INTO `tblsales_activity` (`id`, `rel_type`, `rel_id`, `description`, `additional_data`, `staffid`, `full_name`, `date`) VALUES
@@ -6477,9 +6694,12 @@ INSERT INTO `tblsales_activity` (`id`, `rel_type`, `rel_id`, `description`, `add
 	(4, 'estimate', 2, 'estimate_activity_client_declined', '', NULL, '', '2024-12-04 16:06:33'),
 	(5, 'invoice', 1, 'invoice_activity_from_expense', '', '1', 'Andhy Reeza', '2025-03-10 10:52:54'),
 	(6, 'invoice', 1, 'invoice_activity_status_updated', 'a:2:{i:0;s:36:"<original_status>1</original_status>";i:1;s:26:"<new_status>2</new_status>";}', '1', 'Andhy Reeza', '2025-03-10 10:55:30'),
-	(7, 'invoice', 1, 'invoice_activity_payment_made_by_staff', 'a:2:{i:0;s:12:"Rp 1.000.922";i:1;s:76:"<a href="http://triton.test/admin/payments/payment/1" target="_blank">#1</a>";}', '1', 'Andhy Reeza', '2025-03-10 10:55:30');
+	(7, 'invoice', 1, 'invoice_activity_payment_made_by_staff', 'a:2:{i:0;s:12:"Rp 1.000.922";i:1;s:76:"<a href="http://triton.test/admin/payments/payment/1" target="_blank">#1</a>";}', '1', 'Andhy Reeza', '2025-03-10 10:55:30'),
+	(8, 'estimate', 3, 'estimate_activity_created', '', '1', 'Andhy Reeza', '2025-03-20 13:19:01'),
+	(9, 'estimate', 4, 'estimate_activity_created', '', '1', 'Andhy Reeza', '2025-03-20 15:41:30');
 
 -- membuang struktur untuk table triton.tblscheduled_emails
+DROP TABLE IF EXISTS `tblscheduled_emails`;
 CREATE TABLE IF NOT EXISTS `tblscheduled_emails` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -6495,6 +6715,7 @@ CREATE TABLE IF NOT EXISTS `tblscheduled_emails` (
 -- Membuang data untuk tabel triton.tblscheduled_emails: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblservices
+DROP TABLE IF EXISTS `tblservices`;
 CREATE TABLE IF NOT EXISTS `tblservices` (
   `serviceid` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6504,6 +6725,7 @@ CREATE TABLE IF NOT EXISTS `tblservices` (
 -- Membuang data untuk tabel triton.tblservices: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblsessions
+DROP TABLE IF EXISTS `tblsessions`;
 CREATE TABLE IF NOT EXISTS `tblsessions` (
   `id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ip_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6513,47 +6735,155 @@ CREATE TABLE IF NOT EXISTS `tblsessions` (
   KEY `ci_sessions_timestamp` (`timestamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel triton.tblsessions: ~37 rows (lebih kurang)
+-- Membuang data untuk tabel triton.tblsessions: ~133 rows (lebih kurang)
 INSERT INTO `tblsessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
-	('05n3iecctg78lbj8g3hgrgrs4i7jbcq9', '127.0.0.1', 1741761938, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736313933383b5f707265765f75726c7c733a3130313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f6765745f6974656d5f62795f69642f322f313f637372665f746f6b656e5f6e616d653d6666653634356332643034366237626533613435363163643463323163643239223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('0p8o26pnd178qh9jel8lj89kmm1skhh5', '127.0.0.1', 1741760687, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736303638373b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('1o7j5evli04lclim0bschv2p06vf4et3', '127.0.0.1', 1741789250, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313738393234323b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('1qm4pfn1290mt2srkjq5d9gb462rdfq2', '127.0.0.1', 1741861139, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313836313133393b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('1vkb0shs3gkijjvn7rsp9i6rp3d23lj4', '127.0.0.1', 1741681768, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638313736383b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('28j09c24rupu92ord5rc1s8ah0odn40e', '127.0.0.1', 1741759902, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313735393930323b5f707265765f75726c7c733a32343a22687474703a2f2f747269746f6e2e746573742f61646d696e223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('28p4mhv4qc4tq8bcf4r0550r7usthn9t', '127.0.0.1', 1741860037, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313836303033373b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('2itd7hb6fr0ohp6b1g83t8ls2phlmovo', '127.0.0.1', 1741688274, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638383237343b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('2q4gc62654g46m3ajfhej6nvgmaq07md', '127.0.0.1', 1741851137, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313835313133373b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('2ue1r7cm88k7f5t9pgiqbbskaqogr8fi', '127.0.0.1', 1741685483, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638353438333b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e736573223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('4utkeesl477oq59lgem6o1vfc3qk2c4d', '127.0.0.1', 1741761085, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736313038353b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('6frj8hg5e14i03qvmknir18tin4cndl0', '127.0.0.1', 1741687365, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638373336353b5f707265765f75726c7c733a35363a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f73657474696e673f67726f75703d617070726f76616c223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('6kkocc4562gs602d54ia31de7c1n89ue', '127.0.0.1', 1741861139, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313836313133393b5f707265765f75726c7c733a3130313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f6765745f6974656d5f62795f69642f322f313f637372665f746f6b656e5f6e616d653d3362646162656562393033336131353334386362376566313434303930323535223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('7isi7mgm1ggi5guuqljcurp6m6atel59', '127.0.0.1', 1741689273, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638393039343b5f707265765f75726c7c733a35323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f766965775f7075725f726571756573742f38223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('7l8r4c22fa3p2secimd49djaqlsrk376', '127.0.0.1', 1741851443, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313835313434333b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('7s5g1klravj97ig3sf4enue0k9d1lv11', '127.0.0.1', 1741686965, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638363936353b5f707265765f75726c7c733a35323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f766965775f7075725f726571756573742f38223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('85deeivvlh3aovc3uhgkm2o5qqsogp06', '127.0.0.1', 1741761422, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736313432323b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('a79v3ifq5pgih02s3b3ulh9bk4q4tqbq', '127.0.0.1', 1741789576, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313738393537363b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('abbkqgcfp1hv0o5r9689u9k7dmbske71', '127.0.0.1', 1741688592, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638383539323b5f707265765f75726c7c733a34303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f76656e646f72223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('bdicajckvg6q4b1ljvnf2uc46p66sc4f', '127.0.0.1', 1741790625, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313739303537383b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('g61a17falnf901fqau4tl1edu4hinrb0', '127.0.0.1', 1741790578, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313739303537383b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('g61s7ho5m4tcqe8l41kq8ce0fgdd55ps', '127.0.0.1', 1741764815, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736343831353b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('hkb08g9hc51racecpo4ldau31p877baa', '127.0.0.1', 1741671560, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313637313536303b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('ib9bpuc919e5iatu8vqdpg5ksjp0kb1g', '127.0.0.1', 1741689094, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638393039343b5f707265765f75726c7c733a35323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f766965775f7075725f726571756573742f38223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('il7lkp5kjjjg0663nh0cog0vtq2dkp09', '127.0.0.1', 1741790257, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313739303235373b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('iut6b8lafvjum47vp2mldmvor6g1qe79', '127.0.0.1', 1741686260, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638363236303b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e736573223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('ldeu8s3b6arblm5ogvbrioms55ad6fg9', '127.0.0.1', 1741687741, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638373734313b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('nn7ca6b10ir5geh9lqkce847th7pa1ld', '127.0.0.1', 1741682082, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638323038323b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f76656e646f722f32223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('ofebdtskceklts0tr9p9k53bbvdnu5mq', '127.0.0.1', 1741762295, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736323239353b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('oimrk6alfbnghg6lau0vcm45hbcrqa0p', '127.0.0.1', 1741763120, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736333132303b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('q05e3iqpvphj73uegm4b26v9t0011rk9', '127.0.0.1', 1741763998, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736333939383b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('ra0lhm3lslb23avec3f2delvgupfqp4v', '127.0.0.1', 1741764422, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736343432323b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('sb3eqlgh4ntu5k85lej68hie9gvhlp1h', '127.0.0.1', 1741684968, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638343936383b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e736573223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('sq8pagn2kcgbtb8miifpsuc79m1vl3lf', '127.0.0.1', 1741789950, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313738393935303b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('ttel2q54aoffvt72670ek10qurosnc4s', '127.0.0.1', 1741850368, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313835303336383b5f707265765f75726c7c733a33393a22687474703a2f2f747269746f6e2e746573742f61646d696e2f61757468656e7469636174696f6e223b),
-	('v4pcsv1ifcbu8ui8oopo4scbh2a55a6d', '127.0.0.1', 1741686628, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313638363632383b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e736573223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
-	('vn5f0jjs4f5hhumhgc519ot1l7u37lej', '127.0.0.1', 1741763440, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734313736333434303b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b);
+	('02rkfk15bpje9po0nh2njes7h8fpu4f5', '127.0.0.1', 1742796368, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323739363336383b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e7365732f657870656e7365223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('06dh5ou699tn6q2qvlrd83ln6oijsu1k', '127.0.0.1', 1742715408, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323731353430383b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('0jvl67u98kbb0k8no73ajt1ipps1795f', '127.0.0.1', 1742286143, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238363134333b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('12fkkl9sc25r14ha54h2nk67g3ae4kir', '127.0.0.1', 1742291084, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239313038343b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('15mjv10jgnqgm3hads2kvc18uqva7m54', '127.0.0.1', 1742270716, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323237303731363b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('1eeanbae1k4jftda0iloj6ve2971pssc', '127.0.0.1', 1742202899, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323230323839393b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('1luklabvbdqa3g71nspcuqcfhc7asv9g', '127.0.0.1', 1742799414, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323739393431343b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('1q1arke8465mm62hu4jmbe617cch1q27', '127.0.0.1', 1742540747, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323534303734373b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('2fjhm9i4qaoqnbtvm293u735huo3gc82', '127.0.0.1', 1742284814, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238343831343b5f707265765f75726c7c733a36323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f636f7070795f7075725f726571756573745f666f725f706f2f332f32223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('2gb9qc4sgri1hmp2o7raukoe5jempmlt', '127.0.0.1', 1742699919, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323639393931393b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('2qi6j8uplh90ovsli38ioos69n5ft82g', '127.0.0.1', 1742636992, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323633363939323b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('2quu7vhasmecuvu5kaiukem4njqlblvi', '127.0.0.1', 1742269268, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323236393236383b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('3c277l7ih2g4676mq1ebqtqe865vi1ad', '127.0.0.1', 1742625820, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632353832303b5f707265765f75726c7c733a35303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f72657175657374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('3crurkg4bij6mhqkuj3b5t8ifu1itin9', '127.0.0.1', 1742283856, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238333835363b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('42btujjn9l0gm6tl9pe314a3e72fr27o', '127.0.0.1', 1742624781, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632343738313b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('4kgi4isfpvt7lr04ukrrhho75d4gj5us', '127.0.0.1', 1742530464, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323533303436343b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('4nq47kl10t015571i6er3gcqbos068ak', '127.0.0.1', 1742193260, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323139333236303b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('51po8hb492kg0ss8a2llbjj8ethpplov', '127.0.0.1', 1742288055, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238383035353b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('57jv2ne4pqnmf99vmvru6j9koc949nqr', '127.0.0.1', 1742720217, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323732303231373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('5d92uo2316mo3blhue8lvb7tgtlkm75i', '127.0.0.1', 1742208963, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323230383734393b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('5g4u1l8vstd6s9lqiepeo04ql7q2etd9', '127.0.0.1', 1742293336, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239333333363b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('5hco7jqdriqrehlj64vtuku0ultf72u7', '127.0.0.1', 1742457056, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435373035363b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('5iphehajj39t32peomr93i8f1lljooev', '127.0.0.1', 1742807374, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830373336373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('5qt5b5ns8hoacbnfmlppvqomkpnohs83', '127.0.0.1', 1742790337, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323739303333373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d6174652f31223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('5t9njhrncfpb0ggr6sop5ia2tna55fho', '127.0.0.1', 1742772825, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323737323831353b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a33343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d61746573223b),
+	('64kaofeibtndkbb7n484a1l4vao4ttlk', '127.0.0.1', 1742456286, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435363238363b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('68ldrg5bc7iiag5jl9ha2f123rip6ene', '127.0.0.1', 1742629468, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632393436383b5f707265765f75726c7c733a34353a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f72657175657374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('6e7pklt7r3l7r19bcf7vri9boji1tbti', '127.0.0.1', 1742269753, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323236393735333b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('73i9ou7r96bg38blipje6g1t75p7u25f', '127.0.0.1', 1742542329, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323534323332393b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d6174652f32223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('7emej0kj58ficssvccedumncabdmdmke', '127.0.0.1', 1742700706, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323730303730363b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('840ut2fdidd5rtj5akjs2j3u30g7ujt8', '127.0.0.1', 1742805955, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830353935353b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e7365732f657870656e73652f31223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('86o7rp388rcan1959o52lpr2143uqlro', '127.0.0.1', 1742627371, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632373337313b5f707265765f75726c7c733a36303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6974656d73223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('88tqi4el3e5i6plgbupbrg4luit0g4na', '127.0.0.1', 1742369725, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336393732353b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('8ch6ivoap9pnp7amf0sof811n1kqkd15', '127.0.0.1', 1742272685, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323237323638353b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a65637473223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('8ic4254541pjaf96t395nod7sgrrcaef', '127.0.0.1', 1742786247, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323738363234373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('8kmmjjjtpb2plhjrsje9s4u1fnrrk908', '127.0.0.1', 1742720564, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323732303532393b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b),
+	('8s7qr6qsn2ffaipqpcp1tac81ed8a1v6', '127.0.0.1', 1742286569, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238363536393b5f707265765f75726c7c733a35383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f636f7070795f70726f6a6563745f666f725f706f2f322f31223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('8tg3p208efs642ttaeqrv30kud239gf3', '127.0.0.1', 1742717145, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323731373134353b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('9f85t090t0g9pukc88vjcspdq9ntt33l', '127.0.0.1', 1742286889, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238363838393b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('9g90l6oc3mnpr6snbjnrrghmfsmhtqks', '127.0.0.1', 1742283213, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238333230383b5f707265765f75726c7c733a34353a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f72657175657374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('9gd3s8tgdfitoqpjgdfdautpk0voeund', '127.0.0.1', 1742459903, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435393930333b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('9jmoo8grv69lmvbcn06h2lpf6etgcm8f', '127.0.0.1', 1742268619, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323236383631393b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('9l6njq26hvo3lvd8ensd59n06qedm3v5', '127.0.0.1', 1742800077, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830303037373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e736573223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('aa14ucm9dlcfuv60uvb117qn8qlnrqcf', '127.0.0.1', 1742632879, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323633323837393b5f707265765f75726c7c733a36303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6974656d73223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('aai95bmsuolbj3rrftdqr9f41k2g95h1', '127.0.0.1', 1742788207, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323738383230373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a33343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d61746573223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('add96otjvm30fkfqa83orefsebbf3r8e', '127.0.0.1', 1742271451, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323237313435313b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('aqs4fpoggfvq7klalqq28kjaaqengno6', '127.0.0.1', 1742626603, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632363630333b5f707265765f75726c7c733a36303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6974656d73223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('avq9v5kqq705fq16msp1euarq60r54qd', '127.0.0.1', 1742290742, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239303734323b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a65637473223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('b0ovplbdkhbmkhsd2d1uctb6cn2eii98', '127.0.0.1', 1742799107, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323739393130373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a35323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f766965775f7075725f726571756573742f38223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('b1iscg9rr0qq7e2i9alogt1olka4g1iv', '127.0.0.1', 1742624232, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632343233323b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('b77aoivubh5uc80lcv55hrpsptfn94ng', '127.0.0.1', 1742715824, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323731353832343b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a32343a22687474703a2f2f747269746f6e2e746573742f61646d696e223b),
+	('bi1elagv6r0ro476jnsag43todiihv6p', '127.0.0.1', 1742268306, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323236383330363b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('c1q5me6t9jfffptu199utjmcu6h48c12', '127.0.0.1', 1742716137, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323731363133373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34373a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f726571756573742f39223b),
+	('c42kfe73cio78v8gp0ipc5imfrmhd8aj', '127.0.0.1', 1742541406, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323534313430363b5f707265765f75726c7c733a38393a22687474703a2f2f747269746f6e2e746573742f70757263686173652f76656e646f72735f706f7274616c2f7075725f726571756573742f382f6161613864623530663637346535653361363036336438353933323633666334223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('c7sl73ttbmtibgbjuksk8ojmcm3mqah1', '127.0.0.1', 1742192868, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323139323836383b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('cmjqs68d52t63rskj82t0kbm0ss7obho', '127.0.0.1', 1742451718, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435313731383b5f707265765f75726c7c733a33343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d61746573223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('cpbuvdfhkd1ifu9of0v0rs8o1hjgektn', '127.0.0.1', 1742542711, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323534323633333b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d6174652f32223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('cr82ef3gobngb1veu8j23hlj5k4m2dnf', '127.0.0.1', 1742528568, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323532383536383b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('csmasi0n6m3r5s8ptj9rl9bsebob53qc', '127.0.0.1', 1742369834, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336393732353b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('cutng2qg2dvjvh91re9fljl6s99b59p8', '127.0.0.1', 1742369391, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336393338353b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('d405smbfa390d1ssb2btfqvt5hrf4jsa', '127.0.0.1', 1742530785, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323533303738353b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('d6njvjqa9v7dq5jjj8lo1pnst4ppkqtu', '127.0.0.1', 1742463347, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323436333334373b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('dagfjecfmotjgp1s5sfo04m6kru7qmb0', '127.0.0.1', 1742290410, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239303431303b5f707265765f75726c7c733a35303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f72657175657374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('don12eeljeu6qiu6gd98s5094ffnnmr3', '127.0.0.1', 1742542633, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323534323633333b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d6174652f32223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('du8m24276t7u3gfufvafe0776bjurdm7', '127.0.0.1', 1742785923, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323738353932333b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a33343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d61746573223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('dujo0rbrbmrrgmpcict0rjuhqdq1ul06', '127.0.0.1', 1742288702, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238383730323b5f707265765f75726c7c733a35303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f72657175657374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('e5bcvnbc6d9st44cehqi0kihq1mol3u3', '127.0.0.1', 1742463739, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323436333733393b5f707265765f75726c7c733a34353a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f657374696d6174652f34223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('e7ervo3uluc2un60a68mcd7kqh8nh3tn', '127.0.0.1', 1742529136, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323532393133363b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('e9b3h0kctbqsd1qtr0ecb3oanor4tdbe', '127.0.0.1', 1742630291, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323633303239313b5f707265765f75726c7c733a32343a22687474703a2f2f747269746f6e2e746573742f61646d696e223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('egh4c237kd3qovneeg26gp711i9h8kb2', '127.0.0.1', 1742633221, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323633333232313b5f707265765f75726c7c733a36333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6f76657276696577223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('ei1mjgemq90d038mg3mf46p4ccafp58b', '127.0.0.1', 1742625504, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632353530343b5f707265765f75726c7c733a36303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6974656d73223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('eoadu603tarshjruv9a4l47labtc2e62', '127.0.0.1', 1742459575, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435393537353b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('eoltovle7eqjilefedt7t8uh0bv3cr3b', '127.0.0.1', 1742368672, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336383637323b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('f9aquggvs64k99bjsae8urp57bmg4ql8', '127.0.0.1', 1742699584, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323639393538343b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('fbo3avin76r8n4ps927ffcfuuhqs94uc', '127.0.0.1', 1742366783, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336363738333b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('fobb4u62vjsc0rfahshmtbgdndfk71gf', '127.0.0.1', 1742636683, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323633363638333b5f707265765f75726c7c733a36333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f323f67726f75703d70726f6a6563745f6f76657276696577223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('fqd31b6ki3otmo4kdcm932ido71n2j9e', '127.0.0.1', 1742197391, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323139373339313b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('g5css411v9cvkgrrhjiuta8fa8d4if4r', '127.0.0.1', 1742451300, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435313330303b5f707265765f75726c7c733a32343a22687474703a2f2f747269746f6e2e746573742f61646d696e223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('gimsepg63m7geoq44ab3s5irpibtc1ua', '127.0.0.1', 1742627989, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632373938393b5f707265765f75726c7c733a36333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6f76657276696577223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('h26j0o2s0jtcfau2caniolm665km8b7l', '127.0.0.1', 1742797254, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323739373235343b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e7365732f657870656e7365223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('htu0m0k7e3656u3gng6tltfjenp65sb2', '127.0.0.1', 1742799735, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323739393733353b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('i36hp384i89c2rgadeji6qfc7gknnvov', '127.0.0.1', 1742806672, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830363637323b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('i55glodedpmmf4cl5o9aitumkv66alvc', '127.0.0.1', 1742773755, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323737333735353b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a33343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d61746573223b),
+	('ifkd34ti92qi1dushkepc46n5t012tnb', '127.0.0.1', 1742652818, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323635323831383b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('ish7kbmq0eqs7qm7bbisija4s8f8lec9', '127.0.0.1', 1742208749, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323230383734393b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('ivsvuqviqgd4mr2dootjcvrpohl07j6e', '127.0.0.1', 1742198773, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323139383737333b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('ivtdr90qmf0knv5a8f2baa0voj0on918', '127.0.0.1', 1742805553, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830353535333b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e736573223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('j5nl9svd1iob2n4m0fpgsrs9irks8l6k', '127.0.0.1', 1742623894, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632333839333b7265645f75726c7c733a33343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d61746573223b5f707265765f75726c7c733a33393a22687474703a2f2f747269746f6e2e746573742f61646d696e2f61757468656e7469636174696f6e223b),
+	('j69grevhvicvhhlv9hdatd4lfr1o31ge', '127.0.0.1', 1742627674, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632373637343b5f707265765f75726c7c733a36333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6f76657276696577223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('k10lh052itto1fd8eqaeaaopa07gpd18', '127.0.0.1', 1742452024, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435323032343b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('k1vm8j93i7ijogdv68btcroc8mqt7jrk', '127.0.0.1', 1742541857, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323534313835373b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('kjrh1g21j4gg2e8aoh40gnpe6v89ecpc', '127.0.0.1', 1742652830, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323635323831383b5f707265765f75726c7c733a36333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f313f67726f75703d70726f6a6563745f6f76657276696577223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('l40efb0m81ojbv5onrchhof0rqfooav4', '127.0.0.1', 1742716563, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323731363536333b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('ldgrubt4q959n2scqo84kc9tufg6fgqq', '127.0.0.1', 1742630932, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323633303932333b5f707265765f75726c7c733a36303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6974656d73223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('lep18g1fg68tjoej0hss036ubh9gb0k3', '127.0.0.1', 1742536850, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323533363835303b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('lre226il9q264ekkpmld13opnonue3o2', '127.0.0.1', 1742637742, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323633373734323b5f707265765f75726c7c733a36303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6974656d73223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c623a313b),
+	('m4p6qrku4vu9dpi1spcdprrn20eevdua', '127.0.0.1', 1742367638, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336373633383b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('m9a3omf75aa0dpdn4gusm7pnf0gcj7gu', '127.0.0.1', 1742788691, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323738383639313b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('mf12s4p58lkm4ne06veq6lqtjsaq2j9t', '127.0.0.1', 1742368990, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336383939303b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('monuvhjl3637q46buchl5m7u9cne8qhh', '127.0.0.1', 1742368337, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336383333373b5f707265765f75726c7c733a34303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f34223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('mqc9ut81bqmgj3crcrfua987mon9bnj3', '127.0.0.1', 1742791210, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323739313231303b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e7365732f657870656e7365223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('ms5mbosuebvdkfrd1r07c1cb1s6smdhd', '127.0.0.1', 1742460851, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323436303835313b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('mv7nnl3i8irv2lcu7991jofbcahnm3i1', '127.0.0.1', 1742456740, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435363734303b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('n8t58asna3otemvmmog33sa8niqm41q4', '127.0.0.1', 1742628347, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632383334373b5f707265765f75726c7c733a36333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f343f67726f75703d70726f6a6563745f6f76657276696577223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('nfvsjnsjal367dbcfdo7qe31d5tk9lho', '127.0.0.1', 1742294553, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239343535333b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('nmsdektf31e3j269b6cc7leo2dpgkvlg', '127.0.0.1', 1742540268, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323534303236383b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('o34kackdr6ciqkt9ec5oprogkfp97u05', '127.0.0.1', 1742310834, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323331303530363b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('of7s8olesove7m5l289t3jvu528p1ja1', '127.0.0.1', 1742807054, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830373035343b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('opijoces65neccpksetbdkua31kqiuuv', '127.0.0.1', 1742367311, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323336373331313b5f707265765f75726c7c733a34303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f34223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('or0tqn62mp3u37kbu6nj5miq59smiu6u', '127.0.0.1', 1742197052, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323139373035323b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('p0a5gmnc230a0c6vt9eui1cbft0t2au9', '127.0.0.1', 1742630616, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323633303631363b5f707265765f75726c7c733a33323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f6d6f64756c6573223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c623a313b),
+	('p9vr4j68fdpe3og1ouvt7c0grcd2plrm', '127.0.0.1', 1742701061, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323730313036313b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('pfjau8s099geqfpv8pdop8fuc5dq7oh0', '127.0.0.1', 1742787000, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323738373030303b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('pfmoen9jtcojqbktfkrvn9slu3ad5qin', '127.0.0.1', 1742292274, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239323237343b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('poq1g2n660be7f4nk058m328h6iqk2eg', '127.0.0.1', 1742701412, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323730313339363b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34373a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f726571756573742f39223b),
+	('q4kj416tovog712802kgikt2e83iu9fl', '127.0.0.1', 1742292602, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239323630323b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('qcd537lcupb4uuvojq4sd4h6ec1kp2be', '127.0.0.1', 1742193800, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323139333830303b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f32223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('qqg0vck7f05t2b0okjn0maovctjkhrgn', '127.0.0.1', 1742541097, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323534313039373b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('r2cainhf4nktdhujo3hhsbr5vs3240c4', '127.0.0.1', 1742629781, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632393738313b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f73657474696e6773223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c623a313b),
+	('rq3rc397u641ueqdjd7npd5h9fshd8rn', '127.0.0.1', 1742294865, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239343836353b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('sib9bgtqvv3cgtcn7npr5rq4hdi1477d', '127.0.0.1', 1742807367, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830373336373b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('sj3uq7eg9olbb04gr3p0jekg3a0cochc', '127.0.0.1', 1742626275, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632363237353b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('so1qqlp6mr69robv4vmogvoit675r3ut', '127.0.0.1', 1742529453, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323532393435333b5f707265765f75726c7c733a34323a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('sqqe4jue21ri35pou2ra7pdbpcuulaqh', '127.0.0.1', 1742310506, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323331303530363b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('t4bfjeeojrc1gudg7nrqu0kk3ef9t510', '127.0.0.1', 1742785155, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323738353135353b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a36323a22687474703a2f2f747269746f6e2e746573742f657374696d6174652f332f3961356462623662636562613762376464306631373465616230633138643431223b),
+	('td5gdvl6h325g82hvajnifh35co0ujqj', '127.0.0.1', 1742714959, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323731343935393b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b),
+	('tf9a7i1n0cgvvu0arr94lff51ofrghpe', '127.0.0.1', 1742463953, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323436333733393b5f707265765f75726c7c733a33343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d61746573223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('thqto0trtl434rdl0hneuujttjiqvsrf', '127.0.0.1', 1742720529, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323732303532393b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b5f707265765f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b),
+	('tlkar3c4lteibmbc4tse60ibonv4f8ro', '127.0.0.1', 1742288393, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238383339333b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a6563742f34223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('tr2q7qmopaavpsjbj8bkta4ce6611k41', '127.0.0.1', 1742537164, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323533373136343b5f707265765f75726c7c733a34303a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f766965772f34223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('tsont4gbmeuk5un47pbaiakm6i5retqe', '127.0.0.1', 1742310139, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323331303133393b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('u01j64ifaocfgub2ojtruo1fhb8p5pso', '127.0.0.1', 1742448917, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323434383931343b7265645f75726c7c733a34343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f71756f746174696f6e73223b),
+	('u1lhqp11vk80vvle6ni0vf8ko30sd0k0', '127.0.0.1', 1742455985, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435353938353b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f657374696d617465223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('u3lnmp10h4pmdim6418qmd6610tmdsk9', '127.0.0.1', 1742285180, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238353138303b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('u9i6b10usesl745p503opk60umd9nr8h', '127.0.0.1', 1742791519, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323739313531393b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e7365732f657870656e7365223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('ukt0o12l4mrmuaalsmuo9lnqqimp00gd', '127.0.0.1', 1742800545, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830303534353b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a33333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e736573223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('uqd0m5t8m1g5vj616hvs9tle18qn9vvj', '127.0.0.1', 1742454912, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323435343931323b5f707265765f75726c7c733a34393a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d617465732f6c6973745f657374696d61746573223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b657374696d6174655f706970656c696e657c733a353a2266616c7365223b),
+	('uqmv2ptm90t8ngrmq798duhh4ofhlncv', '127.0.0.1', 1742293000, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323239333030303b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('uskgabp6tkjl92rh8p0h4ffsmggkpq99', '127.0.0.1', 1742625184, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323632353138343b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e7365732f657870656e7365223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('v1qc5u1rjunaqu6p9qjguone9ruftg0v', '127.0.0.1', 1742785562, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323738353536323b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a33343a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657374696d61746573223b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('v617h9oshsuqocprsl0sv4hldhq2uuu1', '127.0.0.1', 1742309810, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323330393831303b5f707265765f75726c7c733a34383a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f70757263686173655f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('vc4onl0q2pg093e4ditc0gjql534l297', '127.0.0.1', 1742270277, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323237303237373b5f707265765f75726c7c733a34313a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70726f6a656374732f70726f6a656374223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b),
+	('vgs83lvpg7nj287uuhn7ahlcmticctq1', '127.0.0.1', 1742287721, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323238373732313b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f70757263686173652f7075725f6f72646572223b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b73657475702d6d656e752d6f70656e7c733a303a22223b),
+	('vsg2976gqluu8410oq3t9c4slev3dggc', '127.0.0.1', 1742806278, _binary 0x5f5f63695f6c6173745f726567656e65726174657c693a313734323830363237383b73746166665f757365725f69647c733a313a2231223b73746166665f6c6f676765645f696e7c623a313b5f707265765f75726c7c733a34333a22687474703a2f2f747269746f6e2e746573742f61646d696e2f657870656e7365732f657870656e73652f31223b73657475702d6d656e752d6f70656e7c733a303a22223b6d6573736167652d737563636573737c733a32393a22457870656e73652075706461746564207375636365737366756c6c792e223b5f5f63695f766172737c613a313a7b733a31353a226d6573736167652d73756363657373223b733a333a226e6577223b7d);
 
 -- membuang struktur untuk table triton.tblshared_customer_files
+DROP TABLE IF EXISTS `tblshared_customer_files`;
 CREATE TABLE IF NOT EXISTS `tblshared_customer_files` (
   `file_id` int NOT NULL,
   `contact_id` int NOT NULL
@@ -6562,6 +6892,7 @@ CREATE TABLE IF NOT EXISTS `tblshared_customer_files` (
 -- Membuang data untuk tabel triton.tblshared_customer_files: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblspam_filters
+DROP TABLE IF EXISTS `tblspam_filters`;
 CREATE TABLE IF NOT EXISTS `tblspam_filters` (
   `id` int NOT NULL AUTO_INCREMENT,
   `type` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6573,6 +6904,7 @@ CREATE TABLE IF NOT EXISTS `tblspam_filters` (
 -- Membuang data untuk tabel triton.tblspam_filters: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblstaff
+DROP TABLE IF EXISTS `tblstaff`;
 CREATE TABLE IF NOT EXISTS `tblstaff` (
   `staffid` int NOT NULL AUTO_INCREMENT,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6611,7 +6943,7 @@ CREATE TABLE IF NOT EXISTS `tblstaff` (
 
 -- Membuang data untuk tabel triton.tblstaff: ~9 rows (lebih kurang)
 INSERT INTO `tblstaff` (`staffid`, `email`, `firstname`, `lastname`, `facebook`, `linkedin`, `phonenumber`, `skype`, `password`, `datecreated`, `profile_image`, `last_ip`, `last_login`, `last_activity`, `last_password_change`, `new_pass_key`, `new_pass_key_requested`, `admin`, `role`, `active`, `default_language`, `direction`, `media_path_slug`, `is_not_staff`, `hourly_rate`, `two_factor_auth_enabled`, `two_factor_auth_code`, `two_factor_auth_code_requested`, `email_signature`, `google_auth_secret`) VALUES
-	(1, 'reeza.andhy@gmail.com', 'Andhy', 'Reeza', '', '', '', '', '$2a$08$Of4efvUk58nOwV0oxVOH3OHEjnn/ublPdS5igY45QWw/MA26qPPTy', '2024-12-03 12:33:48', NULL, '127.0.0.1', '2025-03-13 14:19:28', '2025-03-13 17:18:59', NULL, NULL, NULL, 1, NULL, 1, NULL, '', NULL, 0, 0.00, 0, NULL, NULL, '', NULL),
+	(1, 'reeza.andhy@gmail.com', 'Andhy', 'Reeza', '', '', '', '', '$2a$08$Of4efvUk58nOwV0oxVOH3OHEjnn/ublPdS5igY45QWw/MA26qPPTy', '2024-12-03 12:33:48', NULL, '127.0.0.1', '2025-03-24 06:33:42', '2025-03-24 16:09:34', NULL, NULL, NULL, 1, NULL, 1, NULL, '', NULL, 0, 0.00, 0, NULL, NULL, '', NULL),
 	(2, 'bahruzamzami316@gmail.com', 'Deasy', 'W', 'facebook.com', 'linkedin.com', '12345678', 'skype.com', '$2a$08$3Sh/VkUaOUEmxQHHkIGnK.Q8q5RgKaxggGbQRBvNsIEWznaxyRXnq', '2024-12-03 12:50:16', NULL, '162.158.106.218', '2024-12-04 16:40:40', '2024-12-04 16:40:56', NULL, NULL, NULL, 0, 4, 1, NULL, 'ltr', 'deasy-w', 0, 30000.00, 0, NULL, NULL, 'Deasy W', NULL),
 	(3, 'desizuliati3@gmail.com', 'Nita', 'A', 'facebook.com', 'facebook.com', '12345678', 'facebook.com', '$2a$08$DsCVsQlEVitVXVT0kHrCz.4j6PuIbaHu3jE87JA0am.gpsHGkUiRe', '2024-12-03 12:51:23', NULL, '172.68.119.97', '2024-12-04 20:42:38', '2024-12-04 21:28:17', NULL, NULL, NULL, 0, 2, 1, NULL, 'ltr', 'nita-a', 0, 20000.00, 0, NULL, NULL, 'Nita A', NULL),
 	(4, 'puan@erp.tritonkencanatirta.co.id', 'Puan', 'Maharani', 'facebook.com', 'linkedin.com', '12345678', 'skype.com', '$2a$08$/AcKtn3MdWg2e/6lzVcnbO/TlLv2.adSSd5O4nEyPTvqgWeth6Ls2', '2024-12-03 12:52:28', NULL, '162.158.163.78', '2024-12-04 21:04:39', '2024-12-04 21:13:43', NULL, NULL, NULL, 0, 8, 1, NULL, 'ltr', 'puan-maharani', 0, 15000.00, 0, NULL, NULL, 'Puan Maharani', NULL),
@@ -6622,6 +6954,7 @@ INSERT INTO `tblstaff` (`staffid`, `email`, `firstname`, `lastname`, `facebook`,
 	(9, 'harvin@erp.tritonkencanatirta.co.id', 'Harvin', 'D', 'facebook.com', 'linkedin.com', '12345678', 'skype.com', '$2a$08$RmkkNTs1fqxfneCBNdcqsuH9QU.glSAmVkYf7gjeVkEDy581dVaY.', '2024-12-03 13:44:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 8, 1, NULL, 'ltr', 'harvin-d', 0, 20000.00, 0, NULL, NULL, 'Harvin D', NULL);
 
 -- membuang struktur untuk table triton.tblstaff_departments
+DROP TABLE IF EXISTS `tblstaff_departments`;
 CREATE TABLE IF NOT EXISTS `tblstaff_departments` (
   `staffdepartmentid` int NOT NULL AUTO_INCREMENT,
   `staffid` int NOT NULL,
@@ -6641,6 +6974,7 @@ INSERT INTO `tblstaff_departments` (`staffdepartmentid`, `staffid`, `departmenti
 	(42, 3, 1);
 
 -- membuang struktur untuk table triton.tblstaff_permissions
+DROP TABLE IF EXISTS `tblstaff_permissions`;
 CREATE TABLE IF NOT EXISTS `tblstaff_permissions` (
   `staff_id` int NOT NULL,
   `feature` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6938,6 +7272,7 @@ INSERT INTO `tblstaff_permissions` (`staff_id`, `feature`, `capability`) VALUES
 	(6, 'purchase_quotations', 'delete');
 
 -- membuang struktur untuk table triton.tblsubscriptions
+DROP TABLE IF EXISTS `tblsubscriptions`;
 CREATE TABLE IF NOT EXISTS `tblsubscriptions` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6973,6 +7308,7 @@ CREATE TABLE IF NOT EXISTS `tblsubscriptions` (
 -- Membuang data untuk tabel triton.tblsubscriptions: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltaggables
+DROP TABLE IF EXISTS `tbltaggables`;
 CREATE TABLE IF NOT EXISTS `tbltaggables` (
   `rel_id` int NOT NULL,
   `rel_type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -6983,24 +7319,30 @@ CREATE TABLE IF NOT EXISTS `tbltaggables` (
   KEY `tag_id` (`tag_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Membuang data untuk tabel triton.tbltaggables: ~2 rows (lebih kurang)
+-- Membuang data untuk tabel triton.tbltaggables: ~5 rows (lebih kurang)
 INSERT INTO `tbltaggables` (`rel_id`, `rel_type`, `tag_id`, `tag_order`) VALUES
 	(3, 'task', 1, 1),
-	(1, 'invoice', 1, 1);
+	(1, 'invoice', 1, 1),
+	(4, 'project', 1, 1),
+	(4, 'estimate', 1, 1),
+	(4, 'estimate', 2, 2);
 
 -- membuang struktur untuk table triton.tbltags
+DROP TABLE IF EXISTS `tbltags`;
 CREATE TABLE IF NOT EXISTS `tbltags` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel triton.tbltags: ~0 rows (lebih kurang)
 INSERT INTO `tbltags` (`id`, `name`) VALUES
+	(2, 'dua'),
 	(1, 'test');
 
 -- membuang struktur untuk table triton.tbltasks
+DROP TABLE IF EXISTS `tbltasks`;
 CREATE TABLE IF NOT EXISTS `tbltasks` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -7047,6 +7389,7 @@ INSERT INTO `tbltasks` (`id`, `name`, `description`, `priority`, `dateadded`, `s
 	(3, 'test aja', '<p>test</p>', 2, '2025-03-10 10:51:44', '2025-03-10', '2025-04-11', '2025-03-10 10:56:06', 1, 0, 5, 'week', 1, 1, NULL, 0, 0, 0, NULL, 1, 'expense', 0, 1, 0, 0, 10.00, 0, 1, 0, 0, 0);
 
 -- membuang struktur untuk table triton.tbltaskstimers
+DROP TABLE IF EXISTS `tbltaskstimers`;
 CREATE TABLE IF NOT EXISTS `tbltaskstimers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `task_id` int NOT NULL,
@@ -7063,6 +7406,7 @@ CREATE TABLE IF NOT EXISTS `tbltaskstimers` (
 -- Membuang data untuk tabel triton.tbltaskstimers: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltasks_checklist_templates
+DROP TABLE IF EXISTS `tbltasks_checklist_templates`;
 CREATE TABLE IF NOT EXISTS `tbltasks_checklist_templates` (
   `id` int NOT NULL AUTO_INCREMENT,
   `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
@@ -7072,6 +7416,7 @@ CREATE TABLE IF NOT EXISTS `tbltasks_checklist_templates` (
 -- Membuang data untuk tabel triton.tbltasks_checklist_templates: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltask_assigned
+DROP TABLE IF EXISTS `tbltask_assigned`;
 CREATE TABLE IF NOT EXISTS `tbltask_assigned` (
   `id` int NOT NULL AUTO_INCREMENT,
   `staffid` int NOT NULL,
@@ -7088,6 +7433,7 @@ INSERT INTO `tbltask_assigned` (`id`, `staffid`, `taskid`, `assigned_from`, `is_
 	(2, 1, 3, 1, 0);
 
 -- membuang struktur untuk table triton.tbltask_checklist_items
+DROP TABLE IF EXISTS `tbltask_checklist_items`;
 CREATE TABLE IF NOT EXISTS `tbltask_checklist_items` (
   `id` int NOT NULL AUTO_INCREMENT,
   `taskid` int NOT NULL,
@@ -7105,6 +7451,7 @@ CREATE TABLE IF NOT EXISTS `tbltask_checklist_items` (
 -- Membuang data untuk tabel triton.tbltask_checklist_items: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltask_comments
+DROP TABLE IF EXISTS `tbltask_comments`;
 CREATE TABLE IF NOT EXISTS `tbltask_comments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `content` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7121,6 +7468,7 @@ CREATE TABLE IF NOT EXISTS `tbltask_comments` (
 -- Membuang data untuk tabel triton.tbltask_comments: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltask_followers
+DROP TABLE IF EXISTS `tbltask_followers`;
 CREATE TABLE IF NOT EXISTS `tbltask_followers` (
   `id` int NOT NULL AUTO_INCREMENT,
   `staffid` int NOT NULL,
@@ -7133,6 +7481,7 @@ INSERT INTO `tbltask_followers` (`id`, `staffid`, `taskid`) VALUES
 	(1, 4, 3);
 
 -- membuang struktur untuk table triton.tbltaxes
+DROP TABLE IF EXISTS `tbltaxes`;
 CREATE TABLE IF NOT EXISTS `tbltaxes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7145,6 +7494,7 @@ INSERT INTO `tbltaxes` (`id`, `name`, `taxrate`) VALUES
 	(1, 'PPN', 11.00);
 
 -- membuang struktur untuk table triton.tbltemplates
+DROP TABLE IF EXISTS `tbltemplates`;
 CREATE TABLE IF NOT EXISTS `tbltemplates` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7157,6 +7507,7 @@ CREATE TABLE IF NOT EXISTS `tbltemplates` (
 -- Membuang data untuk tabel triton.tbltemplates: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltickets
+DROP TABLE IF EXISTS `tbltickets`;
 CREATE TABLE IF NOT EXISTS `tbltickets` (
   `ticketid` int NOT NULL AUTO_INCREMENT,
   `adminreplying` int NOT NULL DEFAULT '0',
@@ -7194,6 +7545,7 @@ CREATE TABLE IF NOT EXISTS `tbltickets` (
 -- Membuang data untuk tabel triton.tbltickets: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltickets_pipe_log
+DROP TABLE IF EXISTS `tbltickets_pipe_log`;
 CREATE TABLE IF NOT EXISTS `tbltickets_pipe_log` (
   `id` int NOT NULL AUTO_INCREMENT,
   `date` datetime NOT NULL,
@@ -7209,6 +7561,7 @@ CREATE TABLE IF NOT EXISTS `tbltickets_pipe_log` (
 -- Membuang data untuk tabel triton.tbltickets_pipe_log: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltickets_predefined_replies
+DROP TABLE IF EXISTS `tbltickets_predefined_replies`;
 CREATE TABLE IF NOT EXISTS `tbltickets_predefined_replies` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(191) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7219,6 +7572,7 @@ CREATE TABLE IF NOT EXISTS `tbltickets_predefined_replies` (
 -- Membuang data untuk tabel triton.tbltickets_predefined_replies: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltickets_priorities
+DROP TABLE IF EXISTS `tbltickets_priorities`;
 CREATE TABLE IF NOT EXISTS `tbltickets_priorities` (
   `priorityid` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7232,6 +7586,7 @@ INSERT INTO `tbltickets_priorities` (`priorityid`, `name`) VALUES
 	(3, 'High');
 
 -- membuang struktur untuk table triton.tbltickets_status
+DROP TABLE IF EXISTS `tbltickets_status`;
 CREATE TABLE IF NOT EXISTS `tbltickets_status` (
   `ticketstatusid` int NOT NULL AUTO_INCREMENT,
   `name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7250,6 +7605,7 @@ INSERT INTO `tbltickets_status` (`ticketstatusid`, `name`, `isdefault`, `statusc
 	(5, 'Completed', 1, '#03a9f4', 5);
 
 -- membuang struktur untuk table triton.tblticket_attachments
+DROP TABLE IF EXISTS `tblticket_attachments`;
 CREATE TABLE IF NOT EXISTS `tblticket_attachments` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ticketid` int NOT NULL,
@@ -7263,6 +7619,7 @@ CREATE TABLE IF NOT EXISTS `tblticket_attachments` (
 -- Membuang data untuk tabel triton.tblticket_attachments: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblticket_replies
+DROP TABLE IF EXISTS `tblticket_replies`;
 CREATE TABLE IF NOT EXISTS `tblticket_replies` (
   `id` int NOT NULL AUTO_INCREMENT,
   `ticketid` int NOT NULL,
@@ -7280,6 +7637,7 @@ CREATE TABLE IF NOT EXISTS `tblticket_replies` (
 -- Membuang data untuk tabel triton.tblticket_replies: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltodos
+DROP TABLE IF EXISTS `tbltodos`;
 CREATE TABLE IF NOT EXISTS `tbltodos` (
   `todoid` int NOT NULL AUTO_INCREMENT,
   `description` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7297,6 +7655,7 @@ INSERT INTO `tbltodos` (`todoid`, `description`, `staffid`, `dateadded`, `finish
 	(2, 'Follow up PO dari vendor', 2, '2024-12-04 12:41:44', 0, NULL, NULL);
 
 -- membuang struktur untuk table triton.tbltracked_mails
+DROP TABLE IF EXISTS `tbltracked_mails`;
 CREATE TABLE IF NOT EXISTS `tbltracked_mails` (
   `id` int NOT NULL AUTO_INCREMENT,
   `uid` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7313,6 +7672,7 @@ CREATE TABLE IF NOT EXISTS `tbltracked_mails` (
 -- Membuang data untuk tabel triton.tbltracked_mails: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbltwocheckout_log
+DROP TABLE IF EXISTS `tbltwocheckout_log`;
 CREATE TABLE IF NOT EXISTS `tbltwocheckout_log` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `reference` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7328,6 +7688,7 @@ CREATE TABLE IF NOT EXISTS `tbltwocheckout_log` (
 -- Membuang data untuk tabel triton.tbltwocheckout_log: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tbluser_auto_login
+DROP TABLE IF EXISTS `tbluser_auto_login`;
 CREATE TABLE IF NOT EXISTS `tbluser_auto_login` (
   `key_id` char(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `user_id` int NOT NULL,
@@ -7338,8 +7699,11 @@ CREATE TABLE IF NOT EXISTS `tbluser_auto_login` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel triton.tbluser_auto_login: ~0 rows (lebih kurang)
+INSERT INTO `tbluser_auto_login` (`key_id`, `user_id`, `user_agent`, `last_ip`, `last_login`, `staff`) VALUES
+	('af04a45feed75b7130b949490dabeb05', 1, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36', '127.0.0.1', '2025-03-22 06:13:24', 1);
 
 -- membuang struktur untuk table triton.tbluser_meta
+DROP TABLE IF EXISTS `tbluser_meta`;
 CREATE TABLE IF NOT EXISTS `tbluser_meta` (
   `umeta_id` bigint unsigned NOT NULL AUTO_INCREMENT,
   `staff_id` bigint unsigned NOT NULL DEFAULT '0',
@@ -7359,6 +7723,7 @@ INSERT INTO `tbluser_meta` (`umeta_id`, `staff_id`, `client_id`, `contact_id`, `
 	(5, 0, 0, 1, 'consent_key', '4fa724511516d9389a0c1b34a95610b8-c03267701439acf0799b27f96e1fc294');
 
 -- membuang struktur untuk table triton.tblvault
+DROP TABLE IF EXISTS `tblvault`;
 CREATE TABLE IF NOT EXISTS `tblvault` (
   `id` int NOT NULL AUTO_INCREMENT,
   `customer_id` int NOT NULL,
@@ -7380,6 +7745,7 @@ CREATE TABLE IF NOT EXISTS `tblvault` (
 -- Membuang data untuk tabel triton.tblvault: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblviews_tracking
+DROP TABLE IF EXISTS `tblviews_tracking`;
 CREATE TABLE IF NOT EXISTS `tblviews_tracking` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int NOT NULL,
@@ -7392,6 +7758,7 @@ CREATE TABLE IF NOT EXISTS `tblviews_tracking` (
 -- Membuang data untuk tabel triton.tblviews_tracking: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblware_unit_type
+DROP TABLE IF EXISTS `tblware_unit_type`;
 CREATE TABLE IF NOT EXISTS `tblware_unit_type` (
   `unit_type_id` int unsigned NOT NULL AUTO_INCREMENT,
   `unit_code` varchar(100) DEFAULT NULL,
@@ -7410,6 +7777,7 @@ INSERT INTO `tblware_unit_type` (`unit_type_id`, `unit_code`, `unit_name`, `unit
 	(3, 'UNIT', 'Unit', 'UNIT', 3, 1, '0');
 
 -- membuang struktur untuk table triton.tblweb_to_lead
+DROP TABLE IF EXISTS `tblweb_to_lead`;
 CREATE TABLE IF NOT EXISTS `tblweb_to_lead` (
   `id` int NOT NULL AUTO_INCREMENT,
   `form_key` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -7444,6 +7812,7 @@ INSERT INTO `tblweb_to_lead` (`id`, `form_key`, `lead_source`, `lead_status`, `n
 	(1, 'ab13a1b9df0f86578dc5f1d90404ded2', 3, 2, 1, 'specific_staff', 'a:1:{i:0;s:1:"1";}', 1, 'Water Treatment Solution', '[{"type":"text","required":true,"label":"Nama","className":"form-control","name":"name","subtype":"text"},{"type":"text","subtype":"email","label":"Alamat email","className":"form-control","name":"email"},{"type":"text","label":"Telepon","className":"form-control","name":"phonenumber","subtype":"text"},{"type":"text","label":"Perusahaan","className":"form-control","name":"company","subtype":"text"},{"type":"textarea","label":"Deskripsi","className":"form-control","name":"description","subtype":"textarea"}]', 1, 'Submit', '#ffffff', '#2968c5', 'Terima kasih telah mengisi form', 0, '', '', 'indonesia', 1, 0, '', '', 0, '2024-12-03 13:50:24');
 
 -- membuang struktur untuk table triton.tblwh_goods_delivery_activity_log
+DROP TABLE IF EXISTS `tblwh_goods_delivery_activity_log`;
 CREATE TABLE IF NOT EXISTS `tblwh_goods_delivery_activity_log` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `rel_id` int DEFAULT NULL,
@@ -7459,6 +7828,7 @@ CREATE TABLE IF NOT EXISTS `tblwh_goods_delivery_activity_log` (
 -- Membuang data untuk tabel triton.tblwh_goods_delivery_activity_log: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblwh_order_returns
+DROP TABLE IF EXISTS `tblwh_order_returns`;
 CREATE TABLE IF NOT EXISTS `tblwh_order_returns` (
   `id` int NOT NULL AUTO_INCREMENT,
   `rel_id` int DEFAULT NULL,
@@ -7498,6 +7868,7 @@ CREATE TABLE IF NOT EXISTS `tblwh_order_returns` (
 -- Membuang data untuk tabel triton.tblwh_order_returns: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblwh_order_returns_refunds
+DROP TABLE IF EXISTS `tblwh_order_returns_refunds`;
 CREATE TABLE IF NOT EXISTS `tblwh_order_returns_refunds` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `order_return_id` int DEFAULT NULL,
@@ -7513,6 +7884,7 @@ CREATE TABLE IF NOT EXISTS `tblwh_order_returns_refunds` (
 -- Membuang data untuk tabel triton.tblwh_order_returns_refunds: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblwh_order_return_details
+DROP TABLE IF EXISTS `tblwh_order_return_details`;
 CREATE TABLE IF NOT EXISTS `tblwh_order_return_details` (
   `id` int NOT NULL AUTO_INCREMENT,
   `order_return_id` int NOT NULL,
@@ -7537,6 +7909,7 @@ CREATE TABLE IF NOT EXISTS `tblwh_order_return_details` (
 -- Membuang data untuk tabel triton.tblwh_order_return_details: ~0 rows (lebih kurang)
 
 -- membuang struktur untuk table triton.tblwh_sub_group
+DROP TABLE IF EXISTS `tblwh_sub_group`;
 CREATE TABLE IF NOT EXISTS `tblwh_sub_group` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `sub_group_code` varchar(100) DEFAULT NULL,

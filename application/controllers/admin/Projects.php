@@ -29,7 +29,7 @@ class Projects extends AdminController
     public function table($clientid = '')
     {
         App_table::find('projects')->output([
-            'clientid'=>$clientid
+            'clientid' => $clientid
         ]);
     }
 
@@ -72,6 +72,11 @@ class Projects extends AdminController
 
     public function project($id = '')
     {
+        $this->load->model('departments_model');
+        $this->load->model('staff_model');
+        $this->load->model('currencies_model');
+        $this->load->model('purchase_model');
+
         if (staff_cant('edit', 'projects') && staff_cant('create', 'projects')) {
             access_denied('Projects');
         }
@@ -113,6 +118,13 @@ class Projects extends AdminController
 
             $data['project_members'] = $this->projects_model->get_project_members($id);
             $title                   = _l('edit', _l('project'));
+
+            $data['project_detail'] = json_encode($this->projects_model->get_project_detail($id));
+
+            // print_r($data['project_detail']);
+            
+            $data['taxes_data'] = $this->projects_model->get_html_tax_project($id);
+            // $data['title'] = _l('edit');
         }
 
         if ($this->input->get('customer_id')) {
@@ -130,95 +142,32 @@ class Projects extends AdminController
         $data['statuses'] = $this->projects_model->get_project_statuses();
         $data['staff']    = $this->staff_model->get('', ['active' => 1]);
 
-        if ($this->input->post()) {
-            $pur_order_data = $this->input->post();
-            $pur_order_data['terms'] = $this->input->post('terms', false);
-            $pur_order_data['vendornote'] = $this->input->post('vendornote', false);
-            if ($id == '') {
-                if (!has_permission('purchase_orders', '', 'create')) {
-                    access_denied('purchase_order');
-                }
-                $id = $this->purchase_model->add_pur_order($pur_order_data);
-                if ($id) {
-                    set_alert('success', _l('added_successfully', _l('pur_order')));
-
-                    redirect(admin_url('purchase/purchase_order/' . $id));
-                }
-            } else {
-                if (!has_permission('purchase_orders', '', 'edit')) {
-                    access_denied('purchase_order');
-                }
-                $success = $this->purchase_model->update_pur_order($pur_order_data, $id);
-                if ($success) {
-                    set_alert('success', _l('updated_successfully', _l('pur_order')));
-                }
-                redirect(admin_url('purchase/purchase_order/' . $id));
-            }
-        }
 
         $this->load->model('currencies_model');
+
+
         $data['base_currency'] = $this->currencies_model->get_base_currency();
 
-        $pur_order_row_template = $this->purchase_model->create_purchase_order_row_template();
+        $create_project_row_template = $this->projects_model->create_project_row_template();
 
-        if ($id == '') {
-            $title = _l('create_new_pur_order');
-        } else {
-            $data['pur_order_detail'] = $this->purchase_model->get_pur_order_detail($id);
-            $data['pur_order'] = $this->purchase_model->get_pur_order($id);
-
-            $currency_rate = 1;
-            if ($data['pur_order']->currency != 0 && $data['pur_order']->currency_rate != null) {
-                $currency_rate = $data['pur_order']->currency_rate;
-            }
-
-            $to_currency = $data['base_currency']->name;
-            if ($data['pur_order']->currency != 0 && $data['pur_order']->to_currency != null) {
-                $to_currency = $data['pur_order']->to_currency;
-            }
-
-
-            $data['tax_data'] = $this->purchase_model->get_html_tax_pur_order($id);
-            $title = _l('pur_order_detail');
-
-            if (count($data['pur_order_detail']) > 0) {
-                $index_order = 0;
-                foreach ($data['pur_order_detail'] as $order_detail) {
-                    $index_order++;
-                    $unit_name = pur_get_unit_name($order_detail['unit_id']);
-                    $taxname = $order_detail['tax_name'];
-                    $item_name = $order_detail['item_name'];
-
-                    if (strlen($item_name) == 0) {
-                        $item_name = pur_get_item_variatiom($order_detail['item_code']);
-                    }
-
-                    $pur_order_row_template .= $this->purchase_model->create_purchase_order_row_template('items[' . $index_order . ']',  $item_name, $order_detail['description'], $order_detail['quantity'], $unit_name, $order_detail['unit_price'], $taxname, $order_detail['item_code'], $order_detail['unit_id'], $order_detail['tax_rate'],  $order_detail['total_money'], $order_detail['discount_%'], $order_detail['discount_money'], $order_detail['total'], $order_detail['into_money'], $order_detail['tax'], $order_detail['tax_value'], $order_detail['id'], true, $currency_rate, $to_currency);
-                }
-            }
-        }
-        $data['pur_order_row_template'] = $pur_order_row_template;
 
 
         $data['currencies'] = $this->currencies_model->get();
 
-        $this->load->model('clients_model');
-        $data['clients'] = $this->clients_model->get();
-
-        $this->load->model('departments_model');
-        $data['departments'] = $this->departments_model->get();
-
-        $data['invoices'] = $this->purchase_model->get_invoice_for_pr();
-        $data['pur_request'] = $this->purchase_model->get_pur_request_by_status(2);
-        $data['projects'] = $this->projects_model->get();
-        $data['ven'] = $this->input->get('vendor');
-        $data['taxes'] = $this->purchase_model->get_taxes();
-        // $data['staff']             = $this->staff_model->get('', ['active' => 1]);
         $data['vendors'] = $this->purchase_model->get_vendor();
-        $data['estimates'] = $this->purchase_model->get_estimates_by_status(2);
+        $data['project_row_template'] = $create_project_row_template;
+        $data['invoices'] = $this->purchase_model->get_invoice_for_pr();
+        $data['salse_estimates'] = $this->purchase_model->get_sale_estimate_for_pr();
+
+        $data['taxes'] = $this->purchase_model->get_taxes();
+        $data['projects'] = $this->projects_model->get();
+        $data['staffs'] = $this->staff_model->get();
+        $data['departments'] = $this->departments_model->get();
         $data['units'] = $this->purchase_model->get_units();
 
+        // Old script  $data['items'] = $this->purchase_model->get_items();
         $data['ajaxItems'] = false;
+
         if (total_rows(db_prefix() . 'items') <= ajax_on_total_items()) {
             $data['items'] = $this->purchase_model->pur_get_grouped('can_be_purchased');
         } else {
@@ -226,8 +175,29 @@ class Projects extends AdminController
             $data['ajaxItems'] = true;
         }
 
+
         $data['title'] = $title;
         $this->load->view('admin/projects/project', $data);
+    }
+
+    public function get_project_row_template()
+    {
+        $name = $this->input->post('name');
+        $item_text = $this->input->post('item_text');
+        $unit_price = $this->input->post('unit_price');
+        $quantity = $this->input->post('quantity');
+        $unit_name = $this->input->post('unit_name');
+        $unit_id = $this->input->post('unit_id');
+        $into_money = $this->input->post('into_money');
+        $item_key = $this->input->post('item_key');
+        $tax_value = $this->input->post('tax_value');
+        $tax_name = $this->input->post('taxname');
+        $total = $this->input->post('total');
+        $item_code = $this->input->post('item_code');
+        $currency_rate = $this->input->post('currency_rate');
+        $to_currency = $this->input->post('to_currency');
+
+        echo $this->projects_model->create_project_row_template($name, $item_code, $item_text, $unit_price, $quantity, $unit_name, $unit_id, $into_money, $item_key, $tax_value, $total, $tax_name, '', '', false, $currency_rate, $to_currency);
     }
 
     public function gantt()
@@ -302,6 +272,9 @@ class Projects extends AdminController
 
             $data['tabs'] = get_project_tabs_admin();
             $data['tab']  = $this->app_tabs->filter_tab($data['tabs'], $group);
+            $data['total_pur_orders'] = $this->projects_model->get_sum_pur_orders($id);
+            // print_r($data['total_pur_orders']);
+            $data['total_pur_request'] = $this->projects_model->get_sum_pur_request($id);
 
             if (!$data['tab']) {
                 show_404();
@@ -488,6 +461,52 @@ class Projects extends AdminController
             $data['bodyclass'] .= 'project estimates-total-manual';
             $data['project_status'] = get_project_status_by_id($project->status);
 
+            $data['project']                               = $this->projects_model->get($id);
+            $data['project']->settings->available_features = unserialize($data['project']->settings->available_features);
+
+            $data['project_members'] = $this->projects_model->get_project_members($id);
+            // $title                   = _l('edit', _l('project'));
+
+            $data['project_detail'] = $this->projects_model->get_project_detail($id);
+            
+            $data['taxes_data'] = $this->projects_model->get_html_tax_project($id);
+            if ($this->input->get('customer_id')) {
+                $data['customer_id'] = $this->input->get('customer_id');
+            }
+    
+            $data['last_project_settings'] = $this->projects_model->get_last_project_settings();
+    
+            if (count($data['last_project_settings'])) {
+                $key                                          = array_search('available_features', array_column($data['last_project_settings'], 'name'));
+                $data['last_project_settings'][$key]['value'] = unserialize($data['last_project_settings'][$key]['value']);
+            }
+    
+            $data['settings'] = $this->projects_model->get_settings();
+            $data['statuses'] = $this->projects_model->get_project_statuses();
+            $data['staff']    = $this->staff_model->get('', ['active' => 1]);
+    
+    
+            $this->load->model('currencies_model');
+    
+    
+            $data['base_currency'] = $this->currencies_model->get_base_currency();
+    
+            $purchase_request_row_template = $this->purchase_model->create_purchase_request_row_template();
+    
+    
+    
+            $data['currencies'] = $this->currencies_model->get();
+    
+            $data['vendors'] = $this->purchase_model->get_vendor();
+            $data['purchase_request_row_template'] = $purchase_request_row_template;
+            $data['invoices'] = $this->purchase_model->get_invoice_for_pr();
+            $data['salse_estimates'] = $this->purchase_model->get_sale_estimate_for_pr();
+    
+            $data['taxes'] = $this->purchase_model->get_taxes();
+            $data['projects'] = $this->projects_model->get();
+            $data['staffs'] = $this->staff_model->get();
+            $data['departments'] = $this->departments_model->get();
+            $data['units'] = $this->purchase_model->get_units();
             $this->load->view('admin/projects/view', $data);
         } else {
             access_denied('Project View');
@@ -1233,7 +1252,8 @@ class Projects extends AdminController
                     'name',
                 ], 'task_milestone', $selected_milestone),
                 'assignees' => render_select('assignees[]', $this->projects_model->get_project_members($id, true), [
-                    'staff_id', ['firstname', 'lastname'],
+                    'staff_id',
+                    ['firstname', 'lastname'],
                 ], 'task_single_assignees', $assigned, ['multiple' => true], [], '', '', false),
             ]);
         }

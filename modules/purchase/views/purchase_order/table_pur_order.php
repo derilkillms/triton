@@ -10,29 +10,29 @@ $aColumns = [
     'pur_order_number',
     'vendor',
     'order_date',
-    'type',
+    'tblpur_orders.type',
     'project',
     'department',
     'pur_order_name',
-    'subtotal',
-    'total_tax',
-    'total',
+    'tblpur_orders.subtotal',
+    'tblpur_orders.total_tax',
+    'tblpur_orders.total',
     '(SELECT GROUP_CONCAT(name SEPARATOR ",") FROM ' . db_prefix() . 'taggables JOIN ' . db_prefix() . 'tags ON ' . db_prefix() . 'taggables.tag_id = ' . db_prefix() . 'tags.id WHERE rel_id = ' . db_prefix() . 'pur_orders.id and rel_type="pur_order" ORDER by tag_order ASC) as tags', 
     'approve_status',
     'delivery_date',
     'delivery_status',
-    'number',
+    'tblpur_orders.number',
     'expense_convert',
     ];
 
 if(isset($vendor) || isset($project)){
     $aColumns = [
     'pur_order_number',
-    'total',
-    'total_tax',
+    'tblpur_orders.total',
+    'tblpur_orders.total_tax',
     'vendor', 
     'order_date',
-    'number',
+    'tblpur_orders.number',
     'approve_status',
     
     ];
@@ -147,7 +147,7 @@ if (isset($tags_ft)) {
     }
 }
 
-$result = data_tables_init($aColumns, $sIndexColumn, $sTable, $join, $where, [db_prefix().'pur_orders.id as id','company','pur_order_number','expense_convert',db_prefix().'projects.name as project_name',db_prefix().'departments.name as department_name', 'currency']);
+$result = data_tables_init($aColumns, $sIndexColumn, $sTable, $join, $where, [db_prefix().'pur_orders.id as id','company','pur_order_number','expense_convert',db_prefix().'projects.name as project_name',db_prefix().'departments.name as department_name', 'tblpur_orders.currency']);
 
 $output  = $result['output'];
 $rResult = $result['rResult'];
@@ -168,9 +168,9 @@ foreach ($rResult as $aRow) {
         if($aRow['currency'] != 0){
             $base_currency = pur_get_currency_by_id($aRow['currency']);
         }
-
-        if($aColumns[$i] == 'total'){
-            $_data = app_format_money($aRow['total'], $base_currency->symbol);
+        // $numberOutput .= $aColumns[$i];
+        if($aColumns[$i] == 'tblpur_orders.total'){
+            $_data = app_format_money($aRow['tblpur_orders.total'], $base_currency->symbol);
         }elseif($aColumns[$i] == 'pur_order_number'){
 
             $numberOutput = '';
@@ -202,7 +202,7 @@ foreach ($rResult as $aRow) {
             $_data = get_status_approve($aRow['approve_status']);
 
 
-        }elseif($aColumns[$i] == 'total_tax'){
+        }elseif($aColumns[$i] == 'tblpur_orders.total_tax'){
           $tax = $this->ci->purchase_model->get_html_tax_pur_order($aRow['id']);
           $total_tax = 0;
           foreach($tax['taxes_val'] as $tax_val){
@@ -212,7 +212,9 @@ foreach ($rResult as $aRow) {
           $_data = app_format_money($total_tax, $base_currency->symbol);
         }elseif($aColumns[$i] == 'expense_convert'){
             if($aRow['expense_convert'] == 0){
-             $_data = '<a href="javascript:void(0)" onclick="convert_expense('.$aRow['id'].','.$aRow['total'].'); return false;" class="btn btn-warning btn-icon">'._l('convert').'</a>';
+                // print_r($aRow); die();
+                // expense convert error
+             $_data = '<a href="javascript:void(0)" onclick="convert_expense('.$aRow['id'].','.$aRow['tblpur_orders.total'].'); return false;" class="btn btn-warning btn-icon">'._l('convert').'</a>';
             }else{
                 $_data = '<a href="'.admin_url('expenses/list_expenses/'.$aRow['expense_convert']).'" class="btn btn-success btn-icon">'._l('view_expense').'</a>';
             }
@@ -220,10 +222,10 @@ foreach ($rResult as $aRow) {
                 
                 $_data = render_tags($aRow['tags']);
 
-        }elseif($aColumns[$i] == 'type'){
-            $_data = _l($aRow['type']);
-        }elseif($aColumns[$i] == 'subtotal'){
-            $_data = app_format_money($aRow['subtotal'],$base_currency->symbol);
+        }elseif($aColumns[$i] == 'tblpur_orders.type'){
+            $_data = _l($aRow['tblpur_orders.type']);
+        }elseif($aColumns[$i] == 'tblpur_orders.subtotal'){
+            $_data = app_format_money($aRow['tblpur_orders.subtotal'],$base_currency->symbol);
         }elseif($aColumns[$i] == 'project'){
             $_data = $aRow['project_name'];
         }elseif($aColumns[$i] == 'department'){
@@ -324,17 +326,17 @@ foreach ($rResult as $aRow) {
             $_data = $delivery_status;
         }elseif($aColumns[$i] == 'delivery_date'){
             $_data = _d($aRow['delivery_date']);
-        }else if($aColumns[$i] == 'number'){
-            $paid = $aRow['total'] - purorder_inv_left_to_pay($aRow['id']);
+        }else if($aColumns[$i] == 'tblpur_orders.number'){
+            $paid = $aRow['tblpur_orders.total'] - purorder_inv_left_to_pay($aRow['id']);
 
             $percent = 0;
 
-            if($aRow['total'] > 0){
+            if($aRow['tblpur_orders.total'] > 0){
 
-                $percent = ($paid / $aRow['total'] ) * 100;
+                $percent = ($paid / $aRow['tblpur_orders.total'] ) * 100;
 
             }
-
+            
             
 
             $_data = '<div class="progress">

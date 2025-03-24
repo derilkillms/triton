@@ -1039,6 +1039,42 @@ class Purchase_model extends App_Model
         }
     }
 
+    public function get_project_detail_in_po($project)
+    {
+
+        $project_lst = $this->db->query('SELECT item_code, prj.unit_id as unit_id, unit_price, quantity, into_money, long_description as description, prj.tax as tax, tax_name, tax_rate, item_text, tax_value, total as total_money, total as total FROM ' . db_prefix() . 'project_detail prj LEFT JOIN ' . db_prefix() . 'items it ON prj.item_code = it.id WHERE prj.project_id = ' . $project)->result_array();
+
+        foreach ($project_lst as $key => $detail) {
+            $project_lst[$key]['into_money'] = (float) $detail['into_money'];
+            $project_lst[$key]['total'] = (float) $detail['total'];
+            $project_lst[$key]['total_money'] = (float) $detail['total_money'];
+            $project_lst[$key]['unit_price'] = (float) $detail['unit_price'];
+            $project_lst[$key]['tax_value'] = (float) $detail['tax_value'];
+        }
+
+        return $project_lst;
+    }
+
+    public function get_projects($id = '')
+    {
+        if ($id == '') {
+            if (!has_permission('purchase_request', '', 'view') && is_staff_logged_in()) {
+
+                $or_where = '';
+                $list_vendor = get_vendor_admin_list(get_staff_user_id());
+                foreach ($list_vendor as $vendor_id) {
+                    $or_where .= ' OR find_in_set(' . $vendor_id . ', ' . db_prefix() . 'projects.send_to_vendors)';
+                }
+                $this->db->where('(' . db_prefix() . 'projects.requester = ' . get_staff_user_id() .  $or_where . ')');
+            }
+
+            return $this->db->get(db_prefix() . 'projects')->result_array();
+        } else {
+            $this->db->where('id', $id);
+            return $this->db->get(db_prefix() . 'projects')->row();
+        }
+    }
+
     /**
      * Gets the pur request detail.
      *
@@ -1059,6 +1095,20 @@ class Purchase_model extends App_Model
         }
 
         return $pur_request_lst;
+    }
+    public function get_project_detail($project)
+    {
+        $this->db->where('project_id', $project);
+        $project_lst = $this->db->get(db_prefix() . 'project_detail')->result_array();
+
+        foreach ($project_lst as $key => $detail) {
+            $project_lst[$key]['into_money'] = (float) $detail['into_money'];
+            $project_lst[$key]['total'] = (float) $detail['total'];
+            $project_lst[$key]['unit_price'] = (float) $detail['unit_price'];
+            $project_lst[$key]['tax_value'] = (float) $detail['tax_value'];
+        }
+
+        return $project_lst;
     }
 
     /**
@@ -1667,18 +1717,28 @@ class Purchase_model extends App_Model
 
                 $estimate->items = get_items_by_type('pur_estimate', $id);
 
-                if ($estimate->pur_request != 0) {
+                
 
-                    $estimate->pur_request = $this->get_purchase_request($estimate->pur_request);
-                } else {
-                    $estimate->pur_request = '';
+                if ($estimate->project_id) {
+                    $this->load->model('projects_model');
+                    $estimate->project_data = $this->projects_model->get($estimate->project_id);
                 }
 
-                $estimate->vendor = $this->get_vendor($estimate->vendor);
-                if (!$estimate->vendor) {
-                    $estimate->vendor          = new stdClass();
-                    $estimate->vendor->company = $estimate->deleted_customer_name;
+                $estimate->client = $this->clients_model->get($estimate->clientid);
+
+                if (!$estimate->client) {
+                    $estimate->client          = new stdClass();
+                    $estimate->client->company = $estimate->deleted_customer_name;
                 }
+
+                $this->load->model('email_schedule_model');
+                $estimate->scheduled_email = $this->email_schedule_model->get($id, 'estimate');
+
+                // $estimate->clientid = $this->get_vendor($estimate->clientid);
+                // if (!$estimate->clientid) {
+                //     $estimate->clientid          = new stdClass();
+                //     $estimate->vendor->company = $estimate->deleted_customer_name;
+                // }
             }
 
             return $estimate;
@@ -7713,6 +7773,74 @@ class Purchase_model extends App_Model
         return $rs;
     }
 
+    public function get_html_tax_project($id)
+    {
+        $html = '';
+        $preview_html = '';
+        $pdf_html = '';
+        $taxes = [];
+        $t_rate = [];
+        $tax_val = [];
+        $tax_val_rs = [];
+        $tax_name = [];
+        $rs = [];
+
+        $request = $this->get_projects($id);
+
+        $this->load->model('currencies_model');
+        $base_currency = $this->currencies_model->get_base_currency();
+        if ($request->currency != 0 && $request->currency != null) {
+            $base_currency = pur_get_currency_by_id($request->currency);
+        }
+
+        $this->db->where('project_id', $id);
+        $details = $this->db->get(db_prefix() . 'project_detail')->result_array();
+        foreach ($details as $row) {
+            if ($row['tax'] != '') {
+                $tax_arr = explode('|', $row['tax']);
+
+                $tax_rate_arr = [];
+                if ($row['tax_rate'] != '') {
+                    $tax_rate_arr = explode('|', $row['tax_rate']);
+                }
+
+                foreach ($tax_arr as $k => $tax_it) {
+                    if (!isset($tax_rate_arr[$k])) {
+                        $tax_rate_arr[$k] = $this->tax_rate_by_id($tax_it);
+                    }
+
+                    if (!in_array($tax_it, $taxes)) {
+                        $taxes[$tax_it] = $tax_it;
+                        $t_rate[$tax_it] = $tax_rate_arr[$k];
+                        $tax_name[$tax_it] = $this->get_tax_name($tax_it) . ' (' . $tax_rate_arr[$k] . '%)';
+                    }
+                }
+            }
+        }
+
+        if (count($tax_name) > 0) {
+            foreach ($tax_name as $key => $tn) {
+                $tax_val[$key] = 0;
+                foreach ($details as $row_dt) {
+                    if (!(strpos($row_dt['tax'] ?? '', $taxes[$key]) === false)) {
+                        $tax_val[$key] += ($row_dt['into_money'] * $t_rate[$key] / 100);
+                    }
+                }
+                $pdf_html .= '<tr id="subtotal"><td width="33%"></td><td>' . $tn . '</td><td>' . app_format_money($tax_val[$key], $base_currency->symbol) . '</td></tr>';
+                $preview_html .= '<tr id="subtotal"><td>' . $tn . '</td><td>' . app_format_money($tax_val[$key], $base_currency->symbol) . '</td><tr>';
+                $html .= '<tr class="tax-area_pr"><td>' . $tn . '</td><td width="65%">' . app_format_money($tax_val[$key], '') . ' ' . ($base_currency->symbol) . '</td></tr>';
+                $tax_val_rs[] = $tax_val[$key];
+            }
+        }
+
+        $rs['pdf_html'] = $pdf_html;
+        $rs['preview_html'] = $preview_html;
+        $rs['html'] = $html;
+        $rs['taxes'] = $taxes;
+        $rs['taxes_val'] = $tax_val_rs;
+        return $rs;
+    }
+
     /**
      * Gets the tax name.
      *
@@ -10215,7 +10343,7 @@ class Purchase_model extends App_Model
         } else {
             $manual             = false;
             $row .= '<tr class="sortable item">
-                    <td class="dragger"><input type="hidden" class="order" name="' . $name . '[order]"><input type="hidden" class="ids" name="' . $name . '[id]" value="' . $item_key . '"></td>';
+                    <td class="dragger"><input type="hidden" class="order" name="' . $name . '[order]"><input type="hidden" class="ids" name="' . $name . '[id]" value="taianjing' . $item_key . '"></td>';
             $name_item_code = $name . '[item_code]';
             $name_item_text = $name . '[item_text]';
             $name_unit_id = $name . '[unit_id]';

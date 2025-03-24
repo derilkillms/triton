@@ -8,9 +8,9 @@ $aColumns = [
     db_prefix() . 'pur_estimates.total',
     db_prefix() . 'pur_estimates.total_tax',
     'YEAR(date) as year',
-    'vendor',
-    'pur_request',
-    
+    db_prefix() . 'pur_estimates.clientid',
+    db_prefix() . 'pur_estimates.project_id',
+    db_prefix() . 'projects.name',
     'date',
     'expirydate',
 
@@ -19,8 +19,8 @@ $aColumns = [
 
 $join = [
     'LEFT JOIN ' . db_prefix() . 'currencies ON ' . db_prefix() . 'currencies.id = ' . db_prefix() . 'pur_estimates.currency',
-    'LEFT JOIN ' . db_prefix() . 'pur_vendor ON ' . db_prefix() . 'pur_vendor.userid = ' . db_prefix() . 'pur_estimates.vendor',
-    'LEFT JOIN ' . db_prefix() . 'pur_request ON ' . db_prefix() . 'pur_request.id = ' . db_prefix() . 'pur_estimates.pur_request',
+    'LEFT JOIN ' . db_prefix() . 'clients ON ' . db_prefix() . 'clients.userid = ' . db_prefix() . 'pur_estimates.clientid',
+    'LEFT JOIN ' . db_prefix() . 'projects ON ' . db_prefix() . 'projects.id = ' . db_prefix() . 'pur_estimates.project_id',
 ];
 
 $sIndexColumn = 'id';
@@ -29,15 +29,15 @@ $sTable       = db_prefix() . 'pur_estimates';
 
 $where  = [];
 
-$pur_request = $this->ci->input->post('pur_request');
+$pur_request = $this->ci->input->post('project_id');
 if (isset($pur_request)) {
     $where_pur_request = '';
     foreach ($pur_request as $request) {
         if ($request != '') {
             if ($where_pur_request == '') {
-                $where_pur_request .= ' AND (pur_request = "' . $request . '"';
+                $where_pur_request .= ' AND (project_id = "' . $request . '"';
             } else {
-                $where_pur_request .= ' or pur_request = "' . $request . '"';
+                $where_pur_request .= ' or project_id = "' . $request . '"';
             }
         }
     }
@@ -47,31 +47,31 @@ if (isset($pur_request)) {
     }
 }
 
-$vendors = $this->ci->input->post('vendor');
-if (isset($vendors)) {
-    $where_vendor = '';
-    foreach ($vendors as $ven) {
+$clientid = $this->ci->input->post('clientid');
+if (isset($clientid)) {
+    $where_client = '';
+    foreach ($clientid as $ven) {
         if ($ven != '') {
-            if ($where_vendor == '') {
-                $where_vendor .= ' AND (vendor = ' . $ven . '';
+            if ($where_client == '') {
+                $where_client .= ' AND (clientid = ' . $ven . '';
             } else {
-                $where_vendor .= ' or vendor = ' . $ven . '';
+                $where_client .= ' or clientid = ' . $ven . '';
             }
         }
     }
-    if ($where_vendor != '') {
-        $where_vendor .= ')';
-        array_push($where, $where_vendor);
+    if ($where_client != '') {
+        $where_client .= ')';
+        array_push($where, $where_client);
     }
 }
 
-if(isset($vendor)){
-    array_push($where, ' AND '.db_prefix().'pur_estimates.vendor = '.$vendor);
+if(isset($clientid)){
+    array_push($where, ' AND '.db_prefix().'pur_estimates.clientid = '.$clientid);
 }
 
-if(!has_permission('purchase_quotations', '', 'view')){
-    array_push($where, 'AND (' . db_prefix() . 'pur_estimates.addedfrom = '.get_staff_user_id().' OR ' . db_prefix() . 'pur_estimates.buyer = '.get_staff_user_id().' OR ' . db_prefix() . 'pur_estimates.vendor IN (SELECT vendor_id FROM ' . db_prefix() . 'pur_vendor_admin WHERE staff_id=' . get_staff_user_id() . ') OR '.get_staff_user_id().' IN (SELECT staffid FROM ' . db_prefix() . 'pur_approval_details WHERE ' . db_prefix() . 'pur_approval_details.rel_type = "pur_quotation" AND ' . db_prefix() . 'pur_approval_details.rel_id = '.db_prefix().'pur_estimates.id))');
-}
+// if(!has_permission('purchase_quotations', '', 'view')){
+//     array_push($where, 'AND (' . db_prefix() . 'pur_estimates.addedfrom = '.get_staff_user_id().' OR ' . db_prefix() . 'pur_estimates.buyer = '.get_staff_user_id().' OR ' . db_prefix() . 'pur_estimates.clientid IN (SELECT vendor_id FROM ' . db_prefix() . 'pur_vendor_admin WHERE staff_id=' . get_staff_user_id() . ') OR '.get_staff_user_id().' IN (SELECT staffid FROM ' . db_prefix() . 'pur_approval_details WHERE ' . db_prefix() . 'pur_approval_details.rel_type = "pur_quotation" AND ' . db_prefix() . 'pur_approval_details.rel_id = '.db_prefix().'pur_estimates.id))');
+// }
 
 $filter = [];
 
@@ -81,15 +81,15 @@ $aColumns = hooks()->apply_filters('estimates_table_sql_columns', $aColumns);
 
 $result = data_tables_init($aColumns, $sIndexColumn, $sTable, $join, $where, [
     db_prefix() . 'pur_estimates.id',
-    db_prefix() . 'pur_estimates.vendor',
+    db_prefix() . 'pur_estimates.clientid',
     db_prefix() . 'pur_estimates.invoiceid',
     db_prefix() . 'currencies.name as currency_name',
-    'pur_request',
-    'deleted_vendor_name',
+    'project_id',
+    'deleted_customer_name',
     db_prefix() . 'pur_estimates.currency',
     'company',
-    'pur_rq_name',
-    'pur_rq_code'
+    'tblprojects.name',
+    // 'pur_rq_code'
 ]);
 
 $output  = $result['output'];
@@ -138,13 +138,13 @@ foreach ($rResult as $aRow) {
 
     $row[] = $aRow['year'];
 
-    if (empty($aRow['deleted_vendor_name'])) {
-        $row[] = '<a href="' . admin_url('purchase/vendor/' . $aRow['vendor']) . '" >' .  $aRow['company'] . '</a>';
+    if (empty($aRow['deleted_customer_name'])) {
+        $row[] = '<a href="' . admin_url('clients/client/' . $aRow['clientid']) . '" >' .  $aRow['company'] . '</a>';
     } else {
-        $row[] = $aRow['deleted_vendor_name'];
+        $row[] = $aRow['deleted_customer_name'];
     }
 
-    $row[] = '<a href="' . admin_url('purchase/view_pur_request/' . $aRow['pur_request']) . '" onclick="init_pur_estimate(' . $aRow['id'] . '); return false;">' . $aRow['pur_rq_code'] .'</a>' ;
+    $row[] = '<a href="' . admin_url('projects/view/' . $aRow['project_id']) . '" onclick="init_pur_estimate(' . $aRow['id'] . '); return false;">' . $aRow['tblprojects.name'] .'</a>' ;
 
    
 

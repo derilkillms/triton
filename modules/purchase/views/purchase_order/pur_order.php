@@ -153,7 +153,7 @@
                     <div class="row">
                       <div class="col-md-6 form-group">
                         <label for="project"><?php echo _l('project'); ?></label>
-                        <select name="project" id="project" class="selectpicker" data-live-search="true" data-width="100%" data-none-selected-text="<?php echo _l('ticket_settings_none_assigned'); ?>">
+                        <select name="project" id="project" class="selectpicker" data-live-search="true" onchange="coppy_project(); return false;" data-width="100%" data-none-selected-text="<?php echo _l('ticket_settings_none_assigned'); ?>">
                           <option value=""></option>
                           <?php foreach ($projects as $s) { ?>
                             <option value="<?php echo pur_html_entity_decode($s['id']); ?>" <?php if (isset($pur_order) && $s['id'] == $pur_order->project) {
@@ -432,6 +432,7 @@
                     </thead>
                     <tbody>
                       <?php echo $pur_order_row_template; ?>
+                      
                     </tbody>
                   </table>
                 </div>

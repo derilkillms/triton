@@ -12,9 +12,9 @@ return App_table::find('estimates')
         $project_id = $this->ci->input->post('project_id');
 
         $aColumns = [
-            'number',
-            'total',
-            'total_tax',
+             db_prefix() . 'estimates.number',
+             db_prefix() . 'estimates.total',
+             db_prefix() . 'estimates.total_tax',
             'YEAR(date) as year',
             get_sql_select_client_company(),
             db_prefix() . 'projects.name as project_name',
@@ -110,7 +110,7 @@ return App_table::find('estimates')
 
             $row[] = $numberOutput;
 
-            $amount = '<span class="tw-font-medium">' . e(app_format_money($aRow['total'], $aRow['currency_name'])) . '</span>';
+            $amount = '<span class="tw-font-medium">' . e(app_format_money($aRow[ db_prefix() . 'estimates.total'], $aRow['currency_name'])) . '</span>';
 
             if ($aRow['invoiceid']) {
                 $amount .= '<br /><span class="hide"> - </span><span class="text-success tw-text-sm tw-font-medium">' . _l('estimate_invoiced') . '</span>';
@@ -118,7 +118,7 @@ return App_table::find('estimates')
 
             $row[] = $amount;
 
-            $row[] = '<span class="tw-font-medium">' . e(app_format_money($aRow['total_tax'], $aRow['currency_name'])) . '</span>';
+            $row[] = '<span class="tw-font-medium">' . e(app_format_money($aRow[ db_prefix() . 'estimates.total_tax'], $aRow['currency_name'])) . '</span>';
 
             $row[] = $aRow['year'];
 
