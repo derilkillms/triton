@@ -191,19 +191,19 @@
                             ?>
                             <!-- select item -->
 
-                            
-                                <label for="type"><?php echo _l('type'); ?></label>
-                                <select name="type" id="type" class="selectpicker" data-live-search="true" data-width="100%" data-none-selected-text="<?php echo _l('ticket_settings_none_assigned'); ?>">
-                                    <option value=""></option>
-                                    <option value="capex" <?php if (isset($project) && $project->type == 'capex') {
-                                                                echo 'selected';
-                                                            } ?>><?php echo _l('capex'); ?></option>
-                                    <option value="opex" <?php if (isset($project) && $project->type == 'opex') {
-                                                                echo 'selected';
-                                                            } ?>><?php echo _l('opex'); ?></option>
-                                </select>
-                                <br><br>
-                           
+
+                            <label for="type"><?php echo _l('type'); ?></label>
+                            <select name="type" id="type" class="selectpicker" data-live-search="true" data-width="100%" data-none-selected-text="<?php echo _l('ticket_settings_none_assigned'); ?>">
+                                <option value=""></option>
+                                <option value="capex" <?php if (isset($project) && $project->type == 'capex') {
+                                                            echo 'selected';
+                                                        } ?>><?php echo _l('capex'); ?></option>
+                                <option value="opex" <?php if (isset($project) && $project->type == 'opex') {
+                                                            echo 'selected';
+                                                        } ?>><?php echo _l('opex'); ?></option>
+                            </select>
+                            <br><br>
+
 
 
 
@@ -525,7 +525,7 @@
             </div>
         </div>
         <!-- start rate -->
-       
+
         <div class="row ">
             <div class="col-md-12">
                 <div class="panel_s">
@@ -583,7 +583,175 @@
                                     </thead>
                                     <tbody>
                                         <?php echo pur_html_entity_decode($project_row_template); ?>
-                                        
+                                        <?php
+                                        if (isset($project_detail)) {
+                                            $noitem = 1;
+                                            foreach ($project_detail as $prj) {
+
+
+
+                                        ?>
+
+                                                <tr class="sortable item">
+                                                    <td class="dragger ui-sortable-handle">
+                                                        <input type="hidden" class="order" name="items[<?= $noitem++ ?>][order]" /><input
+                                                            type="hidden"
+                                                            class="ids"
+                                                            name="items[<?= $noitem++ ?>][id]"
+                                                            value="<?= $prj['prd_id'] ?>" />
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="form-group" app-field-wrapper="items[<?= $noitem++ ?>][item_text]">
+                                                            <textarea
+                                                                id="items[<?= $noitem++ ?>][item_text]"
+                                                                name="items[<?= $noitem++ ?>][item_text]"
+                                                                class="form-control"
+                                                                rows="2"
+                                                                placeholder="Item Name">
+<?= $prj['item_text'] ?></textarea>
+                                                        </div>
+                                                    </td>
+                                                    <td class="rate">
+                                                        <div class="form-group no-margin" app-field-wrapper="items[<?= $noitem++ ?>][unit_price]">
+                                                            <input
+                                                                type="number"
+                                                                id="items[<?= $noitem++ ?>][unit_price]"
+                                                                name="items[<?= $noitem++ ?>][unit_price]"
+                                                                class="form-control text-right"
+                                                                onblur="pur_calculate_total();"
+                                                                onchange="pur_calculate_total();"
+                                                                min="0.0"
+                                                                step="any"
+                                                                data-amount="invoice"
+                                                                placeholder="Unit Price"
+                                                                value="<?= $prj['unit_price'] ?>" />
+                                                        </div>
+                                                        <input class="hide" name="og_price" disabled="true" value="<?= $prj['unit_price'] ?>" />
+                                                    </td>
+                                                    <td class="quantities">
+                                                        <div class="form-group no-margin" app-field-wrapper="items[<?= $noitem++ ?>][quantity]">
+                                                            <input
+                                                                type="number"
+                                                                id="items[<?= $noitem++ ?>][quantity]"
+                                                                name="items[<?= $noitem++ ?>][quantity]"
+                                                                class="form-control text-right"
+                                                                onblur="pur_calculate_total();"
+                                                                onchange="pur_calculate_total();"
+                                                                min="0.0"
+                                                                step="any"
+                                                                data-quantity="1"
+                                                                value="<?= $prj['quantity'] ?>" />
+                                                        </div>
+                                                        <div class="form-group no-margin" app-field-wrapper="items[<?= $noitem++ ?>][unit_name]">
+                                                            <input
+                                                                type="text"
+                                                                id="items[<?= $noitem++ ?>][unit_name]"
+                                                                name="items[<?= $noitem++ ?>][unit_name]"
+                                                                class="form-control input-transparent text-right pur_input_none"
+                                                                placeholder="Unit"
+                                                                readonly="1"
+                                                                value="" />
+                                                        </div>
+                                                    </td>
+                                                    <td class="into_money">
+                                                        <div class="form-group" app-field-wrapper="items[<?= $noitem++ ?>][into_money]">
+                                                            <input
+                                                                type="number"
+                                                                id="items[<?= $noitem++ ?>][into_money]"
+                                                                name="items[<?= $noitem++ ?>][into_money]"
+                                                                class="form-control text-right"
+                                                                readonly="1"
+                                                                value="<?= $prj['into_money'] ?>" />
+                                                        </div>
+                                                    </td>
+                                                    <td class="taxrate">
+                                                        <div
+                                                            class="dropdown bootstrap-select show-tick display-block taxes bs3"
+                                                            style="width: 100%">
+                                                            <select
+                                                                class="selectpicker display-block taxes"
+                                                                data-width="100%"
+                                                                name="items[<?= $noitem++ ?>][tax_select][]"
+                                                                multiple=""
+                                                                data-none-selected-text="No Tax"
+                                                                tabindex="-98">
+                                                                <option
+                                                                    value="PPN|11.00"
+                                                                    data-taxrate="11.00"
+                                                                    data-taxname="PPN|11.00"
+                                                                    data-subtext="PPN|11.00">
+                                                                    11.00%
+                                                                </option>
+                                                            </select>
+                                                            <div class="dropdown-menu open">
+                                                                <div
+                                                                    class="inner open"
+                                                                    role="listbox"
+                                                                    id="bs-select-11"
+                                                                    tabindex="-1"
+                                                                    aria-multiselectable="true">
+                                                                    <ul class="dropdown-menu inner" role="presentation"></ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="tax_value">
+                                                        <div class="form-group" app-field-wrapper="items[<?= $noitem++ ?>][tax_value]">
+                                                            <input
+                                                                type="number"
+                                                                id="items[<?= $noitem++ ?>][tax_value]"
+                                                                name="items[<?= $noitem++ ?>][tax_value]"
+                                                                class="form-control text-right"
+                                                                readonly="1"
+                                                                value="<?= $prj['tax_value'] ?>" />
+                                                        </div>
+                                                    </td>
+                                                    <td class="hide item_code">
+                                                        <div class="form-group" app-field-wrapper="items[<?= $noitem++ ?>][item_code]">
+                                                            <input
+                                                                type="text"
+                                                                id="items[<?= $noitem++ ?>][item_code]"
+                                                                name="items[<?= $noitem++ ?>][item_code]"
+                                                                class="form-control"
+                                                                placeholder="item_code"
+                                                                value="<?= $prj['item_code'] ?>" />
+                                                        </div>
+                                                    </td>
+                                                    <td class="hide unit_id">
+                                                        <div class="form-group" app-field-wrapper="items[<?= $noitem++ ?>][unit_id]">
+                                                            <input
+                                                                type="text"
+                                                                id="items[<?= $noitem++ ?>][unit_id]"
+                                                                name="items[<?= $noitem++ ?>][unit_id]"
+                                                                class="form-control"
+                                                                placeholder="Unit"
+                                                                value="<?= $prj['unit_id'] ?>" />
+                                                        </div>
+                                                    </td>
+                                                    <td class="_total">
+                                                        <div class="form-group" app-field-wrapper="items[<?= $noitem++ ?>][total]">
+                                                            <input
+                                                                type="number"
+                                                                id="items[<?= $noitem++ ?>][total]"
+                                                                name="items[<?= $noitem++ ?>][total]"
+                                                                class="form-control text-right"
+                                                                readonly="1"
+                                                                value="<?= $prj['total'] ?>" />
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <a
+                                                            href="#"
+                                                            class="btn btn-danger pull-right"
+                                                            onclick="pur_delete_item(this,<?= $prj['prd_id'] ?>,'.invoice-item'); return false;"><i class="fa fa-trash"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                        <?php
+                                            }
+                                        }
+                                        ?>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -636,6 +804,7 @@
                                             </td>
                                             <td width="65%" id="total_td">
                                                 <div class="input-group" id="total">
+
                                                     <input type="text" readonly="true" class="form-control text-right" name="total_mn" value="<?php if (isset($project)) {
                                                                                                                                                     echo app_format_money($project->total, '');
                                                                                                                                                 } ?>">

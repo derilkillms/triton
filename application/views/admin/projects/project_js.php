@@ -7,14 +7,14 @@ var hot;
 init_pr_currency();
 // Maybe items ajax search
 init_ajax_search('items','#item_select.ajax-search',undefined,admin_url+'purchase/pur_commodity_code_search');
+pur_calculate_total();
+validate_project_form();
+function validate_project_form(selector) {
 
-validate_purrequest_form();
-function validate_purrequest_form(selector) {
-
-    selector = typeof(selector) == 'undefined' ? '#add_edit_pur_request-form' : selector;
+    selector = typeof(selector) == 'undefined' ? '#project_form' : selector;
 
     appValidateForm($(selector), {
-        project_number:'required', pur_rq_name:'required', currency:'required'
+        project_number:'required', name:'required', currency:'required'
     });
 }
 

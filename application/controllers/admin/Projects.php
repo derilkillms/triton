@@ -119,7 +119,7 @@ class Projects extends AdminController
             $data['project_members'] = $this->projects_model->get_project_members($id);
             $title                   = _l('edit', _l('project'));
 
-            $data['project_detail'] = json_encode($this->projects_model->get_project_detail($id));
+            $data['project_detail'] = $this->projects_model->get_project_detail($id);
 
             // print_r($data['project_detail']);
             

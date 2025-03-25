@@ -10343,7 +10343,7 @@ class Purchase_model extends App_Model
         } else {
             $manual             = false;
             $row .= '<tr class="sortable item">
-                    <td class="dragger"><input type="hidden" class="order" name="' . $name . '[order]"><input type="hidden" class="ids" name="' . $name . '[id]" value="taianjing' . $item_key . '"></td>';
+                    <td class="dragger"><input type="hidden" class="order" name="' . $name . '[order]"><input type="hidden" class="ids" name="' . $name . '[id]" value="' . $item_key . '"></td>';
             $name_item_code = $name . '[item_code]';
             $name_item_text = $name . '[item_text]';
             $name_unit_id = $name . '[unit_id]';

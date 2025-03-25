@@ -851,6 +851,90 @@ class purchase extends AdminController
         }
     }
 
+    // Pipeline
+    public function get_pipeline()
+    {
+        if (staff_can('view',  'estimates') || staff_can('view_own',  'estimates') || get_option('allow_staff_view_estimates_assigned') == '1') {
+            $data['estimate_statuses'] = $this->estimates_model->get_statuses();
+            $this->load->view('admin/estimates/pipeline/pipeline', $data);
+        }
+    }
+
+    public function pipeline_open($id)
+    {
+        $canView = user_can_view_estimate($id);
+        if (!$canView) {
+            access_denied('Estimates');
+        } else {
+            if (staff_cant('view', 'estimates') && staff_cant('view_own', 'estimates') && $canView == false) {
+                access_denied('Estimates');
+            }
+        }
+
+        $data['id']       = $id;
+        $data['estimate'] = $this->get_estimate_data_ajax($id, true);
+        $this->load->view('admin/estimates/pipeline/estimate', $data);
+    }
+
+    public function update_pipeline()
+    {
+        if (staff_can('edit',  'estimates')) {
+            $this->estimates_model->update_pipeline($this->input->post());
+        }
+    }
+
+    public function pipeline($set = 0, $manual = false)
+    {
+        if ($set == 1) {
+            $set = 'true';
+        } else {
+            $set = 'false';
+        }
+        $this->session->set_userdata([
+            'estimate_pipeline' => $set,
+        ]);
+        if ($manual == false) {
+            redirect(admin_url('estimates/list_estimates'));
+        }
+    }
+
+    public function pipeline_load_more()
+    {
+        $status = $this->input->get('status');
+        $page   = $this->input->get('page');
+
+        $estimates = (new EstimatesPipeline($status))
+            ->search($this->input->get('search'))
+            ->sortBy(
+                $this->input->get('sort_by'),
+                $this->input->get('sort')
+            )
+            ->page($page)->get();
+
+        foreach ($estimates as $estimate) {
+            $this->load->view('admin/estimates/pipeline/_kanban_card', [
+                'estimate' => $estimate,
+                'status'   => $status,
+            ]);
+        }
+    }
+
+    public function set_estimate_pipeline_autoload($id)
+    {
+        if ($id == '') {
+            return false;
+        }
+
+        if ($this->session->has_userdata('estimate_pipeline')
+                && $this->session->userdata('estimate_pipeline') == 'true') {
+            $this->session->set_flashdata('estimateid', $id);
+
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * { quotations }
      *
@@ -864,7 +948,7 @@ class purchase extends AdminController
         }
 
         // Pipeline was initiated but user click from home page and need to show table only to filter
-        if ($this->input->get('status') || $this->input->get('filter') && $isPipeline) {
+        if ($this->input->get('status') || $this->input->get('filter')) {
             $this->pipeline(0, true);
         }
 

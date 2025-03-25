@@ -950,6 +950,334 @@ class Projects_model extends App_Model
         return false;
     }
 
+    public function update($data, $id)
+    {
+        $affectedRows = 0;
+        $purq = $this->get_projects($id);
+
+        $data['subtotal'] = reformat_currency_pur($data['subtotal'], $data['currency']);
+
+        $data['to_currency'] = $data['currency'];
+
+        $new_project = [];
+        if (isset($data['newitems'])) {
+            $new_project = $data['newitems'];
+            unset($data['newitems']);
+        }
+
+        $update_project = [];
+        if (isset($data['items'])) {
+            $update_project = $data['items'];
+            unset($data['items']);
+        }
+
+        $remove_project = [];
+        if (isset($data['removed_items'])) {
+            $remove_project = $data['removed_items'];
+            unset($data['removed_items']);
+        }
+
+        unset($data['item_text']);
+        unset($data['unit_price']);
+        unset($data['quantity']);
+        unset($data['into_money']);
+        unset($data['tax_select']);
+        unset($data['tax_value']);
+        unset($data['total']);
+        unset($data['item_select']);
+        unset($data['item_code']);
+        unset($data['unit_name']);
+        unset($data['request_detail']);
+        unset($data['isedit']);
+        unset($data['unit_id']);
+
+        if (isset($data['send_to_vendors']) && count($data['send_to_vendors']) > 0) {
+            $data['send_to_vendors'] = implode(',', $data['send_to_vendors']);
+        }
+
+       
+
+        if (isset($data['total_mn'])) {
+            $data['total'] = reformat_currency_pur($data['total_mn'], $data['currency']);
+            unset($data['total_mn']);
+        }
+        $data['total_tax'] = $data['total'] - $data['subtotal'];
+
+        $this->db->select('status');
+        $this->db->where('id', $id);
+        $old_status = $this->db->get(db_prefix() . 'projects')->row()->status;
+
+        $send_created_email = false;
+        if (isset($data['send_created_email'])) {
+            unset($data['send_created_email']);
+            $send_created_email = true;
+        }
+
+        $send_project_marked_as_finished_email_to_contacts = false;
+        if (isset($data['project_marked_as_finished_email_to_contacts'])) {
+            unset($data['project_marked_as_finished_email_to_contacts']);
+            $send_project_marked_as_finished_email_to_contacts = true;
+        }
+
+        $original_project = $this->get($id);
+
+        if (isset($data['notify_project_members_status_change'])) {
+            $notify_project_members_status_change = true;
+            unset($data['notify_project_members_status_change']);
+        }
+        $affectedRows = 0;
+        if (!isset($data['settings'])) {
+            $this->db->where('project_id', $id);
+            $this->db->update(db_prefix() . 'project_settings', [
+                'value' => 0,
+            ]);
+            if ($this->db->affected_rows() > 0) {
+                $affectedRows++;
+            }
+        } else {
+            $_settings = [];
+            $_values = [];
+
+            foreach ($data['settings'] as $name => $val) {
+                array_push($_settings, $name);
+                $_values[$name] = $val;
+            }
+
+            unset($data['settings']);
+            $original_settings = $this->get_project_settings($id);
+
+            foreach ($original_settings as $setting) {
+                if ($setting['name'] != 'available_features') {
+                    if (in_array($setting['name'], $_settings)) {
+                        $value_setting = 1;
+                    } else {
+                        $value_setting = 0;
+                    }
+                } else {
+                    $tabs = get_project_tabs_admin();
+                    $tab_settings = [];
+                    foreach ($_values[$setting['name']] as $tab) {
+                        $tab_settings[$tab] = 1;
+                    }
+                    foreach ($tabs as $tab) {
+                        if (!isset($tab['collapse'])) {
+                            if (!in_array($tab['slug'], $_values[$setting['name']])) {
+                                $tab_settings[$tab['slug']] = 0;
+                            }
+                        } else {
+                            foreach ($tab['children'] as $tab_dropdown) {
+                                if (!in_array($tab_dropdown['slug'], $_values[$setting['name']])) {
+                                    $tab_settings[$tab_dropdown['slug']] = 0;
+                                }
+                            }
+                        }
+                    }
+                    $value_setting = serialize($tab_settings);
+                }
+
+                $this->db->where('project_id', $id);
+                $this->db->where('name', $setting['name']);
+                $this->db->update(db_prefix() . 'project_settings', [
+                    'value' => $value_setting,
+                ]);
+
+                if ($this->db->affected_rows() > 0) {
+                    $affectedRows++;
+                }
+            }
+        }
+
+        $data['project_cost'] = !empty($data['project_cost']) ? $data['project_cost'] : null;
+        $data['estimated_hours'] = !empty($data['estimated_hours']) ? $data['estimated_hours'] : null;
+
+        if ($old_status == 4 && $data['status'] != 4) {
+            $data['date_finished'] = null;
+        } elseif (isset($data['date_finished'])) {
+            $data['date_finished'] = to_sql_date($data['date_finished'], true);
+        }
+
+        if (isset($data['progress_from_tasks'])) {
+            $data['progress_from_tasks'] = 1;
+        } else {
+            $data['progress_from_tasks'] = 0;
+        }
+
+        if (isset($data['custom_fields'])) {
+            $custom_fields = $data['custom_fields'];
+            if (handle_custom_fields_post($id, $custom_fields)) {
+                $affectedRows++;
+            }
+            unset($data['custom_fields']);
+        }
+
+        if (!empty($data['deadline'])) {
+            $data['deadline'] = to_sql_date($data['deadline']);
+        } else {
+            $data['deadline'] = null;
+        }
+
+        $data['start_date'] = to_sql_date($data['start_date']);
+        if ($data['billing_type'] == 1) {
+            $data['project_rate_per_hour'] = 0;
+        } elseif ($data['billing_type'] == 2) {
+            $data['project_cost'] = 0;
+        } else {
+            $data['project_rate_per_hour'] = 0;
+            $data['project_cost'] = 0;
+        }
+        if (isset($data['project_members'])) {
+            $project_members = $data['project_members'];
+            unset($data['project_members']);
+        }
+        $_pm = [];
+        if (isset($project_members)) {
+            $_pm['project_members'] = $project_members;
+        }
+        if ($this->add_edit_members($_pm, $id)) {
+            $affectedRows++;
+        }
+        if (isset($data['mark_all_tasks_as_completed'])) {
+            $mark_all_tasks_as_completed = true;
+            unset($data['mark_all_tasks_as_completed']);
+        }
+
+        if (isset($data['tags'])) {
+            if (handle_tags_save($data['tags'], $id, 'project')) {
+                $affectedRows++;
+            }
+            unset($data['tags']);
+        }
+
+        if (isset($data['cancel_recurring_tasks'])) {
+            unset($data['cancel_recurring_tasks']);
+            $this->cancel_recurring_tasks($id);
+        }
+
+        if (isset($data['contact_notification'])) {
+            if ($data['contact_notification'] == 2) {
+                $data['notify_contacts'] = serialize($data['notify_contacts']);
+            } else {
+                $data['notify_contacts'] = serialize([]);
+            }
+        }
+
+        $data = hooks()->apply_filters('before_update_project', $data, $id);
+
+        $this->db->where('id', $id);
+        $this->db->update(db_prefix() . 'projects', $data);
+
+        if ($this->db->affected_rows() > 0) {
+            if (isset($mark_all_tasks_as_completed)) {
+                $this->_mark_all_project_tasks_as_completed($id);
+            }
+            $affectedRows++;
+        }
+
+        if ($send_created_email == true) {
+            if ($this->send_project_customer_email($id, 'project_created_to_customer')) {
+                $affectedRows++;
+            }
+        }
+
+        if ($send_project_marked_as_finished_email_to_contacts == true) {
+            if ($this->send_project_customer_email($id, 'project_marked_as_finished_to_customer')) {
+                $affectedRows++;
+            }
+        }
+        if ($affectedRows > 0) {
+            $this->log_activity($id, 'project_activity_updated');
+            log_activity('Project Updated [ID: ' . $id . ']');
+
+            if ($original_project->status != $data['status']) {
+                hooks()->do_action('project_status_changed', [
+                    'status' => $data['status'],
+                    'project_id' => $id,
+                ]);
+                // Give space this log to be on top
+                sleep(1);
+                if ($data['status'] == 4) {
+                    $this->log_activity($id, 'project_marked_as_finished');
+                    $this->db->where('id', $id);
+                    $this->db->update(db_prefix() . 'projects', ['date_finished' => date('Y-m-d H:i:s')]);
+                } else {
+                    $this->log_activity($id, 'project_status_updated', '<b><lang>project_status_' . $data['status'] . '</lang></b>');
+                }
+
+                if (isset($notify_project_members_status_change)) {
+                    $this->_notify_project_members_status_change($id, $original_project->status, $data['status']);
+                }
+            }
+            hooks()->do_action('after_update_project', $id);
+
+            return true;
+        }
+
+        if (count($update_project) > 0) {
+            foreach ($update_project as $_key => $rqd) {
+                $dt_data = [];
+                $dt_data['project_id'] = $id;
+                $dt_data['item_code'] = $rqd['item_code'];
+                $dt_data['unit_id'] = isset($rqd['unit_id']) ? $rqd['unit_id'] : null;
+                $dt_data['unit_price'] = $rqd['unit_price'];
+                $dt_data['into_money'] = $rqd['into_money'];
+                $dt_data['total'] = $rqd['total'];
+                $dt_data['tax_value'] = $rqd['tax_value'];
+                $dt_data['item_text'] = nl2br($rqd['item_text']);
+
+                $tax_money = 0;
+                $tax_rate_value = 0;
+                $tax_rate = null;
+                $tax_id = null;
+                $tax_name = null;
+
+                if (isset($rqd['tax_select'])) {
+                    $tax_rate_data = $this->pur_get_tax_rate($rqd['tax_select']);
+                    $tax_rate_value = $tax_rate_data['tax_rate'];
+                    $tax_rate = $tax_rate_data['tax_rate_str'];
+                    $tax_id = $tax_rate_data['tax_id_str'];
+                    $tax_name = $tax_rate_data['tax_name_str'];
+                }
+
+                $dt_data['tax'] = $tax_id;
+                $dt_data['tax_rate'] = $tax_rate;
+                $dt_data['tax_name'] = $tax_name;
+
+                $dt_data['quantity'] = ($rqd['quantity'] != '' && $rqd['quantity'] != null) ? $rqd['quantity'] : 0;
+
+                if ($purq->status == 2 && ($rqd['item_code'] == '' || $rqd['item_code'] == null)) {
+                    $item_data['description'] = $rqd['item_text'];
+                    $item_data['purchase_price'] = $rqd['unit_price'];
+                    $item_data['unit_id'] = $rqd['unit_id'];
+                    $item_data['rate'] = '';
+                    $item_data['sku_code'] = '';
+                    $item_data['commodity_barcode'] = $this->generate_commodity_barcode();
+                    $item_data['commodity_code'] = $this->generate_commodity_barcode();
+                    $item_id = $this->add_commodity_one_item($item_data);
+                    if ($item_id) {
+                        $dt_data['item_code'] = $item_id;
+                    }
+                }
+
+                $this->db->where('prd_id', $rqd['id']);
+                $this->db->update(db_prefix() . 'project_detail', $dt_data);
+                if ($this->db->affected_rows() > 0) {
+                    $affectedRows++;
+                }
+            }
+        }
+
+        if (count($remove_project) > 0) {
+            foreach ($remove_project as $remove_id) {
+                $this->db->where('prd_id', $remove_id);
+                if ($this->db->delete(db_prefix() . 'project_detail')) {
+                    $affectedRows++;
+                }
+            }
+        }
+
+        return false;
+    }
+
     public function get_project_detail($project)
     {
         $this->db->where('project_id', $project);
@@ -1222,7 +1550,7 @@ class Projects_model extends App_Model
     public function get_projects($id = '')
     {
         if ($id == '') {
-            if (!has_permission('purchase_request', '', 'view') && is_staff_logged_in()) {
+            if (!has_permission('project', '', 'view') && is_staff_logged_in()) {
 
                 $or_where = '';
                 $list_vendor = get_vendor_admin_list(get_staff_user_id());
@@ -1506,219 +1834,7 @@ class Projects_model extends App_Model
         return $password;
     }
 
-    public function update($data, $id)
-    {
-        $this->db->select('status');
-        $this->db->where('id', $id);
-        $old_status = $this->db->get(db_prefix() . 'projects')->row()->status;
-
-        $send_created_email = false;
-        if (isset($data['send_created_email'])) {
-            unset($data['send_created_email']);
-            $send_created_email = true;
-        }
-
-        $send_project_marked_as_finished_email_to_contacts = false;
-        if (isset($data['project_marked_as_finished_email_to_contacts'])) {
-            unset($data['project_marked_as_finished_email_to_contacts']);
-            $send_project_marked_as_finished_email_to_contacts = true;
-        }
-
-        $original_project = $this->get($id);
-
-        if (isset($data['notify_project_members_status_change'])) {
-            $notify_project_members_status_change = true;
-            unset($data['notify_project_members_status_change']);
-        }
-        $affectedRows = 0;
-        if (!isset($data['settings'])) {
-            $this->db->where('project_id', $id);
-            $this->db->update(db_prefix() . 'project_settings', [
-                'value' => 0,
-            ]);
-            if ($this->db->affected_rows() > 0) {
-                $affectedRows++;
-            }
-        } else {
-            $_settings = [];
-            $_values = [];
-
-            foreach ($data['settings'] as $name => $val) {
-                array_push($_settings, $name);
-                $_values[$name] = $val;
-            }
-
-            unset($data['settings']);
-            $original_settings = $this->get_project_settings($id);
-
-            foreach ($original_settings as $setting) {
-                if ($setting['name'] != 'available_features') {
-                    if (in_array($setting['name'], $_settings)) {
-                        $value_setting = 1;
-                    } else {
-                        $value_setting = 0;
-                    }
-                } else {
-                    $tabs = get_project_tabs_admin();
-                    $tab_settings = [];
-                    foreach ($_values[$setting['name']] as $tab) {
-                        $tab_settings[$tab] = 1;
-                    }
-                    foreach ($tabs as $tab) {
-                        if (!isset($tab['collapse'])) {
-                            if (!in_array($tab['slug'], $_values[$setting['name']])) {
-                                $tab_settings[$tab['slug']] = 0;
-                            }
-                        } else {
-                            foreach ($tab['children'] as $tab_dropdown) {
-                                if (!in_array($tab_dropdown['slug'], $_values[$setting['name']])) {
-                                    $tab_settings[$tab_dropdown['slug']] = 0;
-                                }
-                            }
-                        }
-                    }
-                    $value_setting = serialize($tab_settings);
-                }
-
-                $this->db->where('project_id', $id);
-                $this->db->where('name', $setting['name']);
-                $this->db->update(db_prefix() . 'project_settings', [
-                    'value' => $value_setting,
-                ]);
-
-                if ($this->db->affected_rows() > 0) {
-                    $affectedRows++;
-                }
-            }
-        }
-
-        $data['project_cost'] = !empty($data['project_cost']) ? $data['project_cost'] : null;
-        $data['estimated_hours'] = !empty($data['estimated_hours']) ? $data['estimated_hours'] : null;
-
-        if ($old_status == 4 && $data['status'] != 4) {
-            $data['date_finished'] = null;
-        } elseif (isset($data['date_finished'])) {
-            $data['date_finished'] = to_sql_date($data['date_finished'], true);
-        }
-
-        if (isset($data['progress_from_tasks'])) {
-            $data['progress_from_tasks'] = 1;
-        } else {
-            $data['progress_from_tasks'] = 0;
-        }
-
-        if (isset($data['custom_fields'])) {
-            $custom_fields = $data['custom_fields'];
-            if (handle_custom_fields_post($id, $custom_fields)) {
-                $affectedRows++;
-            }
-            unset($data['custom_fields']);
-        }
-
-        if (!empty($data['deadline'])) {
-            $data['deadline'] = to_sql_date($data['deadline']);
-        } else {
-            $data['deadline'] = null;
-        }
-
-        $data['start_date'] = to_sql_date($data['start_date']);
-        if ($data['billing_type'] == 1) {
-            $data['project_rate_per_hour'] = 0;
-        } elseif ($data['billing_type'] == 2) {
-            $data['project_cost'] = 0;
-        } else {
-            $data['project_rate_per_hour'] = 0;
-            $data['project_cost'] = 0;
-        }
-        if (isset($data['project_members'])) {
-            $project_members = $data['project_members'];
-            unset($data['project_members']);
-        }
-        $_pm = [];
-        if (isset($project_members)) {
-            $_pm['project_members'] = $project_members;
-        }
-        if ($this->add_edit_members($_pm, $id)) {
-            $affectedRows++;
-        }
-        if (isset($data['mark_all_tasks_as_completed'])) {
-            $mark_all_tasks_as_completed = true;
-            unset($data['mark_all_tasks_as_completed']);
-        }
-
-        if (isset($data['tags'])) {
-            if (handle_tags_save($data['tags'], $id, 'project')) {
-                $affectedRows++;
-            }
-            unset($data['tags']);
-        }
-
-        if (isset($data['cancel_recurring_tasks'])) {
-            unset($data['cancel_recurring_tasks']);
-            $this->cancel_recurring_tasks($id);
-        }
-
-        if (isset($data['contact_notification'])) {
-            if ($data['contact_notification'] == 2) {
-                $data['notify_contacts'] = serialize($data['notify_contacts']);
-            } else {
-                $data['notify_contacts'] = serialize([]);
-            }
-        }
-
-        $data = hooks()->apply_filters('before_update_project', $data, $id);
-
-        $this->db->where('id', $id);
-        $this->db->update(db_prefix() . 'projects', $data);
-
-        if ($this->db->affected_rows() > 0) {
-            if (isset($mark_all_tasks_as_completed)) {
-                $this->_mark_all_project_tasks_as_completed($id);
-            }
-            $affectedRows++;
-        }
-
-        if ($send_created_email == true) {
-            if ($this->send_project_customer_email($id, 'project_created_to_customer')) {
-                $affectedRows++;
-            }
-        }
-
-        if ($send_project_marked_as_finished_email_to_contacts == true) {
-            if ($this->send_project_customer_email($id, 'project_marked_as_finished_to_customer')) {
-                $affectedRows++;
-            }
-        }
-        if ($affectedRows > 0) {
-            $this->log_activity($id, 'project_activity_updated');
-            log_activity('Project Updated [ID: ' . $id . ']');
-
-            if ($original_project->status != $data['status']) {
-                hooks()->do_action('project_status_changed', [
-                    'status' => $data['status'],
-                    'project_id' => $id,
-                ]);
-                // Give space this log to be on top
-                sleep(1);
-                if ($data['status'] == 4) {
-                    $this->log_activity($id, 'project_marked_as_finished');
-                    $this->db->where('id', $id);
-                    $this->db->update(db_prefix() . 'projects', ['date_finished' => date('Y-m-d H:i:s')]);
-                } else {
-                    $this->log_activity($id, 'project_status_updated', '<b><lang>project_status_' . $data['status'] . '</lang></b>');
-                }
-
-                if (isset($notify_project_members_status_change)) {
-                    $this->_notify_project_members_status_change($id, $original_project->status, $data['status']);
-                }
-            }
-            hooks()->do_action('after_update_project', $id);
-
-            return true;
-        }
-
-        return false;
-    }
+    
 
     /**
      * Simplified function to send non complicated email templates for project contacts
