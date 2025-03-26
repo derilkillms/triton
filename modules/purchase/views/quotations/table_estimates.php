@@ -23,7 +23,7 @@ $join = [
     'LEFT JOIN ' . db_prefix() . 'projects ON ' . db_prefix() . 'projects.id = ' . db_prefix() . 'pur_estimates.project_id',
 ];
 
-$sIndexColumn = 'id';
+$sIndexColumn = db_prefix() .'pur_estimates.id';
 $sTable       = db_prefix() . 'pur_estimates';
 
 
@@ -73,10 +73,10 @@ if(isset($clientid)){
 //     array_push($where, 'AND (' . db_prefix() . 'pur_estimates.addedfrom = '.get_staff_user_id().' OR ' . db_prefix() . 'pur_estimates.buyer = '.get_staff_user_id().' OR ' . db_prefix() . 'pur_estimates.clientid IN (SELECT vendor_id FROM ' . db_prefix() . 'pur_vendor_admin WHERE staff_id=' . get_staff_user_id() . ') OR '.get_staff_user_id().' IN (SELECT staffid FROM ' . db_prefix() . 'pur_approval_details WHERE ' . db_prefix() . 'pur_approval_details.rel_type = "pur_quotation" AND ' . db_prefix() . 'pur_approval_details.rel_id = '.db_prefix().'pur_estimates.id))');
 // }
 
-$filter = [];
+// $filter = [];
 
 
-$aColumns = hooks()->apply_filters('estimates_table_sql_columns', $aColumns);
+// $aColumns = hooks()->apply_filters('estimates_table_sql_columns', $aColumns);
 
 
 $result = data_tables_init($aColumns, $sIndexColumn, $sTable, $join, $where, [
@@ -88,7 +88,7 @@ $result = data_tables_init($aColumns, $sIndexColumn, $sTable, $join, $where, [
     'deleted_customer_name',
     db_prefix() . 'pur_estimates.currency',
     'company',
-    'tblprojects.name',
+    db_prefix() .'projects.name'
     // 'pur_rq_code'
 ]);
 

@@ -12,7 +12,9 @@ $table_data = array(
       'name'=>_l('clients'),
       'th_attrs'=>array('class'=> (isset($client) ? 'not_visible' : ''))
    ),
+   // 'Project Number',
    _l('projects'),
+   
    _l('estimate_dt_table_heading_date'),
    _l('estimate_dt_table_heading_expirydate'),
    _l('approval_status'));

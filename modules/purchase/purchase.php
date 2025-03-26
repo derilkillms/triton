@@ -636,6 +636,9 @@ function purchase_head_components()
     if (!(strpos($viewuri, '/admin/purchase/estimate') === false)) {
         echo '<link href="' . module_dir_url(PURCHASE_MODULE_NAME, 'assets/css/estimate_template.css') . '?v=' . PURCHASE_REVISION . '"  rel="stylesheet" type="text/css" />';
     }
+    if (!(strpos($viewuri, '/admin/expenses') === false)) {
+        echo '<link href="' . module_dir_url(PURCHASE_MODULE_NAME, 'assets/css/estimate_template.css') . '?v=' . PURCHASE_REVISION . '"  rel="stylesheet" type="text/css" />';
+    }
     if (!(strpos($viewuri, 'purchase/vendors_portal/add_update_quotation') === false)) {
         echo '<link href="' . module_dir_url(PURCHASE_MODULE_NAME, 'assets/css/estimate_template.css') . '?v=' . PURCHASE_REVISION . '"  rel="stylesheet" type="text/css" />';
     }

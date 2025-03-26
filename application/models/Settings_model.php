@@ -25,6 +25,21 @@ class Settings_model extends App_Model
      * @param  array $data all settings
      * @return integer
      */
+    public function get_setting($setting='expenses'){
+        $this->db->select('setting');
+        $this->db->from(db_prefix() .'pur_approval_setting');
+        $this->db->where('related', $setting);
+        $query = $this->db->get();
+
+        // Ambil hasilnya
+        if ($query->num_rows() > 0) {
+            $row = $query->row(); // Ambil satu baris data
+            $data_json = $row->setting; // Data JSON dari field 'setting'
+        } else {
+            $data_json = '[]'; // Jika tidak ada data, gunakan array kosong
+        }
+        return $data_json;
+    }
     public function update($data)
     {
         $original_encrypted_fields = [];

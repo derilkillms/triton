@@ -134,27 +134,34 @@ function data_tables_init($aColumns, $sIndexColumn, $sTable, $join = [], $where 
         $useMatchForCustomFieldsTableSearch = hooks()->apply_filters('use_match_for_custom_fields_table_search', 'false');
 
         for ($i = 0; $i < count($aColumns); $i++) {
+            if (!isset($aColumns[$i]) || empty($aColumns[$i])) {
+                continue; // Lewati jika tidak ada kolom atau kosong
+            }
+        
             $columnName = $aColumns[$i];
             if (strpos($columnName, ' as ') !== false) {
                 $columnName = strbefore($columnName, ' as');
             }
-
-            if (stripos($columnName, 'AVG(') === false && stripos($columnName, 'SUM(') === false) {
-                if (($data['columns'][$i]) && $data['columns'][$i]['searchable'] == 'true') {
+        
+            // Pastikan $columnName memiliki nilai sebelum diproses
+            if (!empty($columnName) && stripos($columnName, 'AVG(') === false && stripos($columnName, 'SUM(') === false) {
+                if (isset($data['columns'][$i]) && isset($data['columns'][$i]['searchable']) && $data['columns'][$i]['searchable'] == 'true') {
                     if (isset($searchAs[$i])) {
                         $columnName = $searchAs[$i];
                     }
-
+        
                     // Custom fields values are FULLTEXT and should be searched with MATCH
-                    // Not working ATM
                     if ($useMatchForCustomFieldsTableSearch === 'true' && startsWith($columnName, 'ctable_')) {
                         $sMatchCustomFields[] = $columnName;
                     } else {
-                        $sWhere .= 'convert(' . $columnName . " USING utf8) LIKE '%" . $CI->db->escape_like_str($search_value) . "%' ESCAPE '!' OR ";
+                        if (!empty($search_value)) {
+                            $sWhere .= 'convert(' . $columnName . " USING utf8) LIKE '%" . $CI->db->escape_like_str($search_value) . "%' ESCAPE '!' OR ";
+                        }
                     }
                 }
             }
         }
+        
 
         if (count($sMatchCustomFields) > 0) {
             $s = $CI->db->escape_str($search_value);

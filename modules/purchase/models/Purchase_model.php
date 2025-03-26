@@ -28,7 +28,7 @@ class Purchase_model extends App_Model
      */
     public function get_setting($setting='pur_request'){
         $this->db->select('setting');
-        $this->db->from('tblpur_approval_setting');
+        $this->db->from(db_prefix() .'pur_approval_setting');
         $this->db->where('related', $setting);
         $query = $this->db->get();
 

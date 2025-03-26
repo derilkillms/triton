@@ -702,6 +702,22 @@ class Expenses_model extends App_Model
         return false;
     }
 
+
+    public function change_status_expenses($status, $id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update(db_prefix() . 'expenses', ['approve_status' => $status]);
+        if ($this->db->affected_rows() > 0) {
+
+            hooks()->do_action('after_expenses_approve', $id);
+
+            // hooks()->apply_filters('create_goods_receipt',['status' => $status,'id' => $id]);
+            return true;
+        }
+        return false;
+    }
+
+
     /* Categories start */
 
     /**

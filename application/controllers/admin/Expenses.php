@@ -10,6 +10,7 @@ class Expenses extends AdminController
     {
         parent::__construct();
         $this->load->model('expenses_model');
+        $this->load->model('settings_model');
     }
 
     public function index($id = '')
@@ -316,6 +317,8 @@ class Expenses extends AdminController
 
     public function get_expense_data_ajax($id)
     {
+        
+
         if (staff_cant('view', 'expenses') && staff_cant('view_own', 'expenses')) {
             echo _l('access_denied');
             die;
@@ -337,6 +340,12 @@ class Expenses extends AdminController
 
         $data['child_expenses'] = $this->expenses_model->get_child_expenses($id);
         $data['members']        = $this->staff_model->get('', ['active' => 1]);
+
+        $setting = $this->settings_model->get_setting('expenses'); 
+
+        $data['get_setting'] = json_decode($setting,true);
+        // print_r($data['get_setting']); die();
+
         $this->load->view('admin/expenses/expense_preview_template', $data);
     }
 
@@ -346,6 +355,23 @@ class Expenses extends AdminController
             'customer_has_projects' => customer_has_projects($customer_id),
             'client_currency'       => $this->clients_model->get_customer_default_currency($customer_id),
         ]);
+    }
+
+    public function change_status_expenses($status, $id)
+    {
+        $change = $this->expenses_model->change_status_expenses($status, $id);
+        if ($change == true) {
+
+            $message = 'Change status expense' . ' ' . _l('successfully');
+            echo json_encode([
+                'result' => $message,
+            ]);
+        } else {
+            $message = 'Change status expense' . ' ' . _l('fail');
+            echo json_encode([
+                'result' => $message,
+            ]);
+        }
     }
 
     public function categories()
