@@ -174,12 +174,23 @@
                      <input type="file" name="nib_file" class="form-control" id="nib_file">
 
                      <?php
-                     if (isset($client)) {
-                        if ($client->nib_file != "") {
-                           echo '<br><img src="/uploads/vendor/' . $client->nib_file . '" alt="NIB" width="150px"/>';
+                     if (isset($client) && !empty($client->nib_file)) {
+                        $file_path = '/uploads/vendor/' . $client->nib_file;
+                        $file_extension = pathinfo($client->nib_file, PATHINFO_EXTENSION);
+
+                        // Daftar ekstensi file yang dianggap sebagai gambar
+                        $image_extensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp'];
+
+                        if (in_array(strtolower($file_extension), $image_extensions)) {
+                           // Jika file adalah gambar, tampilkan sebagai <img>
+                           echo '<br><img src="' . $file_path . '" alt="NIB" width="150px"/>';
+                        } else {
+                           // Jika file bukan gambar, tampilkan tombol download
+                           echo '<br><a href="' . $file_path . '" download class="btn btn-primary">Download File</a>';
                         }
                      }
                      ?>
+
                   </div>
 
                </div>

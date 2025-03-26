@@ -150,7 +150,7 @@ class Purchase_model extends App_Model
      */
     public function add_vendor($data, $client_id = null, $client_or_lead_convert_request = false) {
         $config['upload_path']   = './uploads/vendor'; // Direktori penyimpanan file
-        $config['allowed_types'] = 'jpg|jpeg|png|bmp'; // Jenis file yang diizinkan
+        $config['allowed_types'] = 'jpg|jpeg|png|bmp|pdf|docx'; // Jenis file yang diizinkan
         $config['max_size']      = 2048; // Maksimum ukuran file dalam KB (2MB)
         $config['encrypt_name']  = TRUE; // Supaya nama file unik
 
@@ -296,7 +296,7 @@ class Purchase_model extends App_Model
         }
 
         $config['upload_path']   = './uploads/vendor'; // Direktori penyimpanan file
-        $config['allowed_types'] = 'jpg|jpeg|png|bmp'; // Jenis file yang diizinkan
+        $config['allowed_types'] = 'jpg|jpeg|png|bmp|pdf|docx'; // Jenis file yang diizinkan
         $config['max_size']      = 2048; // Maksimum ukuran file dalam KB (2MB)
         $config['encrypt_name']  = TRUE; // Supaya nama file unik
 

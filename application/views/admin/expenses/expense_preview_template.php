@@ -449,7 +449,8 @@
         "use strict";
         $.post(admin_url + 'expenses/change_status_expenses/' + invoker.value + '/' + id).done(function(reponse) {
             reponse = JSON.parse(reponse);
-            window.location.href = admin_url + 'expenses/#' + id;
+            // reload()
+            window.location.href = admin_url + 'expenses/';
             alert_float('success', reponse.result);
         });
     }
